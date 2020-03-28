@@ -2,11 +2,9 @@ package Animaciones;
 
 import Ventanas.Login;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -16,10 +14,10 @@ public class Animacion implements ActionListener
 {
     private final Timer timer;  
     private float lerp = 0f;;
-    private final Transform origin_transform;                       //Estado original del componente
-    private final Transform from_transform;                               //Estado inicial del componente
-    private final Transform to_transform;                                 //A donde se moverá y escalará el componente
-    private Transform current_transform;//Estado de la transición 
+    private final Transform origin_transform;                               //Estado original del componente
+    private final Transform from_transform;                                 //Estado inicial del componente
+    private final Transform to_transform;                                   //A donde se moverá y escalará el componente
+    private Transform current_transform;                                    //Estado de la transición 
     private final Component objetivo;
     
     /***
