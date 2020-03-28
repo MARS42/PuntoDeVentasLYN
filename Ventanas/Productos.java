@@ -31,28 +31,27 @@ public class Productos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jTextField3 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jTextField5 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jTextField6 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,11 +59,11 @@ public class Productos extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel7.setFont(new java.awt.Font("Candara", 0, 48)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(238, 112, 82));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Productos");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1230, 50));
+        jLabel7.setText("Buscar");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 220, 50));
 
         jTextField1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jTextField1.setBorder(null);
@@ -73,9 +72,6 @@ public class Productos extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 340, 20));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Calculator_32px.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 40, 50));
 
         jLabel5.setBackground(new java.awt.Color(238, 112, 82));
         jLabel5.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
@@ -98,9 +94,6 @@ public class Productos extends javax.swing.JFrame {
         jTextField3.setBorder(null);
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 340, 40));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Musical_Notes_32px.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 40, 50));
-
         jLabel6.setBackground(new java.awt.Color(238, 112, 82));
         jLabel6.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
@@ -114,9 +107,6 @@ public class Productos extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 340, 20));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Calculator_32px.png"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 40, 50));
 
         jLabel9.setBackground(new java.awt.Color(238, 112, 82));
         jLabel9.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
@@ -132,9 +122,6 @@ public class Productos extends javax.swing.JFrame {
         jTextField5.setBorder(null);
         jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 340, 40));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Calculator_32px.png"))); // NOI18N
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 40, 50));
-
         jLabel11.setBackground(new java.awt.Color(238, 112, 82));
         jLabel11.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
@@ -149,9 +136,6 @@ public class Productos extends javax.swing.JFrame {
         jTextField6.setBorder(null);
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 640, 340, 40));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Globe_32px.png"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 640, 40, 50));
-
         jLabel13.setBackground(new java.awt.Color(238, 112, 82));
         jLabel13.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
@@ -161,14 +145,40 @@ public class Productos extends javax.swing.JFrame {
         jButton1.setText("Registrar");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 715, 340, 40));
 
-        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 520, 700));
+        jLabel15.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel15.setFont(new java.awt.Font("Candara", 0, 48)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Productos");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1410, 50));
+
+        jTextField7.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jTextField7.setBorder(null);
+        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 340, 40));
+
+        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 140, 340, 20));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "CodB", "Nombre", "Unitario", "Mayoreo", "Unidades"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 880, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1440, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,30 +225,29 @@ public class Productos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }
