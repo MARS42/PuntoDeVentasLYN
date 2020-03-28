@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Ventanas;
+import Animaciones.Controlador;
 import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
 import BaseDatos.Query;
@@ -16,40 +17,38 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame implements Conectar{
 
-boolean desbloquear=false;
+    boolean desbloquear=false;
+    Query sql;
+    ArrayList<String> datos;
+    
     public Login() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        
+        this.setLocationRelativeTo(null);   
+        sql = new Query();
+        datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
     }
-private String getUsuario(){
-    
- return txtUsuario.getText();
-}
-private String getPass(){
-    return new Encriptar(txtPassword.getText().toString()).Encrip();
-    
-}
-public void Login(){
-    try{
-        Query sql=new Query();
-        ArrayList<String> datos=  sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
-     if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
-        desbloquear=true;
-          /* AnimationClass internet= new AnimationClass();
-        internet.(-40, 10, 10, 5, JLInternet);
-        //<---
-        AnimationClass internett= new AnimationClass();
-        internett.jLabelXLeft(10, -40, 10, 5, JLInternet);*/
-          
-     }else{
-         JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");
-     }
-             
-    }catch(Exception e){
-        JOptionPane.showMessageDialog(null, e.getMessage());
+    private String getUsuario(){ return txtUsuario.getText(); }
+    private String getPass(){ return new Encriptar(txtPassword.getText().toString()).Encrip(); }
+    public void Login(){
+        try
+        {
+            datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
+            if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
+                desbloquear=true;
+                Controlador.main.AnimacionJPIngreso(JPIngreso);
+                //AnimationClass internet= new AnimationClass();
+                //internet.jPasswordFieldXLeft(-400, 100, 10, 50, txtPassword);
+                //<---
+                //AnimationClass internett= new AnimationClass();
+                //internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
+
+            }else{
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");
+            }   
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
-}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
