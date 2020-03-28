@@ -33,12 +33,17 @@ public class Controlador
         {
             //panelIngreso = new Animacion(component, TiposAnimacion.DeslizarIzquierda);
             //panelMenu = new Animacion(component2, TiposAnimacion.RecorrerIzquierda);
-            panelIngreso = new Animacion(c, -c.getWidth(), c.getLocation().y, c.getWidth(), c.getHeight());
+            panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight());
+            panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight());
             
             panelIngreso.Iniciar();
+            panelMenu.Iniciar();
         }
         else
+        {
             panelIngreso.Reinciar();
+            panelMenu.Reinciar();
+        }
     }
     
     //TIPOS ANIMACIÓN
@@ -64,6 +69,7 @@ public class Controlador
                     (int)Lerp(a.sx, b.sx, t), (int)Lerp(a.sy, b.sy, t));
         else
         {
+            t = animacion_cubica(t);
             to.px = (int)Lerp(a.px, b.px, t);
             to.py = (int)Lerp(a.py, b.py, t);
             to.sx = (int)Lerp(a.sx, b.sx, t);
