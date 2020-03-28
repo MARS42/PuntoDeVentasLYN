@@ -12,13 +12,12 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Encriptar {
-String texto;
-public Encriptar(String texto){
-    this.texto=texto;
-}
+    String texto;
+    public Encriptar(String texto){
+        this.texto=texto;
+    }
 
-public String Encrip(){
-   
-    return DigestUtils.md5Hex(texto);
-}
+    public String Encrip(){
+        return DigestUtils.md5Hex(texto);
+    }
 }
