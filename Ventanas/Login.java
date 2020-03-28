@@ -35,7 +35,7 @@ public class Login extends javax.swing.JFrame implements Conectar{
             datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                 desbloquear=true;
-                Controlador.main.AnimacionJPIngreso(JPIngreso);
+                Controlador.main.AnimacionJPIngreso(JPIngreso, JPMenu);
                 //AnimationClass internet= new AnimationClass();
                 //internet.jPasswordFieldXLeft(-400, 100, 10, 50, txtPassword);
                 //<---
@@ -67,18 +67,25 @@ public class Login extends javax.swing.JFrame implements Conectar{
         jButton1 = new javax.swing.JButton();
         JLInternet = new javax.swing.JLabel();
         JPMenu = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        NombreLocal = new javax.swing.JLabel();
+        subJPMenu = new javax.swing.JPanel();
+        pClientes = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        pProductos = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        pCiber = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        pCuenta = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        pVentas = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        JPWindowTools = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
 
@@ -178,23 +185,26 @@ public class Login extends javax.swing.JFrame implements Conectar{
 
         JPMenu.setBackground(new java.awt.Color(255, 255, 255));
         JPMenu.setForeground(new java.awt.Color(255, 255, 255));
-        JPMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel7.setFont(new java.awt.Font("Candara", 0, 48)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Papeleria L Y N");
-        JPMenu.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 740, 50));
+        NombreLocal.setBackground(new java.awt.Color(238, 112, 82));
+        NombreLocal.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
+        NombreLocal.setForeground(new java.awt.Color(238, 112, 82));
+        NombreLocal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NombreLocal.setText("Papeleria L Y N");
+        NombreLocal.setPreferredSize(new java.awt.Dimension(800, 30));
+        JPMenu.add(NombreLocal);
 
-        jLabel9.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel9.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel9.setText("Clientes");
-        JPMenu.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
+        subJPMenu.setBackground(new java.awt.Color(255, 255, 255));
+        subJPMenu.setForeground(new java.awt.Color(255, 255, 255));
+        subJPMenu.setPreferredSize(new java.awt.Dimension(800, 450));
+        subJPMenu.setLayout(new java.awt.GridLayout(2, 3));
+
+        pClientes.setBackground(new java.awt.Color(255, 255, 255));
+        pClientes.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Handshake_96px.png"))); // NOI18N
+        jLabel8.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jLabel8MouseMoved(evt);
@@ -208,16 +218,25 @@ public class Login extends javax.swing.JFrame implements Conectar{
                 jLabel8MouseExited(evt);
             }
         });
-        JPMenu.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 200, 160));
+        pClientes.add(jLabel8);
 
-        jLabel10.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel10.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel10.setText("Productos");
-        JPMenu.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
+        jLabel9.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel9.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Clientes");
+        jLabel9.setPreferredSize(new java.awt.Dimension(150, 30));
+        pClientes.add(jLabel9);
+
+        subJPMenu.add(pClientes);
+
+        pProductos.setBackground(new java.awt.Color(255, 255, 255));
+        pProductos.setForeground(new java.awt.Color(255, 255, 255));
+        pProductos.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Today_96px.png"))); // NOI18N
+        jLabel11.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jLabel11MouseMoved(evt);
@@ -231,62 +250,25 @@ public class Login extends javax.swing.JFrame implements Conectar{
                 jLabel11MouseExited(evt);
             }
         });
-        JPMenu.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 200, 160));
+        pProductos.add(jLabel11);
 
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_User_96px_2.png"))); // NOI18N
-        jLabel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel12MouseMoved(evt);
-            }
-        });
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel12MouseExited(evt);
-            }
-        });
-        JPMenu.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 200, 160));
+        jLabel10.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel10.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Productos");
+        jLabel10.setPreferredSize(new java.awt.Dimension(150, 30));
+        pProductos.add(jLabel10);
 
-        jLabel13.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel13.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel13.setText("Cuenta");
-        JPMenu.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, -1, -1));
+        subJPMenu.add(pProductos);
 
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Maintenance_96px.png"))); // NOI18N
-        jLabel14.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel14MouseMoved(evt);
-            }
-        });
-        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel14MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel14MouseExited(evt);
-            }
-        });
-        JPMenu.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 200, 160));
-
-        jLabel15.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel15.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel15.setText("Ventas");
-        JPMenu.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, -1, -1));
-
-        jLabel16.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel16.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel16.setText("Ciber");
-        JPMenu.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 240, -1, -1));
+        pCiber.setBackground(new java.awt.Color(255, 255, 255));
+        pCiber.setForeground(new java.awt.Color(255, 255, 255));
+        pCiber.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Google_Drive_96px.png"))); // NOI18N
+        jLabel17.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jLabel17MouseMoved(evt);
@@ -300,13 +282,94 @@ public class Login extends javax.swing.JFrame implements Conectar{
                 jLabel17MouseExited(evt);
             }
         });
-        JPMenu.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 200, 160));
+        pCiber.add(jLabel17);
+
+        jLabel16.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel16.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Ciber");
+        jLabel16.setPreferredSize(new java.awt.Dimension(150, 30));
+        pCiber.add(jLabel16);
+
+        subJPMenu.add(pCiber);
+
+        pCuenta.setBackground(new java.awt.Color(255, 255, 255));
+        pCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        pCuenta.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_User_96px_2.png"))); // NOI18N
+        jLabel12.setPreferredSize(new java.awt.Dimension(150, 150));
+        jLabel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel12MouseMoved(evt);
+            }
+        });
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel12MouseExited(evt);
+            }
+        });
+        pCuenta.add(jLabel12);
+
+        jLabel13.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel13.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Cuenta");
+        jLabel13.setPreferredSize(new java.awt.Dimension(150, 30));
+        pCuenta.add(jLabel13);
+
+        subJPMenu.add(pCuenta);
+
+        pVentas.setBackground(new java.awt.Color(255, 255, 255));
+        pVentas.setForeground(new java.awt.Color(255, 255, 255));
+        pVentas.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Maintenance_96px.png"))); // NOI18N
+        jLabel14.setPreferredSize(new java.awt.Dimension(150, 150));
+        jLabel14.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel14MouseMoved(evt);
+            }
+        });
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel14MouseExited(evt);
+            }
+        });
+        pVentas.add(jLabel14);
+
+        jLabel15.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel15.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Ventas");
+        jLabel15.setPreferredSize(new java.awt.Dimension(150, 30));
+        pVentas.add(jLabel15);
+
+        subJPMenu.add(pVentas);
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel8.setPreferredSize(new java.awt.Dimension(100, 100));
+        subJPMenu.add(jPanel8);
+
+        JPMenu.add(subJPMenu);
 
         getContentPane().add(JPMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 760, 530));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        JPWindowTools.setBackground(new java.awt.Color(255, 255, 255));
+        JPWindowTools.setForeground(new java.awt.Color(255, 255, 255));
+        JPWindowTools.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
         jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -315,7 +378,7 @@ public class Login extends javax.swing.JFrame implements Conectar{
                 jLabel18MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 40, 40));
+        JPWindowTools.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 40, 40));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Multiply_32px.png"))); // NOI18N
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -324,9 +387,9 @@ public class Login extends javax.swing.JFrame implements Conectar{
                 jLabel19MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, 40));
+        JPWindowTools.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 760, 50));
+        getContentPane().add(JPWindowTools, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 760, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -519,6 +582,8 @@ public class Login extends javax.swing.JFrame implements Conectar{
     private javax.swing.JLabel JLInternet;
     private javax.swing.JPanel JPIngreso;
     private javax.swing.JPanel JPMenu;
+    private javax.swing.JPanel JPWindowTools;
+    private javax.swing.JLabel NombreLocal;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -536,12 +601,17 @@ public class Login extends javax.swing.JFrame implements Conectar{
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel pCiber;
+    private javax.swing.JPanel pClientes;
+    private javax.swing.JPanel pCuenta;
+    private javax.swing.JPanel pProductos;
+    private javax.swing.JPanel pVentas;
+    private javax.swing.JPanel subJPMenu;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

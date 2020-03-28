@@ -11,77 +11,67 @@ import javax.swing.Timer;
  */
 public class Animacion implements ActionListener
 {
-    private final Timer animador;  
-    private float lerp = 0f;
-    private float start = 0f, startt = 0f;
-    private float end = 0f, endt = 0f;
-    private final Controlador.TiposAnimacion tanim;   
+    private final Timer timer;  
+    private float lerp = 0f;;
+    private final Transform origin_transform;                       //Estado original del componente
+    private Transform from_transform;                               //Estado inicial del componente
+    private Transform to_transform;                                 //A donde se moverá y escalará el componente
+    private Transform current_transform;//Estado de la transición 
     private Component objetivo;
     
-    public Animacion(Component objetivo, Controlador.TiposAnimacion tanim)
+    /***
+     * Inicia una animación que dará como resultado un desplazamiento o escalonamiento
+     * @param o Componente al que se le aplicará la animación
+     * @param newpx Valor objetivo de posición en eje X
+     * @param newpy Valor objetivo de posición en eje Y
+     * @param newsx Valor objetivo de escala en eje X
+     * @param newsy Valor objetivo de escala en eje Y
+     */
+    public Animacion(Component o, int newpx, int newpy, int newsx, int newsy)
     {
-        this.objetivo = objetivo;
-        this.tanim = tanim;
-        switch(tanim)
-        {
-            case DeslizarIzquierda:
-                this.start = objetivo.getLocation().x;
-                this.end = -objetivo.getWidth();
-                break;
-            case DeslizarDerecha:
-                this.start = objetivo.getLocation().x;
-                this.end = objetivo.getWidth();
-                break;
-            case DeslizarAbajo:
-                this.start = objetivo.getLocation().y;
-                this.end = objetivo.getHeight();
-                break;
-            case DeslizarArriba:
-                this.start = objetivo.getLocation().y;
-                this.end = -objetivo.getHeight();
-            break;
-        }
-        startt = start;
-        endt = end;
-        animador = new Timer(Controlador.main.ratioAnimacion, this);
-        animador.setCoalesce(true);
+        this.objetivo = o;
+        origin_transform = new Transform(o.getLocation().x, o.getLocation().y, o.getWidth(), o.getHeight());
+        from_transform = new Transform(origin_transform.px, origin_transform.py, origin_transform.sx, origin_transform.sy);
+        to_transform = new Transform(newpx, newpy, newsx, newsy);
+        current_transform = new Transform(origin_transform.px, origin_transform.py, origin_transform.sx, origin_transform.sy);
+        timer = new Timer(Controlador.main.ratioAnimacion, this);
+        timer.setCoalesce(true);
     }
     
     public void Iniciar(){
-        start = startt;
-        end = endt;
+        from_transform.px = origin_transform.px;
+        from_transform.py = origin_transform.py;
+        from_transform.sx = origin_transform.sx;
+        from_transform.sy = origin_transform.sy;
         lerp = 0f;
-        animador.start();
+        timer.start();
     }
     public void Reinciar(){
-        start = startt;
-        end = endt;
+        from_transform.px = origin_transform.px;
+        from_transform.py = origin_transform.py;
+        from_transform.sx = origin_transform.sx;
+        from_transform.sy = origin_transform.sy;
         lerp = 0f;
-        animador.restart(); 
+        timer.restart(); 
     }
-    public void Detener(){ animador.stop(); }
+    public void Detener(){ timer.stop(); }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        Animar();
+    }
+    
+    private void Animar()
+    {
         if(lerp <= 1f)
         {
-            switch(tanim)
-            {
-                case DeslizarIzquierda:
-                case DeslizarDerecha:
-                    objetivo.setLocation((int)Controlador.main.Lerp(start, end, 
-                            Controlador.main.animacion_cubica(lerp)), objetivo.getLocation().y);
-                    break;
-                case DeslizarAbajo:
-                case DeslizarArriba:
-                    objetivo.setLocation(objetivo.getLocation().x, (int)Controlador.main.Lerp(start, end, 
-                            Controlador.main.animacion_cubica(lerp)));
-                    break;
-            }
+            current_transform = Controlador.main.LerpTransform(from_transform, to_transform, lerp, current_transform);
+            objetivo.setLocation(current_transform.px, current_transform.py);
+            objetivo.setSize(current_transform.sx, current_transform.sy);
             lerp += Controlador.main.velocidadAnim;
         }
         else
-            animador.stop();
+            timer.stop();
     }
 }

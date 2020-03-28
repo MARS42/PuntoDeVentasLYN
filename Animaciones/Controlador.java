@@ -16,7 +16,8 @@ public class Controlador
         DeslizarIzquierda,
         DeslizarDerecha,
         DeslizarArriba,
-        DeslizarAbajo
+        DeslizarAbajo,
+        RecorrerIzquierda
     }
     
     public float velocidadAnim = 0.05f;   
@@ -24,12 +25,16 @@ public class Controlador
     
     //Animaciones
     public Animacion panelIngreso;
+    public Animacion panelMenu;
     
-    public void AnimacionJPIngreso(Component component)
+    public void AnimacionJPIngreso(Component c, Component c2)
     {
         if(panelIngreso == null)
         {
-            panelIngreso = new Animacion(component, TiposAnimacion.DeslizarIzquierda);
+            //panelIngreso = new Animacion(component, TiposAnimacion.DeslizarIzquierda);
+            //panelMenu = new Animacion(component2, TiposAnimacion.RecorrerIzquierda);
+            panelIngreso = new Animacion(c, -c.getWidth(), c.getLocation().y, c.getWidth(), c.getHeight());
+            
             panelIngreso.Iniciar();
         }
         else
@@ -50,5 +55,20 @@ public class Controlador
     float Lerp(float a, float b, float x)
     {
         return a + (x * (b - a));
+    }
+    //INTERPOLACIÓN DE TRANSFORM
+    Transform LerpTransform(Transform a, Transform b, float t, Transform to)
+    {
+        if(to == null)
+            return new Transform((int)Lerp(a.px, b.px, t), (int)Lerp(a.py, b.py, t), 
+                    (int)Lerp(a.sx, b.sx, t), (int)Lerp(a.sy, b.sy, t));
+        else
+        {
+            to.px = (int)Lerp(a.px, b.px, t);
+            to.py = (int)Lerp(a.py, b.py, t);
+            to.sx = (int)Lerp(a.sx, b.sx, t);
+            to.sy = (int)Lerp(a.sy, b.sy, t);
+            return to;
+        }
     }
 }
