@@ -28,7 +28,7 @@ public class Query implements Conectar{
             if(n>0){
                 
             }
-            c.apagar();
+           
         } catch (Exception e) {
            JOptionPane.showMessageDialog(null,mensaje+e.getMessage());     
         }

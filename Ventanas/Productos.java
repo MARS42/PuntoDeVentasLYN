@@ -41,6 +41,9 @@ public class Productos extends javax.swing.JFrame implements Conectar{
          products.add(cajas.get(i).getText());
          
      }
+     for(int i=0; i<products.size(); i++){
+         cajas.get(i).setText("");
+     }
      cajas.clear();
      Conec.insert("insert into productos values (?,?,?,?,?);", products, "No se pudieron agregar los productos ");
  }
@@ -104,6 +107,11 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         txtNombreProducto.setBackground(new java.awt.Color(246, 246, 246));
         txtNombreProducto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNombreProducto.setBorder(null);
+        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProductoKeyTyped(evt);
+            }
+        });
         RegistroProductos.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 320, 50));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
@@ -228,6 +236,11 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         // TODO add your handling code here:
         ObtenerProductos();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_txtNombreProductoKeyTyped
 
     /**
      * @param args the command line arguments
