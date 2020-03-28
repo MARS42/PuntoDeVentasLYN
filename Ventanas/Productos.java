@@ -5,7 +5,7 @@
  */
 package Ventanas;
 
-import Actores.BloquarLetras;
+
 import Principal.Conectar;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -23,6 +23,8 @@ public class Productos extends javax.swing.JFrame implements Conectar{
     public Productos() {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
+        setLocationRelativeTo(this);
+        
     }
 
  public Object obtenerValor(JTextField caja )
@@ -47,6 +49,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
      for(int i=0; i<cajas.size(); i++){
          if(cajas.get(i)!=null){
            products.add(cajas.get(i).getText());  
+           
          }
          
      }
@@ -79,6 +82,8 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         txtUnidades = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -98,7 +103,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
 
         jLabel2.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel2.setText("Registro de productos");
-        RegistroProductos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, 50));
+        RegistroProductos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 40, 480, 50));
 
         txtCodigoBarra.setBackground(new java.awt.Color(246, 246, 246));
         txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -185,7 +190,6 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Registrar");
-        jButton2.setActionCommand("Registrar");
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +199,18 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         });
         RegistroProductos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 300, 60));
 
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Barras", "Nombre Producto", "Precio Unitario", "Precio Mayoreo", "Unidades"
+            }
+        ));
+        jScrollPane1.setViewportView(Tabla);
+
+        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 810, 650));
+
         jTabbedPane1.addTab("Registro del productos ", RegistroProductos);
 
         jPanel2.setBackground(new java.awt.Color(246, 246, 246));
@@ -203,7 +219,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1281, Short.MAX_VALUE)
+            .addGap(0, 1484, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +234,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1281, Short.MAX_VALUE)
+            .addGap(0, 1484, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +249,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1281, Short.MAX_VALUE)
+            .addGap(0, 1484, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,6 +370,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RegistroProductos;
+    private javax.swing.JTable Tabla;
     private javax.swing.JTextField TxtPrecioMayoreo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -365,6 +382,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
