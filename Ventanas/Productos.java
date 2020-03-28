@@ -39,12 +39,14 @@ public class Productos extends javax.swing.JFrame implements Conectar{
      cajas.add(TxtPrecioMayoreo);
      cajas.add(txtUnidades);
      ArrayList<Object> products= new ArrayList<>();
+     products.add("");
+     products.add("");
+      products.add(0.0);
+      products.add(0.0);
+      products.add(0.0);
      for(int i=0; i<cajas.size(); i++){
          if(cajas.get(i)!=null){
            products.add(cajas.get(i).getText());  
-         }
-         else{
-             products.add("");
          }
          
      }
