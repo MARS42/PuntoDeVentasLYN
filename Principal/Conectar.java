@@ -4,10 +4,11 @@ hijas
  */
 package Principal;
 
+import BaseDatos.Query;
 import BaseDatos.Sql;
 
 
 public interface Conectar {
     Sql c= new Sql();
-    
+    Query Conec= new Query();
 }

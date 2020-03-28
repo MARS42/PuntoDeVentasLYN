@@ -26,11 +26,11 @@ public class Query implements Conectar{
             }
             int n=   psd.executeUpdate();
             if(n>0){
-                JOptionPane.showMessageDialog(null, mensaje);
+                
             }
-            c.apagar();
+           
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null,"Nose puede guardar los datos "+e.getMessage());     
+           JOptionPane.showMessageDialog(null,mensaje+e.getMessage());     
         }
     }  
 
