@@ -30,6 +30,23 @@ public class Productos extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         RegistroProductos = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -37,13 +54,93 @@ public class Productos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTabbedPane1.setBackground(new java.awt.Color(238, 112, 82));
-        jTabbedPane1.setForeground(new java.awt.Color(102, 102, 102));
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTabbedPane1.setFont(new java.awt.Font("Corbel", 0, 24)); // NOI18N
 
-        RegistroProductos.setBackground(new java.awt.Color(255, 255, 255));
+        RegistroProductos.setBackground(new java.awt.Color(246, 246, 246));
         RegistroProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel1.setText("Codigo de Barras ");
+        RegistroProductos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 50));
+
+        jLabel2.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel2.setText("Registro de productos");
+        RegistroProductos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, 50));
+
+        jTextField1.setBackground(new java.awt.Color(246, 246, 246));
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField1.setBorder(null);
+        RegistroProductos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 320, 50));
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 320, 30));
+
+        jLabel3.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel3.setText("Nombre del producto ");
+        RegistroProductos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 50));
+
+        jTextField2.setBackground(new java.awt.Color(246, 246, 246));
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField2.setBorder(null);
+        RegistroProductos.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 320, 50));
+
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 320, 30));
+
+        jLabel4.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel4.setText("Precio unitario");
+        RegistroProductos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 50));
+
+        jTextField3.setBackground(new java.awt.Color(246, 246, 246));
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField3.setBorder(null);
+        RegistroProductos.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 320, 50));
+
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 320, 30));
+
+        jLabel5.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel5.setText("Precio Mayoreo");
+        RegistroProductos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, 50));
+
+        jTextField4.setBackground(new java.awt.Color(246, 246, 246));
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField4.setBorder(null);
+        RegistroProductos.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 320, 50));
+
+        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 320, 30));
+
+        jLabel6.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel6.setText("Unidades");
+        RegistroProductos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, 50));
+
+        jTextField5.setBackground(new java.awt.Color(246, 246, 246));
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField5.setBorder(null);
+        RegistroProductos.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 520, 320, 50));
+
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 570, 320, 30));
+
+        jButton2.setBackground(new java.awt.Color(255, 102, 0));
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Registrar");
+        jButton2.setActionCommand("Registrar");
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        RegistroProductos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 610, 310, 60));
+
         jTabbedPane1.addTab("Registro del productos ", RegistroProductos);
+
+        jPanel2.setBackground(new java.awt.Color(246, 246, 246));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -58,6 +155,8 @@ public class Productos extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Actualizar productos", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(246, 246, 246));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -70,6 +169,8 @@ public class Productos extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Eliminar productos", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(246, 246, 246));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -88,7 +189,7 @@ public class Productos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,9 +236,26 @@ public class Productos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RegistroProductos;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
