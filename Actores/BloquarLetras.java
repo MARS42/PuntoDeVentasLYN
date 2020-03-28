@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author omara
  */
 public class BloquarLetras {
-    ArrayList<Object>numeros= new ArrayList<>();
+   public  ArrayList<Object>numeros= new ArrayList<>();
 
     public BloquarLetras() {
         for(int i=0; i<9; i++){

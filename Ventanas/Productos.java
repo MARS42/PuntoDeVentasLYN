@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import Actores.BloquarLetras;
 import Principal.Conectar;
 import java.util.ArrayList;
 import javax.swing.JTextField;
@@ -125,6 +126,11 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         txtPrecioUnitarii.setBackground(new java.awt.Color(246, 246, 246));
         txtPrecioUnitarii.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPrecioUnitarii.setBorder(null);
+        txtPrecioUnitarii.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioUnitariiKeyTyped(evt);
+            }
+        });
         RegistroProductos.add(txtPrecioUnitarii, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 320, 50));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
@@ -138,6 +144,11 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         TxtPrecioMayoreo.setBackground(new java.awt.Color(246, 246, 246));
         TxtPrecioMayoreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TxtPrecioMayoreo.setBorder(null);
+        TxtPrecioMayoreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtPrecioMayoreoKeyTyped(evt);
+            }
+        });
         RegistroProductos.add(TxtPrecioMayoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 320, 50));
 
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
@@ -151,6 +162,11 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         txtUnidades.setBackground(new java.awt.Color(246, 246, 246));
         txtUnidades.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtUnidades.setBorder(null);
+        txtUnidades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUnidadesKeyTyped(evt);
+            }
+        });
         RegistroProductos.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 520, 320, 50));
 
         jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
@@ -239,8 +255,54 @@ public class Productos extends javax.swing.JFrame implements Conectar{
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
         // TODO add your handling code here:
-       
+    
+        
     }//GEN-LAST:event_txtNombreProductoKeyTyped
+
+    private void txtPrecioUnitariiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitariiKeyTyped
+        // TODO add your handling code here:
+  char mander=evt.getKeyChar();
+              String ex=mander+"";
+              if(ex.equalsIgnoreCase(".")){
+                 if(!txtPrecioUnitarii.getText().contains(".")){
+                     txtPrecioUnitarii.setText(  txtPrecioUnitarii.getText()+"."); 
+                 }
+                
+              }
+               if(!Character.isDigit(mander) ){
+             evt.consume();
+          }
+    }//GEN-LAST:event_txtPrecioUnitariiKeyTyped
+
+    private void TxtPrecioMayoreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioMayoreoKeyTyped
+        // TODO add your handling code here:
+          char mander=evt.getKeyChar();
+              String ex=mander+"";
+              if(ex.equalsIgnoreCase(".")){
+                 if(!TxtPrecioMayoreo.getText().contains(".")){
+                     TxtPrecioMayoreo.setText(  TxtPrecioMayoreo.getText()+"."); 
+                 }
+                
+              }
+               if(!Character.isDigit(mander) ){
+             evt.consume();
+          }
+    }//GEN-LAST:event_TxtPrecioMayoreoKeyTyped
+
+    private void txtUnidadesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidadesKeyTyped
+        // TODO add your handling code here:
+           char mander=evt.getKeyChar();
+              String ex=mander+"";
+              if(ex.equalsIgnoreCase(".")){
+                 if(!txtUnidades.getText().contains(".")){
+                     txtUnidades.setText(  txtUnidades.getText()+"."); 
+                 }
+                
+              }
+               if(!Character.isDigit(mander) ){
+             evt.consume();
+          }
+    }//GEN-LAST:event_txtUnidadesKeyTyped
 
     /**
      * @param args the command line arguments
