@@ -8,6 +8,7 @@ package Ventanas;
 import Actores.BloquarLetras;
 import Principal.Conectar;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -39,7 +40,12 @@ public class Productos extends javax.swing.JFrame implements Conectar{
      cajas.add(txtUnidades);
      ArrayList<Object> products= new ArrayList<>();
      for(int i=0; i<cajas.size(); i++){
-         products.add(cajas.get(i).getText());
+         if(cajas.get(i)!=null){
+           products.add(cajas.get(i).getText());  
+         }
+         else{
+             products.add("");
+         }
          
      }
      for(int i=0; i<products.size(); i++){
@@ -232,7 +238,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
             .addGap(0, 749, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Buscar productos", jPanel4);
+        jTabbedPane1.addTab("Inventario", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,7 +256,12 @@ public class Productos extends javax.swing.JFrame implements Conectar{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        ObtenerProductos();
+        try{
+          ObtenerProductos();  
+        }catch(Error e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
