@@ -3,12 +3,13 @@ Ventana de Animacion de Inicio del sistema
  */
 package Ventanas;
 
+import Principal.Conectar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 
-public class SplashScrean extends javax.swing.JFrame {
+public class SplashScrean extends javax.swing.JFrame implements Conectar{
       private Timer time;
     int contador;
     private final int SEGUNDOS=5;
@@ -17,6 +18,11 @@ public class SplashScrean extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         mostrarb();
+    }
+    //Medoto para mandar al login despues de que termine la carga 
+    public  void login(){
+         new Login().setVisible(true);
+         this.dispose();
     }
     //Comienza el conteo
 public void comenzar(){time.start();
@@ -41,6 +47,7 @@ class timerListener implements ActionListener{
                time.stop();
                
          //Mostrar Login
+         login();
            }
            
             }
@@ -62,6 +69,8 @@ class timerListener implements ActionListener{
         progreso.setBackground(new java.awt.Color(255, 153, 0));
         progreso.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         progreso.setForeground(new java.awt.Color(255, 204, 102));
+        progreso.setBorderPainted(false);
+        progreso.setOpaque(true);
         getContentPane().add(progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 390, 110));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
