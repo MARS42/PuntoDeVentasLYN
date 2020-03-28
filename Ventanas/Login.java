@@ -446,6 +446,7 @@ public void Login(){
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
       if(desbloquear){
             //abrir una nueva ventana 
+                 new Productos().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
         }
