@@ -40,7 +40,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         Tabla.getTableHeader().setBackground(new Color(255,255,255));
         Tabla.getTableHeader().setForeground(new Color(0,0,0));
         
-        Tabla.setRowHeight(30);
+        Tabla.setRowHeight(35);
        
     }
     void MensajeDeRegistro(){
@@ -309,8 +309,8 @@ String fila[]= new String[5];
             }
         });
         Tabla.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        Tabla.setRowHeight(25);
-        Tabla.setSelectionBackground(new java.awt.Color(207, 76, 62));
+        Tabla.setRowHeight(35);
+        Tabla.setSelectionBackground(new java.awt.Color(255, 153, 0));
         Tabla.setShowHorizontalLines(false);
         Tabla.setShowVerticalLines(false);
         Tabla.getTableHeader().setReorderingAllowed(false);
@@ -352,7 +352,7 @@ String fila[]= new String[5];
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1581, Short.MAX_VALUE)
+            .addGap(0, 1727, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +367,7 @@ String fila[]= new String[5];
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1581, Short.MAX_VALUE)
+            .addGap(0, 1727, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +382,7 @@ String fila[]= new String[5];
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1581, Short.MAX_VALUE)
+            .addGap(0, 1727, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

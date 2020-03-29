@@ -509,6 +509,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
       
         AnimationClass internet= new AnimationClass();
         internet.jLabelXRight(-40, 10, 10, 5, JLInternet);
+        
         //<---
         AnimationClass internett= new AnimationClass();
         internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
