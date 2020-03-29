@@ -10,6 +10,7 @@ import Principal.Conectar;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,9 +25,43 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
-        
+       
+        tabla("select * from productos;");
     }
+public void tabla(String sql){
+           DefaultTableModel modelo= new DefaultTableModel();
+           modelo.addColumn("Codigo Barras");
+            modelo.addColumn("Producto");
+            modelo.addColumn("Precio Unitario");
+            modelo.addColumn("Precio Mayoreo");
+            modelo.addColumn("Cantidad");
+            int ancho=this.getWidth()-810;
+            int alto=this.getHeight()-650;
+            RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 810+ancho, alto+650));
+            setVisible(false);
+            Tabla.setModel(modelo);
+          setVisible(true);
+           
+  ArrayList<String> datos= Conec.Select(sql, 5);
+int j=0;
+String fila[]= new String[5];
+  for(int i=0; i<datos.size();){
+      
+   while(j<5){
+    fila[j]=datos.get(i);
+    
+       i++;
+       j++;
+   }
+   modelo.addRow(fila);
+   j=0;
+    
+}
+  Tabla.setModel(modelo);
+  datos.clear();
+  
 
+}
  public Object obtenerValor(JTextField caja )
  {
      return caja.getText();
