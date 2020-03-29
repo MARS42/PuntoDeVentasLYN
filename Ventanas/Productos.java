@@ -55,6 +55,7 @@ public void tabla(String sql){
           setVisible(true);
            
   ArrayList<String> datos= Conec.Select(sql, 5);
+ System.out.println("Numero de registro "+datos.size());
 int j=0;
 String fila[]= new String[5];
   for(int i=0; i<datos.size();){
@@ -467,7 +468,7 @@ String fila[]= new String[5];
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
-        tabla("select * from productos where NombreP like '%"+txtBuscar.getText()+"%' or codigoBarras like '%"+txtBuscar+"%';");
+        tabla("select * from productos where codigoBarras='"+txtBuscar.getText()+"'  union select * from productos where NombreP like '%"+txtBuscar.getText()+"%';");
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     /**
