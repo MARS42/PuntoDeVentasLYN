@@ -9,13 +9,22 @@ import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
 import BaseDatos.Query;
 import Principal.Conectar;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
  * @author omara
  */
-public class Login extends javax.swing.JFrame implements Conectar{
+public class Login extends javax.swing.JFrame implements Conectar, WindowListener{
 
     public static Login ins;
     boolean desbloquear=false;
@@ -28,6 +37,7 @@ public class Login extends javax.swing.JFrame implements Conectar{
         this.setLocationRelativeTo(null);   
         sql = new Query();
         datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
+        addWindowListener(this);
     }
     private String getUsuario(){ return txtUsuario.getText(); }
     private String getPass(){ return new Encriptar(txtPassword.getText().toString()).Encrip(); }
@@ -52,6 +62,39 @@ public class Login extends javax.swing.JFrame implements Conectar{
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+    public Void Minimizar()
+    {
+        setOpacity(0);
+        this.setState(Login.ICONIFIED);
+        return null;
+    }
+    public Void Maximizar()
+    {
+        setOpacity(1);
+        this.setState(NORMAL);
+        return null;
+    }
+    public Void Opacidad(float lerp, boolean min)
+    {
+        if(min)
+            setOpacity(1 - lerp);
+        else
+            setOpacity(lerp);
+        return null;
+    }
+    
+//    @Override
+//    public void paint(Graphics gr)
+//    {
+//        super.paint(gr);
+//        Graphics2D g2d = (Graphics2D) gr;
+//        g2d.setRenderingHint(
+//            RenderingHints.KEY_ANTIALIASING,
+//            RenderingHints.VALUE_ANTIALIAS_ON);
+//        g2d.setComposite(AlphaComposite.getInstance(
+//            AlphaComposite.SRC_OVER, lerp));
+//    }
+//    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,6 +137,7 @@ public class Login extends javax.swing.JFrame implements Conectar{
         jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -429,7 +473,7 @@ public class Login extends javax.swing.JFrame implements Conectar{
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
         // TODO add your handling code here:
-        this.setState(Login.ICONIFIED);
+        Controlador.main.Minimizar(this, this::Minimizar);
     }//GEN-LAST:event_jLabel18MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
@@ -639,4 +683,33 @@ public class Login extends javax.swing.JFrame implements Conectar{
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        Controlador.main.Maximizar(this, this::Maximizar);
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+    }
 }

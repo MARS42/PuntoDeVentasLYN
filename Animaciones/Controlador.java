@@ -1,6 +1,8 @@
 package Animaciones;
 
+import Ventanas.Login;
 import java.awt.Component;
+import java.util.concurrent.Callable;
 
 /**
  *
@@ -24,8 +26,36 @@ public class Controlador
     public int ratioAnimacion = 8;
     
     //Animaciones
+    public Animacion minimizar, maximizar;
     public Animacion panelIngreso;
     public Animacion panelMenu;
+    
+    public void Minimizar(Component f, Callable<Void> action)
+    {
+        if(minimizar == null)
+        {
+            minimizar = new Animacion(f, f.getX(), f.getY() + f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
+            minimizar.setUpdateAction(() -> Login.ins.Opacidad(minimizar.getLerp(), true));
+            minimizar.Iniciar();
+        }
+        else
+        {
+            minimizar.Reinciar();
+        }
+    }
+    public void Maximizar(Component f, Callable<Void> action)
+    {
+        if(maximizar == null)
+        {
+            maximizar = new Animacion(f, f.getX(), f.getY() - f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
+            maximizar.setUpdateAction(() -> Login.ins.Opacidad(maximizar.getLerp(), false));
+            maximizar.Iniciar();
+        }
+        else
+        {
+            maximizar.Reinciar();
+        }
+    }
     
     public void AnimacionJPIngreso(Component c, Component c2)
     {
@@ -33,8 +63,8 @@ public class Controlador
         {
             //panelIngreso = new Animacion(component, TiposAnimacion.DeslizarIzquierda);
             //panelMenu = new Animacion(component2, TiposAnimacion.RecorrerIzquierda);
-            panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight());
-            panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight());
+            panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight(), null);
+            panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight(), null);
             
             panelIngreso.Iniciar();
             panelMenu.Iniciar();
