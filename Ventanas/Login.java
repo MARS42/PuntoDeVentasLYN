@@ -132,7 +132,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 0, 0));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -644,7 +643,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLInternet;
     private javax.swing.JPanel JPIngreso;
-    public javax.swing.JPanel JPMenu;
+    private javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPWindowTools;
     public javax.swing.JPanel MainPanel;
     private javax.swing.JLabel NombreLocal;

@@ -71,16 +71,14 @@ public class Animacion implements ActionListener
         Animar();
     }
     
-    Dimension d = new Dimension();
     private void Animar()
     {
         try {
             if(lerp <= 1f)
             {
                 current_transform = Controlador.main.LerpTransform(from_transform, to_transform, lerp, current_transform);
-                d.setSize(current_transform.sx, current_transform.sy);
                 objetivo.setLocation(current_transform.px, current_transform.py);
-                objetivo.setPreferredSize(d);
+                objetivo.setSize(current_transform.sx, current_transform.sy);
                 lerp += Controlador.main.velocidadAnim;
                 Login.ins.pack();
                 updateAction.call();
