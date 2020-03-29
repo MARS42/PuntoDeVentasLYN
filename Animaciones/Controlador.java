@@ -13,47 +13,48 @@ public class Controlador
     public static Controlador main;
     public Controlador() { main = this; }
     
-    public enum TiposAnimacion
-    {
-        DeslizarIzquierda,
-        DeslizarDerecha,
-        DeslizarArriba,
-        DeslizarAbajo,
-        RecorrerIzquierda
-    }
-    
     public float velocidadAnim = 0.05f;   
     public int ratioAnimacion = 8;
     
     //Animaciones
-    public Animacion minimizar, maximizar;
+    public Animacion minimizar, maximizar, cerrar;
     public Animacion panelIngreso;
     public Animacion panelMenu;
     
-    public void Minimizar(Component f, Callable<Void> action)
+    public void AccionesVentana(Component f, Callable<Void> action, int opcion)
     {
-        if(minimizar == null)
+        switch(opcion)
         {
-            minimizar = new Animacion(f, f.getX(), f.getY() + f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
-            minimizar.setUpdateAction(() -> Login.ins.Opacidad(minimizar.getLerp(), true));
-            minimizar.Iniciar();
-        }
-        else
-        {
-            minimizar.Reinciar();
-        }
-    }
-    public void Maximizar(Component f, Callable<Void> action)
-    {
-        if(maximizar == null)
-        {
-            maximizar = new Animacion(f, f.getX(), f.getY() - f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
-            maximizar.setUpdateAction(() -> Login.ins.Opacidad(maximizar.getLerp(), false));
-            maximizar.Iniciar();
-        }
-        else
-        {
-            maximizar.Reinciar();
+            case 1://Minimizar
+                if(minimizar == null)
+                {
+                    minimizar = new Animacion(f, f.getX(), f.getY() + f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
+                    minimizar.setUpdateAction(() -> Login.ins.Opacidad(minimizar.getLerp(), true));
+                    minimizar.Iniciar();
+                }
+                else
+                    minimizar.Reinciar();
+                break;
+            case 2://Maximizar
+                if(maximizar == null)
+                {
+                    maximizar = new Animacion(f, f.getX(), f.getY() - f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
+                    maximizar.setUpdateAction(() -> Login.ins.Opacidad(maximizar.getLerp(), false));
+                    maximizar.Iniciar();
+                }
+                else
+                    maximizar.Reinciar();
+                break;
+            case 3://Cerrar
+                if(cerrar == null)
+                {
+                    cerrar = new Animacion(f, f.getX(), f.getY(), f.getWidth(), f.getHeight(), action);
+                    cerrar.setUpdateAction(() -> Login.ins.Opacidad(cerrar.getLerp(), true));
+                    cerrar.Iniciar();
+                }
+                else
+                    cerrar.Reinciar();
+                break;
         }
     }
     
@@ -61,8 +62,6 @@ public class Controlador
     {
         if(panelIngreso == null)
         {
-            //panelIngreso = new Animacion(component, TiposAnimacion.DeslizarIzquierda);
-            //panelMenu = new Animacion(component2, TiposAnimacion.RecorrerIzquierda);
             panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight(), null);
             panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight(), null);
             

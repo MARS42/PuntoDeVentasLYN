@@ -9,13 +9,6 @@ import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
 import BaseDatos.Query;
 import Principal.Conectar;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.RenderingHints;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -49,12 +42,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                 desbloquear=true;
                 Controlador.main.AnimacionJPIngreso(JPIngreso, JPMenu);
-                //AnimationClass internet= new AnimationClass();
-                //internet.jPasswordFieldXLeft(-400, 100, 10, 50, txtPassword);
-                //<---
-                //AnimationClass internett= new AnimationClass();
-                //internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
-
             }else{
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");
             }   
@@ -74,6 +61,14 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         this.setState(NORMAL);
         return null;
     }
+    public Void Cerrar()
+    {
+//        setVisible(false);
+//        dispose();
+        System.exit(0);
+        return null;
+    }
+    
     public Void Opacidad(float lerp, boolean min)
     {
         if(min)
@@ -137,7 +132,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 0, 0));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -473,7 +467,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
         // TODO add your handling code here:
-        Controlador.main.Minimizar(this, this::Minimizar);
+        Controlador.main.AccionesVentana(this, this::Minimizar, 1);
     }//GEN-LAST:event_jLabel18MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
@@ -481,7 +475,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         int dialog=JOptionPane.YES_NO_OPTION;
         int result=JOptionPane.showConfirmDialog(null,"¿Desea salir del Login?","Salir",dialog);
         if(result==0){
-            System.exit(0);
+            //System.exit(0);
+            Controlador.main.AccionesVentana(this, this::Cerrar, 3);
         }
     }//GEN-LAST:event_jLabel19MouseClicked
 
@@ -648,7 +643,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLInternet;
     private javax.swing.JPanel JPIngreso;
-    public javax.swing.JPanel JPMenu;
+    private javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPWindowTools;
     public javax.swing.JPanel MainPanel;
     private javax.swing.JLabel NombreLocal;
@@ -698,11 +693,12 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     @Override
     public void windowIconified(WindowEvent e) {
+        Controlador.main.AccionesVentana(this, this::Minimizar, 1);
     }
 
     @Override
     public void windowDeiconified(WindowEvent e) {
-        Controlador.main.Maximizar(this, this::Maximizar);
+        Controlador.main.AccionesVentana(this, this::Maximizar, 2);
     }
 
     @Override
