@@ -124,6 +124,8 @@ String fila[]= new String[5];
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         Registrro = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -249,13 +251,20 @@ String fila[]= new String[5];
         ));
         jScrollPane1.setViewportView(Tabla);
 
-        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 810, 600));
+        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 810, 600));
 
         Registrro.setBackground(new java.awt.Color(255, 102, 0));
         Registrro.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         Registrro.setForeground(new java.awt.Color(255, 102, 0));
         Registrro.setText("Producto Registrado");
         RegistroProductos.add(Registrro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 706, 310, 40));
+
+        jTextField1.setBackground(new java.awt.Color(246, 246, 246));
+        RegistroProductos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 62, 490, 40));
+
+        jLabel7.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel7.setText("Buscar");
+        RegistroProductos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 66, 120, 30));
 
         jTabbedPane1.addTab("Registro del productos ", RegistroProductos);
 
@@ -427,6 +436,7 @@ String fila[]= new String[5];
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -437,6 +447,7 @@ String fila[]= new String[5];
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtCodigoBarra;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecioUnitarii;
