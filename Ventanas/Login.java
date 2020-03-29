@@ -267,7 +267,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_customer_32px_1.png"))); // NOI18N
         JPIngreso.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 40));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Menu_32px.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Menu_32px_1.png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -300,7 +300,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         JPMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         JPMenu.setForeground(new java.awt.Color(255, 255, 255));
 
-        NombreLocal.setBackground(new java.awt.Color(238, 112, 82));
+        NombreLocal.setBackground(new java.awt.Color(62, 120, 207));
         NombreLocal.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
         NombreLocal.setForeground(new java.awt.Color(238, 112, 82));
         NombreLocal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

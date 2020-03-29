@@ -37,9 +37,10 @@ public class Productos extends javax.swing.JFrame implements Conectar{
       
         Tabla.getTableHeader().setFont( new Font("Segoe",Font.BOLD,12));
         Tabla.getTableHeader().setOpaque(false);
-        Tabla.getTableHeader().setBackground(new Color(32,136,203));
-        Tabla.getTableHeader().setForeground(new Color(255,255,255));
-        Tabla.setRowHeight(25);
+        Tabla.getTableHeader().setBackground(new Color(255,255,255));
+        Tabla.getTableHeader().setForeground(new Color(0,0,0));
+        
+        Tabla.setRowHeight(30);
        
     }
     void MensajeDeRegistro(){
@@ -309,7 +310,7 @@ String fila[]= new String[5];
         });
         Tabla.setIntercellSpacing(new java.awt.Dimension(0, 0));
         Tabla.setRowHeight(25);
-        Tabla.setSelectionBackground(new java.awt.Color(255, 102, 0));
+        Tabla.setSelectionBackground(new java.awt.Color(207, 76, 62));
         Tabla.setShowHorizontalLines(false);
         Tabla.setShowVerticalLines(false);
         Tabla.getTableHeader().setReorderingAllowed(false);
