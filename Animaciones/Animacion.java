@@ -1,5 +1,6 @@
 package Animaciones;
 
+import Ventanas.Login;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,11 +14,11 @@ public class Animacion implements ActionListener
 {
     private final Timer timer;  
     private float lerp = 0f;;
-    private final Transform origin_transform;                       //Estado original del componente
-    private Transform from_transform;                               //Estado inicial del componente
-    private Transform to_transform;                                 //A donde se moverá y escalará el componente
-    private Transform current_transform;//Estado de la transición 
-    private Component objetivo;
+    private final Transform origin_transform;                               //Estado original del componente
+    private final Transform from_transform;                                 //Estado inicial del componente
+    private final Transform to_transform;                                   //A donde se moverá y escalará el componente
+    private Transform current_transform;                                    //Estado de la transición 
+    private final Component objetivo;
     
     /***
      * Inicia una animación que dará como resultado un desplazamiento o escalonamiento
@@ -30,7 +31,7 @@ public class Animacion implements ActionListener
     public Animacion(Component o, int newpx, int newpy, int newsx, int newsy)
     {
         this.objetivo = o;
-        origin_transform = new Transform(o.getLocation().x, o.getLocation().y, o.getWidth(), o.getHeight());
+        origin_transform = new Transform(o.getX(), o.getY(), o.getWidth(), o.getHeight());
         from_transform = new Transform(origin_transform.px, origin_transform.py, origin_transform.sx, origin_transform.sy);
         to_transform = new Transform(newpx, newpy, newsx, newsy);
         current_transform = new Transform(origin_transform.px, origin_transform.py, origin_transform.sx, origin_transform.sy);
@@ -70,8 +71,11 @@ public class Animacion implements ActionListener
             objetivo.setLocation(current_transform.px, current_transform.py);
             objetivo.setSize(current_transform.sx, current_transform.sy);
             lerp += Controlador.main.velocidadAnim;
+            Login.ins.pack();
         }
         else
+        {
             timer.stop();
+        }
     }
 }

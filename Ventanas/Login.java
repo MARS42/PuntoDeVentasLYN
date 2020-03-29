@@ -17,11 +17,13 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame implements Conectar{
 
+    public static Login ins;
     boolean desbloquear=false;
     Query sql;
     ArrayList<String> datos;
     
     public Login() {
+        ins = this;
         initComponents();
         this.setLocationRelativeTo(null);   
         sql = new Query();
@@ -32,6 +34,7 @@ public class Login extends javax.swing.JFrame implements Conectar{
     public void Login(){
         try
         {
+            MainPanel.setLayout(null);
             datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                 desbloquear=true;
@@ -53,6 +56,7 @@ public class Login extends javax.swing.JFrame implements Conectar{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MainPanel = new javax.swing.JPanel();
         JPIngreso = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -66,6 +70,9 @@ public class Login extends javax.swing.JFrame implements Conectar{
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         JLInternet = new javax.swing.JLabel();
+        JPWindowTools = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         JPMenu = new javax.swing.JPanel();
         NombreLocal = new javax.swing.JLabel();
         subJPMenu = new javax.swing.JPanel();
@@ -85,14 +92,13 @@ public class Login extends javax.swing.JFrame implements Conectar{
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        JPWindowTools = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPIngreso.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -181,7 +187,46 @@ public class Login extends javax.swing.JFrame implements Conectar{
         JLInternet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Globe_32px.png"))); // NOI18N
         JPIngreso.add(JLInternet, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 60, -1, 40));
 
-        getContentPane().add(JPIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 580));
+        MainPanel.add(JPIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 580));
+
+        JPWindowTools.setBackground(new java.awt.Color(255, 255, 255));
+        JPWindowTools.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
+        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Multiply_32px.png"))); // NOI18N
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPWindowToolsLayout = new javax.swing.GroupLayout(JPWindowTools);
+        JPWindowTools.setLayout(JPWindowToolsLayout);
+        JPWindowToolsLayout.setHorizontalGroup(
+            JPWindowToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPWindowToolsLayout.createSequentialGroup()
+                .addContainerGap(1010, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19))
+        );
+        JPWindowToolsLayout.setVerticalGroup(
+            JPWindowToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPWindowToolsLayout.createSequentialGroup()
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        MainPanel.add(JPWindowTools, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 50));
 
         JPMenu.setBackground(new java.awt.Color(255, 255, 255));
         JPMenu.setForeground(new java.awt.Color(255, 255, 255));
@@ -365,31 +410,9 @@ public class Login extends javax.swing.JFrame implements Conectar{
 
         JPMenu.add(subJPMenu);
 
-        getContentPane().add(JPMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 760, 530));
+        MainPanel.add(JPMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 790, 530));
 
-        JPWindowTools.setBackground(new java.awt.Color(255, 255, 255));
-        JPWindowTools.setForeground(new java.awt.Color(255, 255, 255));
-        JPWindowTools.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
-        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel18MouseClicked(evt);
-            }
-        });
-        JPWindowTools.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 40, 40));
-
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Multiply_32px.png"))); // NOI18N
-        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel19MouseClicked(evt);
-            }
-        });
-        JPWindowTools.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, 40));
-
-        getContentPane().add(JPWindowTools, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 760, 50));
+        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -581,8 +604,9 @@ public class Login extends javax.swing.JFrame implements Conectar{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLInternet;
     private javax.swing.JPanel JPIngreso;
-    private javax.swing.JPanel JPMenu;
+    public javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPWindowTools;
+    public javax.swing.JPanel MainPanel;
     private javax.swing.JLabel NombreLocal;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
