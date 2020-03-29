@@ -292,7 +292,15 @@ String fila[]= new String[5];
             new String [] {
                 "Codigo Barras", "Nombre Producto", "Precio Unitario", "Precio Mayoreo", "Unidades"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(Tabla);
 
         RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 830, 600));
@@ -375,7 +383,7 @@ String fila[]= new String[5];
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1553, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="1" pref="1553" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -364,10 +364,10 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="5" rowCount="0">
                         <Column editable="true" title="Codigo Barras" type="java.lang.Object"/>
-                        <Column editable="true" title="Nombre Producto" type="java.lang.Object"/>
-                        <Column editable="true" title="Precio Unitario" type="java.lang.Object"/>
-                        <Column editable="true" title="Precio Mayoreo" type="java.lang.Object"/>
-                        <Column editable="true" title="Unidades" type="java.lang.Object"/>
+                        <Column editable="false" title="Nombre Producto" type="java.lang.Object"/>
+                        <Column editable="false" title="Precio Unitario" type="java.lang.Object"/>
+                        <Column editable="false" title="Precio Mayoreo" type="java.lang.Object"/>
+                        <Column editable="false" title="Unidades" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
