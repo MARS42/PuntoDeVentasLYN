@@ -43,6 +43,7 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         Tabla.setRowHeight(35);
        
     }
+  
     void MensajeDeRegistro(){
          AnimationClass internet= new AnimationClass();
         internet.jLabelXRight(-320, 0, 10, 5, Registrro);
