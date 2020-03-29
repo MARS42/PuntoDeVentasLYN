@@ -6,8 +6,11 @@
 package Ventanas;
 
 
+import AppPackage.AnimationClass;
 import Principal.Conectar;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -25,8 +28,15 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
+       tabla("select * from productos;");
        
-        tabla("select * from productos;");
+    }
+    void MensajeDeRegistro(){
+         AnimationClass internet= new AnimationClass();
+        internet.jLabelXRight(-320, 0, 10, 5, Registrro);
+      
+        AnimationClass internett= new AnimationClass();
+        internett.jLabelXLeft(0, -320, 10, 5, Registrro);
     }
 public void tabla(String sql){
            DefaultTableModel modelo= new DefaultTableModel();
@@ -35,10 +45,8 @@ public void tabla(String sql){
             modelo.addColumn("Precio Unitario");
             modelo.addColumn("Precio Mayoreo");
             modelo.addColumn("Cantidad");
-            int ancho=this.getWidth()-810;
-            int alto=this.getHeight()-650;
-            RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 810+ancho, alto+650));
-            setVisible(false);
+           
+          
             Tabla.setModel(modelo);
           setVisible(true);
            
@@ -76,16 +84,12 @@ String fila[]= new String[5];
      cajas.add(TxtPrecioMayoreo);
      cajas.add(txtUnidades);
      ArrayList<Object> products= new ArrayList<>();
-     products.add("");
-     products.add("");
-      products.add(0.0);
-      products.add(0.0);
-      products.add(0.0);
+    
      for(int i=0; i<cajas.size(); i++){
-         if(cajas.get(i)!=null){
+        
            products.add(cajas.get(i).getText());  
            
-         }
+        
          
      }
      for(int i=0; i<products.size(); i++){
@@ -93,6 +97,7 @@ String fila[]= new String[5];
      }
      cajas.clear();
      Conec.insert("insert into productos values (?,?,?,?,?);", products, "No se pudieron agregar los productos ");
+ MensajeDeRegistro();
  }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -119,6 +124,7 @@ String fila[]= new String[5];
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+        Registrro = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -246,6 +252,11 @@ String fila[]= new String[5];
 
         RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 810, 650));
 
+        Registrro.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        Registrro.setForeground(new java.awt.Color(102, 102, 102));
+        Registrro.setText("Producto Registrado");
+        RegistroProductos.add(Registrro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 706, 310, 40));
+
         jTabbedPane1.addTab("Registro del productos ", RegistroProductos);
 
         jPanel2.setBackground(new java.awt.Color(246, 246, 246));
@@ -311,6 +322,7 @@ String fila[]= new String[5];
         // TODO add your handling code here:
         try{
           ObtenerProductos();  
+            tabla("Select * from productos");
         }catch(Error e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -405,6 +417,7 @@ String fila[]= new String[5];
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RegistroProductos;
+    private javax.swing.JLabel Registrro;
     private javax.swing.JTable Tabla;
     private javax.swing.JTextField TxtPrecioMayoreo;
     private javax.swing.JButton jButton2;
