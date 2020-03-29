@@ -9,6 +9,7 @@ package Ventanas;
 import AppPackage.AnimationClass;
 import Principal.Conectar;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -27,7 +28,11 @@ public class Productos extends javax.swing.JFrame implements Conectar{
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
+       int distancia=this.getWidth()-650;
+    
+        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, distancia, 600));
        tabla("select * from productos;");
+       
        
     }
     void MensajeDeRegistro(){
@@ -73,6 +78,35 @@ String fila[]= new String[5];
  {
      return caja.getText();
  }
+ //Generarion de Codigos de barras para los productos q no tienen codigo de barras
+ /* 
+ Para generar los codigos se toma en cuenta lo siguinte 
+ el numero de letras del nombre del producto
+ los numeros de la fecha actual y el numero de registros q tiene la tabla actualmente 
+ mas un numero randon entre el 0-20
+ ejemplo Escuadra Baco
+ num de letras 12
+ fecha actual 29/03/2020/11/1
+ numero random 20
+ numero de registros actuales es de 10
+ entonces el codigo de barras quedaria asi 
+ 12290320202011110
+ */
+ public Object GenerarBarras(String nombre){
+     int numLetras=nombre.length();
+ Calendar fecha = Calendar.getInstance();
+        int año = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH) + 1;
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+        int minuto = fecha.get(Calendar.MINUTE);
+        int segundo = fecha.get(Calendar.SECOND);
+        int numero=(int)(Math.random()*20);
+        int registros=Conec.Select("Select * from productos;", 5).size();
+        
+        return numLetras+""+año+""+mes+""+dia+""+hora+""+minuto+""+segundo+""+numero+""+registros;
+
+ }
  public void ObtenerProductos(){
      //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
      //a la lista de productos
@@ -83,20 +117,28 @@ String fila[]= new String[5];
      cajas.add(TxtPrecioMayoreo);
      cajas.add(txtUnidades);
      ArrayList<Object> products= new ArrayList<>();
-    
+     //Tenemos q llenar la lsta con daros vasios por si el usuario no los introduce se pongas estos datos
+    products.add("");
+    products.add("");
+    products.add(0);
+    products.add(0);
+    products.add(0);
      for(int i=0; i<cajas.size(); i++){
-        
-           products.add(cajas.get(i).getText());  
-           
-        
-         
-     }
+        if(obtenerValor(cajas.get(i)).equals("")){
+            if(i==0){
+                products.set(0,GenerarBarras(txtNombreProducto.getText()));
+            }
+        }else{
+          products.set(i,cajas.get(i).getText());  
+        }
+        }
      for(int i=0; i<products.size(); i++){
          cajas.get(i).setText("");
      }
      cajas.clear();
      Conec.insert("insert into productos values (?,?,?,?,?);", products, "No se pudieron agregar los productos ");
- MensajeDeRegistro();
+ products.clear();
+     MensajeDeRegistro();
  }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -124,8 +166,10 @@ String fila[]= new String[5];
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         Registrro = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -154,7 +198,7 @@ String fila[]= new String[5];
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        RegistroProductos.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 320, 30));
+        RegistroProductos.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 490, 30));
 
         jLabel3.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel3.setText("Nombre del producto ");
@@ -251,7 +295,7 @@ String fila[]= new String[5];
         ));
         jScrollPane1.setViewportView(Tabla);
 
-        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 810, 600));
+        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 830, 600));
 
         Registrro.setBackground(new java.awt.Color(255, 102, 0));
         Registrro.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
@@ -259,12 +303,26 @@ String fila[]= new String[5];
         Registrro.setText("Producto Registrado");
         RegistroProductos.add(Registrro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 706, 310, 40));
 
-        jTextField1.setBackground(new java.awt.Color(246, 246, 246));
-        RegistroProductos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 62, 490, 40));
+        txtBuscar.setBackground(new java.awt.Color(246, 246, 246));
+        txtBuscar.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
+        txtBuscar.setBorder(null);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+        RegistroProductos.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 490, 40));
 
         jLabel7.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel7.setText("Buscar");
-        RegistroProductos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 66, 120, 30));
+        RegistroProductos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 120, 30));
+
+        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 320, 30));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Search_32px_2.png"))); // NOI18N
+        RegistroProductos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 60, 30, 40));
 
         jTabbedPane1.addTab("Registro del productos ", RegistroProductos);
 
@@ -274,7 +332,7 @@ String fila[]= new String[5];
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1484, Short.MAX_VALUE)
+            .addGap(0, 1548, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +347,7 @@ String fila[]= new String[5];
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1484, Short.MAX_VALUE)
+            .addGap(0, 1548, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +362,7 @@ String fila[]= new String[5];
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1484, Short.MAX_VALUE)
+            .addGap(0, 1548, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +375,7 @@ String fila[]= new String[5];
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1553, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,8 +388,18 @@ String fila[]= new String[5];
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
-          ObtenerProductos();  
-            tabla("Select * from productos");
+            /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
+            producto tiene un nombre pero puede faltar su codigo de barras 
+            */
+            if(txtNombreProducto.getText().length()==0 || txtPrecioUnitarii.getText().length()==0){
+               
+                JOptionPane.showMessageDialog(this, "Debes ingresar el nombre del producto o el precio unitario");
+            }
+            else{
+              ObtenerProductos();  
+            tabla("Select * from productos");  
+            }
+          
         }catch(Error e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -389,6 +457,11 @@ String fila[]= new String[5];
           }
     }//GEN-LAST:event_txtUnidadesKeyTyped
 
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        // TODO add your handling code here:
+        tabla("select * from productos where NombreP like '%"+txtBuscar.getText()+"%' or codigoBarras like '%"+txtBuscar+"%';");
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -437,6 +510,7 @@ String fila[]= new String[5];
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -446,8 +520,9 @@ String fila[]= new String[5];
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCodigoBarra;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecioUnitarii;
