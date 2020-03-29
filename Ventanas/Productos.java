@@ -9,8 +9,7 @@ package Ventanas;
 import AppPackage.AnimationClass;
 import Principal.Conectar;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -250,10 +249,11 @@ String fila[]= new String[5];
         ));
         jScrollPane1.setViewportView(Tabla);
 
-        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 810, 650));
+        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 810, 600));
 
+        Registrro.setBackground(new java.awt.Color(255, 102, 0));
         Registrro.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        Registrro.setForeground(new java.awt.Color(102, 102, 102));
+        Registrro.setForeground(new java.awt.Color(255, 102, 0));
         Registrro.setText("Producto Registrado");
         RegistroProductos.add(Registrro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 706, 310, 40));
 
