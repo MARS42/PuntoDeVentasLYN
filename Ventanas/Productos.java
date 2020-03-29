@@ -8,6 +8,8 @@ package Ventanas;
 
 import AppPackage.AnimationClass;
 import Principal.Conectar;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -32,7 +34,12 @@ public class Productos extends javax.swing.JFrame implements Conectar{
     
         RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, distancia, 600));
        tabla("select * from productos;");
-       
+      
+        Tabla.getTableHeader().setFont( new Font("Segoe",Font.BOLD,12));
+        Tabla.getTableHeader().setOpaque(false);
+        Tabla.getTableHeader().setBackground(new Color(32,136,203));
+        Tabla.getTableHeader().setForeground(new Color(255,255,255));
+        Tabla.setRowHeight(25);
        
     }
     void MensajeDeRegistro(){
@@ -55,7 +62,7 @@ public void tabla(String sql){
           setVisible(true);
            
   ArrayList<String> datos= Conec.Select(sql, 5);
- System.out.println("Numero de registro "+datos.size());
+
 int j=0;
 String fila[]= new String[5];
   for(int i=0; i<datos.size();){
@@ -177,11 +184,11 @@ String fila[]= new String[5];
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTabbedPane1.setBackground(new java.awt.Color(238, 112, 82));
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTabbedPane1.setFont(new java.awt.Font("Corbel", 0, 24)); // NOI18N
 
-        RegistroProductos.setBackground(new java.awt.Color(246, 246, 246));
+        RegistroProductos.setBackground(new java.awt.Color(255, 255, 255));
         RegistroProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
@@ -192,7 +199,6 @@ String fila[]= new String[5];
         jLabel2.setText("Registro de productos");
         RegistroProductos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 40, 480, 50));
 
-        txtCodigoBarra.setBackground(new java.awt.Color(246, 246, 246));
         txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtCodigoBarra.setBorder(null);
         RegistroProductos.add(txtCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 320, 50));
@@ -205,7 +211,6 @@ String fila[]= new String[5];
         jLabel3.setText("Nombre del producto ");
         RegistroProductos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 50));
 
-        txtNombreProducto.setBackground(new java.awt.Color(246, 246, 246));
         txtNombreProducto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNombreProducto.setBorder(null);
         txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -223,7 +228,6 @@ String fila[]= new String[5];
         jLabel4.setText("Precio unitario");
         RegistroProductos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 50));
 
-        txtPrecioUnitarii.setBackground(new java.awt.Color(246, 246, 246));
         txtPrecioUnitarii.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPrecioUnitarii.setBorder(null);
         txtPrecioUnitarii.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -241,7 +245,6 @@ String fila[]= new String[5];
         jLabel5.setText("Precio Mayoreo");
         RegistroProductos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, 50));
 
-        TxtPrecioMayoreo.setBackground(new java.awt.Color(246, 246, 246));
         TxtPrecioMayoreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TxtPrecioMayoreo.setBorder(null);
         TxtPrecioMayoreo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -259,7 +262,6 @@ String fila[]= new String[5];
         jLabel6.setText("Unidades");
         RegistroProductos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, 50));
 
-        txtUnidades.setBackground(new java.awt.Color(246, 246, 246));
         txtUnidades.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtUnidades.setBorder(null);
         txtUnidades.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -286,6 +288,12 @@ String fila[]= new String[5];
         });
         RegistroProductos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 300, 60));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+
+        Tabla.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Tabla.setForeground(new java.awt.Color(255, 255, 255));
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -302,6 +310,12 @@ String fila[]= new String[5];
                 return canEdit [columnIndex];
             }
         });
+        Tabla.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        Tabla.setRowHeight(25);
+        Tabla.setSelectionBackground(new java.awt.Color(255, 102, 0));
+        Tabla.setShowHorizontalLines(false);
+        Tabla.setShowVerticalLines(false);
+        Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabla);
 
         RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 830, 600));
@@ -312,7 +326,6 @@ String fila[]= new String[5];
         Registrro.setText("Producto Registrado");
         RegistroProductos.add(Registrro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 706, 310, 40));
 
-        txtBuscar.setBackground(new java.awt.Color(246, 246, 246));
         txtBuscar.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
         txtBuscar.setBorder(null);
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -341,7 +354,7 @@ String fila[]= new String[5];
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1548, Short.MAX_VALUE)
+            .addGap(0, 1581, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,7 +369,7 @@ String fila[]= new String[5];
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1548, Short.MAX_VALUE)
+            .addGap(0, 1581, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,7 +384,7 @@ String fila[]= new String[5];
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1548, Short.MAX_VALUE)
+            .addGap(0, 1581, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
