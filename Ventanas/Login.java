@@ -230,6 +230,14 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
                 txtUsuarioMouseExited(evt);
             }
         });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
         JPIngreso.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 200, 40));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -667,6 +675,17 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
             MenuCapas.moveToFront(BotonesMenu);
             ActivarPanel(1);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        // TODO add your handling code here:
+         if(evt.getKeyCode()==10 && txtPassword.getText().length()>0){
+           Login();
+       }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
 
     /**
      * @param args the command line arguments
