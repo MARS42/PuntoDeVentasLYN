@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /**
  *
  * @author omara
@@ -23,21 +24,33 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     boolean desbloquear=false;
     Query sql;
     ArrayList<String> datos;
+    ArrayList<JPanel> panelsBotones = new ArrayList<>();
     
     public Login() {
         ins = this;
         initComponents();
+        Init();
+    }
+    
+    private void Init()
+    {
         this.setLocationRelativeTo(null);   
         sql = new Query();
         datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
         addWindowListener(this);
+        setOpacity(0);
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH );
+        Controlador.main.AccionesVentana(this, this::Abrir, 4);
+        panelsBotones.add(BotonesMenu);
+        panelsBotones.add(JPClientes);
     }
+    
     private String getUsuario(){ return txtUsuario.getText(); }
     private String getPass(){ return new Encriptar(txtPassword.getText().toString()).Encrip(); }
     public void Login(){
         try
         {
-            MainPanel.setLayout(null);
+            BotonesMenu.setLayout(null);
             datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                 desbloquear=true;
@@ -61,13 +74,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         this.setState(NORMAL);
         return null;
     }
-    public Void Cerrar()
-    {
-//        setVisible(false);
-//        dispose();
-        System.exit(0);
-        return null;
-    }
+    public Void Cerrar() { System.exit(0); return null; }
+    public Void Abrir(){ setOpacity(1); return null; }
     
     public Void Opacidad(float lerp, boolean min)
     {
@@ -76,6 +84,18 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         else
             setOpacity(lerp);
         return null;
+    }
+    
+    public void ActivarPanel(int index)
+    {
+        for(int i = 0; i < panelsBotones.size(); i++)
+        {
+            JPanel p = panelsBotones.get(index);
+            if(index == i)
+                p.setVisible(true);
+            else
+                p.setVisible(false);
+        }
     }
     
 //    @Override
@@ -94,7 +114,11 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MainPanel = new javax.swing.JPanel();
+        JPWindowTools = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        MenuCapas = new javax.swing.JLayeredPane();
+        BotonesMenu = new javax.swing.JPanel();
         JPIngreso = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -108,9 +132,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         JLInternet = new javax.swing.JLabel();
-        JPWindowTools = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         JPMenu = new javax.swing.JPanel();
         NombreLocal = new javax.swing.JLabel();
         subJPMenu = new javax.swing.JPanel();
@@ -130,13 +151,53 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        JPClientes = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setResizable(false);
+        setSize(new java.awt.Dimension(1080, 580));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        JPWindowTools.setBackground(new java.awt.Color(255, 255, 255));
+        JPWindowTools.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        JPWindowTools.setForeground(new java.awt.Color(255, 255, 255));
+        JPWindowTools.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        JPWindowTools.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                JPWindowToolsMouseDragged(evt);
+            }
+        });
+        JPWindowTools.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JPWindowToolsMousePressed(evt);
+            }
+        });
+        JPWindowTools.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
+        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+        JPWindowTools.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 30, 30));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Multiply_32px.png"))); // NOI18N
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
+        JPWindowTools.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, -1, 30));
+
+        getContentPane().add(JPWindowTools, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 30));
+
+        MenuCapas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BotonesMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPIngreso.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -225,48 +286,10 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         JLInternet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Globe_32px.png"))); // NOI18N
         JPIngreso.add(JLInternet, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 60, -1, 40));
 
-        MainPanel.add(JPIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 580));
-
-        JPWindowTools.setBackground(new java.awt.Color(255, 255, 255));
-        JPWindowTools.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
-        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel18MouseClicked(evt);
-            }
-        });
-
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Multiply_32px.png"))); // NOI18N
-        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel19MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout JPWindowToolsLayout = new javax.swing.GroupLayout(JPWindowTools);
-        JPWindowTools.setLayout(JPWindowToolsLayout);
-        JPWindowToolsLayout.setHorizontalGroup(
-            JPWindowToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPWindowToolsLayout.createSequentialGroup()
-                .addContainerGap(1010, Short.MAX_VALUE)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19))
-        );
-        JPWindowToolsLayout.setVerticalGroup(
-            JPWindowToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPWindowToolsLayout.createSequentialGroup()
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        MainPanel.add(JPWindowTools, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 50));
+        BotonesMenu.add(JPIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 550));
 
         JPMenu.setBackground(new java.awt.Color(255, 255, 255));
+        JPMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         JPMenu.setForeground(new java.awt.Color(255, 255, 255));
 
         NombreLocal.setBackground(new java.awt.Color(238, 112, 82));
@@ -279,11 +302,13 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         subJPMenu.setBackground(new java.awt.Color(255, 255, 255));
         subJPMenu.setForeground(new java.awt.Color(255, 255, 255));
+        subJPMenu.setOpaque(false);
         subJPMenu.setPreferredSize(new java.awt.Dimension(800, 450));
         subJPMenu.setLayout(new java.awt.GridLayout(2, 3));
 
         pClientes.setBackground(new java.awt.Color(255, 255, 255));
         pClientes.setForeground(new java.awt.Color(255, 255, 255));
+        pClientes.setOpaque(false);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Handshake_96px.png"))); // NOI18N
@@ -315,6 +340,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         pProductos.setBackground(new java.awt.Color(255, 255, 255));
         pProductos.setForeground(new java.awt.Color(255, 255, 255));
+        pProductos.setOpaque(false);
         pProductos.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -347,6 +373,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         pCiber.setBackground(new java.awt.Color(255, 255, 255));
         pCiber.setForeground(new java.awt.Color(255, 255, 255));
+        pCiber.setOpaque(false);
         pCiber.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -379,6 +406,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         pCuenta.setBackground(new java.awt.Color(255, 255, 255));
         pCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        pCuenta.setOpaque(false);
         pCuenta.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -411,6 +439,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         pVentas.setBackground(new java.awt.Color(255, 255, 255));
         pVentas.setForeground(new java.awt.Color(255, 255, 255));
+        pVentas.setOpaque(false);
         pVentas.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -443,14 +472,27 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel8.setOpaque(false);
         jPanel8.setPreferredSize(new java.awt.Dimension(100, 100));
         subJPMenu.add(jPanel8);
 
         JPMenu.add(subJPMenu);
 
-        MainPanel.add(JPMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 790, 530));
+        BotonesMenu.add(JPMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 790, 550));
 
-        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 580));
+        MenuCapas.add(BotonesMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 550));
+
+        jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        JPClientes.add(jButton2);
+
+        MenuCapas.add(JPClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 550));
+
+        getContentPane().add(MenuCapas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1080, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -561,7 +603,10 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         // TODO add your handling code here:
         //Producto  esto es como un boton  pero es un label
         if(desbloquear){
-            //abrir una nueva ventana 
+            //abrir una nueva ventana
+            MenuCapas.moveToBack(BotonesMenu);
+            MenuCapas.moveToFront(JPClientes);
+            ActivarPanel(0);
         }else{
             JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
         }
@@ -605,6 +650,24 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         }
     }//GEN-LAST:event_jLabel14MouseClicked
 
+    private int tx, ty;
+    private void JPWindowToolsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPWindowToolsMousePressed
+        tx = evt.getX();
+        ty = evt.getY();
+        Controlador.main.ResetMinMax();
+    }//GEN-LAST:event_JPWindowToolsMousePressed
+
+    private void JPWindowToolsMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPWindowToolsMouseDragged
+        setLocation(evt.getXOnScreen() - tx,  evt.getYOnScreen() - ty);
+    }//GEN-LAST:event_JPWindowToolsMouseDragged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //VolverMenu
+            MenuCapas.moveToBack(JPClientes);
+            MenuCapas.moveToFront(BotonesMenu);
+            ActivarPanel(1);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -641,13 +704,16 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel BotonesMenu;
     private javax.swing.JLabel JLInternet;
+    private javax.swing.JPanel JPClientes;
     private javax.swing.JPanel JPIngreso;
     private javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPWindowTools;
-    public javax.swing.JPanel MainPanel;
+    private javax.swing.JLayeredPane MenuCapas;
     private javax.swing.JLabel NombreLocal;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

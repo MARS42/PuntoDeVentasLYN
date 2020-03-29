@@ -2,7 +2,6 @@ package Animaciones;
 
 import Ventanas.Login;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.Callable;
@@ -25,6 +24,15 @@ public class Animacion implements ActionListener
     private final Callable<Void> action;                                    //Método a llamar al terminar animación
     private Callable<Void> updateAction;                                    //Método que se llamará a cada actualización 
     public void setUpdateAction(Callable<Void> updateAction){ this.updateAction = updateAction; }
+    /***
+     * Define que curva usará para definir la suavidad de la animación\n
+     * 1. Cuadrada\n
+     * 2. Cúbica\n
+     * 3. Cúbica suave\n
+     * 4. Raíz Cuadrada
+     */
+    private final int curve;
+    public int getCurveType(){ return curve; }
     
     /***
      * Inicia una animación que dará como resultado un desplazamiento o escalonamiento
@@ -34,11 +42,13 @@ public class Animacion implements ActionListener
      * @param newsx Valor objetivo de escala en eje X
      * @param newsy Valor objetivo de escala en eje Y
      * @param action Método que se llamará al final de la animación
+     * @param curve Define que curva usará para definir la suavidad de la animación
      */
-    public Animacion(Component o, int newpx, int newpy, int newsx, int newsy, Callable<Void> action)
+    public Animacion(Component o, int newpx, int newpy, int newsx, int newsy, Callable<Void> action, int curve)
     {
         this.objetivo = o;
         this.action = action;
+        this.curve = curve;
         origin_transform = new Transform(o.getX(), o.getY(), o.getWidth(), o.getHeight());
         from_transform = new Transform(origin_transform.px, origin_transform.py, origin_transform.sx, origin_transform.sy);
         to_transform = new Transform(newpx, newpy, newsx, newsy);
@@ -48,18 +58,18 @@ public class Animacion implements ActionListener
     }
     
     public void Iniciar(){
-        from_transform.px = origin_transform.px;
-        from_transform.py = origin_transform.py;
-        from_transform.sx = origin_transform.sx;
-        from_transform.sy = origin_transform.sy;
+        from_transform.px = objetivo.getX();
+        from_transform.py = objetivo.getY();
+        from_transform.sx = objetivo.getWidth();
+        from_transform.sy = objetivo.getHeight();
         lerp = 0f;
         timer.start();
     }
     public void Reinciar(){
-        from_transform.px = origin_transform.px;
-        from_transform.py = origin_transform.py;
-        from_transform.sx = origin_transform.sx;
-        from_transform.sy = origin_transform.sy;
+        from_transform.px = objetivo.getX();
+        from_transform.py = objetivo.getY();
+        from_transform.sx = objetivo.getWidth();
+        from_transform.sy = objetivo.getHeight();
         lerp = 0f;
         timer.restart(); 
     }
@@ -76,7 +86,7 @@ public class Animacion implements ActionListener
         try {
             if(lerp <= 1f)
             {
-                current_transform = Controlador.main.LerpTransform(from_transform, to_transform, lerp, current_transform);
+                current_transform = Controlador.main.LerpTransform(from_transform, to_transform, lerp, current_transform, curve);
                 objetivo.setLocation(current_transform.px, current_transform.py);
                 objetivo.setSize(current_transform.sx, current_transform.sy);
                 lerp += Controlador.main.velocidadAnim;

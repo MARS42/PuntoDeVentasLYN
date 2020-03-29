@@ -17,10 +17,11 @@ public class Controlador
     public int ratioAnimacion = 8;
     
     //Animaciones
-    public Animacion minimizar, maximizar, cerrar;
+    public Animacion minimizar, maximizar, cerrar, abrir;
     public Animacion panelIngreso;
     public Animacion panelMenu;
     
+    public void ResetMinMax(){ minimizar = null; maximizar = null; }
     public void AccionesVentana(Component f, Callable<Void> action, int opcion)
     {
         switch(opcion)
@@ -28,7 +29,7 @@ public class Controlador
             case 1://Minimizar
                 if(minimizar == null)
                 {
-                    minimizar = new Animacion(f, f.getX(), f.getY() + f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
+                    minimizar = new Animacion(f, f.getX(), f.getY() + f.getHeight() / 2, f.getWidth(), f.getHeight(), action, 3);
                     minimizar.setUpdateAction(() -> Login.ins.Opacidad(minimizar.getLerp(), true));
                     minimizar.Iniciar();
                 }
@@ -38,7 +39,7 @@ public class Controlador
             case 2://Maximizar
                 if(maximizar == null)
                 {
-                    maximizar = new Animacion(f, f.getX(), f.getY() - f.getHeight() / 2, f.getWidth(), f.getHeight(), action);
+                    maximizar = new Animacion(f, f.getX(), f.getY() - f.getHeight() / 2, f.getWidth(), f.getHeight(), action, 3);
                     maximizar.setUpdateAction(() -> Login.ins.Opacidad(maximizar.getLerp(), false));
                     maximizar.Iniciar();
                 }
@@ -48,12 +49,22 @@ public class Controlador
             case 3://Cerrar
                 if(cerrar == null)
                 {
-                    cerrar = new Animacion(f, f.getX(), f.getY(), f.getWidth(), f.getHeight(), action);
+                    cerrar = new Animacion(f, f.getX(), f.getY(), f.getWidth(), f.getHeight(), action, 4);
                     cerrar.setUpdateAction(() -> Login.ins.Opacidad(cerrar.getLerp(), true));
                     cerrar.Iniciar();
                 }
                 else
                     cerrar.Reinciar();
+                break;
+            case 4://Abrir
+                if(abrir == null)
+                {
+                    abrir = new Animacion(f, f.getX(), f.getY(), f.getWidth(), f.getHeight(), action, 3);
+                    abrir.setUpdateAction(() -> Login.ins.Opacidad(abrir.getLerp(), false));
+                    abrir.Iniciar();
+                }
+                else
+                    abrir.Reinciar();
                 break;
         }
     }
@@ -62,8 +73,8 @@ public class Controlador
     {
         if(panelIngreso == null)
         {
-            panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight(), null);
-            panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight(), null);
+            panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight(), null, 3);
+            panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight(), null, 3);
             
             panelIngreso.Iniciar();
             panelMenu.Iniciar();
@@ -78,11 +89,19 @@ public class Controlador
     //TIPOS ANIMACIÓN
     float animacion_cubica(float x)
     {
+        return x * x * x;
+    }
+    float animacion_cubicaMod(float x)
+    {
         return x * x *(3f - (2f * x));
     }
     float animacion_cuadrada(float x)
     {
         return x * x;
+    }
+    float animacion_sqrt(float x)
+    {
+        return (float)Math.sqrt(x);
     }
     
     //INTERPOLACIÓN
@@ -91,14 +110,28 @@ public class Controlador
         return a + (x * (b - a));
     }
     //INTERPOLACIÓN DE TRANSFORM
-    Transform LerpTransform(Transform a, Transform b, float t, Transform to)
+    Transform LerpTransform(Transform a, Transform b, float t, Transform to, int animType)
     {
         if(to == null)
             return new Transform((int)Lerp(a.px, b.px, t), (int)Lerp(a.py, b.py, t), 
                     (int)Lerp(a.sx, b.sx, t), (int)Lerp(a.sy, b.sy, t));
         else
         {
-            t = animacion_cubica(t);
+            switch(animType)
+            {
+                case 1:
+                    t = animacion_cuadrada(t);
+                    break;
+                case 2:
+                    t = animacion_cubica(t);
+                    break;
+                case 3:
+                    t = animacion_cubicaMod(t);
+                    break;
+                case 4:
+                    t = animacion_sqrt(t);
+                    break;
+            }
             to.px = (int)Lerp(a.px, b.px, t);
             to.py = (int)Lerp(a.py, b.py, t);
             to.sx = (int)Lerp(a.sx, b.sx, t);
