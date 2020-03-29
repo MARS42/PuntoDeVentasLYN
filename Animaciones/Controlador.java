@@ -13,15 +13,6 @@ public class Controlador
     public static Controlador main;
     public Controlador() { main = this; }
     
-    public enum TiposAnimacion
-    {
-        DeslizarIzquierda,
-        DeslizarDerecha,
-        DeslizarArriba,
-        DeslizarAbajo,
-        RecorrerIzquierda
-    }
-    
     public float velocidadAnim = 0.05f;   
     public int ratioAnimacion = 8;
     
@@ -71,8 +62,6 @@ public class Controlador
     {
         if(panelIngreso == null)
         {
-            //panelIngreso = new Animacion(component, TiposAnimacion.DeslizarIzquierda);
-            //panelMenu = new Animacion(component2, TiposAnimacion.RecorrerIzquierda);
             panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight(), null);
             panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight(), null);
             
