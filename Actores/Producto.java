@@ -30,6 +30,30 @@ public class Producto {
         this.PrecioMayoreo = PrecioMayoreo;
         this.unidades = unidades;
     }
+
+    public int getCodigoBarras() {
+        return codigoBarras;
+    }
+
+    public String getNombreP() {
+        return NombreP;
+    }
+
+    public double getPrecioUnitario() {
+        return PrecioUnitario;
+    }
+
+    public double getPrecioMayoreo() {
+        return PrecioMayoreo;
+    }
+
+    public double getUnidades() {
+        return unidades;
+    }
+
+    public Producto getSiguinte() {
+        return siguinte;
+    }
    
    
 }
