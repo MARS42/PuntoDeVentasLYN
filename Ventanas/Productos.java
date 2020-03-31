@@ -416,7 +416,7 @@ String fila[]= new String[5];
         JPActualizar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 50));
 
         jLabel10.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel10.setText("Registro de productos");
+        jLabel10.setText("Actualizar productos");
         JPActualizar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 40, 480, 50));
 
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
@@ -624,7 +624,8 @@ String fila[]= new String[5];
             }
             else{
               ObtenerProductos();  
-            tabla("Select * from productos",Tabla);  
+            tabla("Select * from productos",Tabla);
+            tabla("Select * from productos",Tabla1); 
             }
           
         }catch(Error e){
@@ -708,8 +709,11 @@ String fila[]= new String[5];
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try{
-            ObtenerProductos1();
-            tabla("select * from productos;", Tabla1);
+            if((obtenerValor(txtCodigoBarra2)+"").length()>0){
+              ObtenerProductos1();
+            tabla("select * from productos;", Tabla1);   
+            }
+           
         }catch(Exception e){
             
         }
