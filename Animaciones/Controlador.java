@@ -20,6 +20,7 @@ public class Controlador
     public Animacion minimizar, maximizar, cerrar, abrir;
     public Animacion panelIngreso;
     public Animacion panelMenu;
+    public Animacion abrirSalida, cerrarSalida;
     
     public void ResetMinMax(){ minimizar = null; maximizar = null; }
     public void AccionesVentana(Component f, Callable<Void> action, int opcion)
@@ -65,6 +66,26 @@ public class Controlador
                 }
                 else
                     abrir.Reinciar();
+                break;
+            case 5://Cerrar Salida
+                if(cerrarSalida == null)
+                {
+                    cerrarSalida = new Animacion(f, f.getX()+200, f.getY()-150, f.getWidth(), f.getHeight(), action, 3);
+                    cerrarSalida.setUpdateAction(() -> Login.ins.salida.Opacidad(cerrarSalida.getLerp(), true));
+                    cerrarSalida.Iniciar();
+                }
+                else
+                    cerrarSalida.Reinciar();
+                break;
+            case 6://Abrir Salida
+                if(abrirSalida == null)
+                {
+                    abrirSalida = new Animacion(f, f.getX(), f.getY(), f.getWidth(), f.getHeight(), action, 3);
+                    abrirSalida.setUpdateAction(() -> Login.ins.salida.Opacidad(abrirSalida.getLerp(), false));
+                    abrirSalida.Iniciar();
+                }
+                else
+                    abrirSalida.Reinciar();
                 break;
         }
     }

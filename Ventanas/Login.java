@@ -9,9 +9,12 @@ import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
 import BaseDatos.Query;
 import Principal.Conectar;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /**
@@ -25,6 +28,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     Query sql;
     ArrayList<String> datos;
     ArrayList<JPanel> panelsBotones = new ArrayList<>();
+    public Salida salida;
     
     public Login() {
         ins = this;
@@ -43,6 +47,9 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         Controlador.main.AccionesVentana(this, this::Abrir, 4);
         panelsBotones.add(BotonesMenu);
         panelsBotones.add(JPClientes);
+        salida = new Salida(this);
+        salida.setVisible(true);
+        //salida.Ocultar();
     }
     
     private String getUsuario(){ return txtUsuario.getText(); }
@@ -77,6 +84,12 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     public Void Cerrar() { System.exit(0); return null; }
     public Void Abrir(){ setOpacity(1); return null; }
     
+    public void CerrarDef()
+    {
+        Controlador.main.AccionesVentana(this, this::Cerrar, 3);
+        //unDarken();
+    }
+    
     public Void Opacidad(float lerp, boolean min)
     {
         if(min)
@@ -84,6 +97,30 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         else
             setOpacity(lerp);
         return null;
+    }
+    boolean dark = false;
+    public void Darken()
+    {
+        setEnabled(false);
+        dark = true;
+        repaint();
+    }
+    public void unDarken()
+    {
+        setEnabled(true);
+        dark = false;
+        repaint();
+    }
+    
+    @Override
+    public void paint(Graphics g)
+    {
+        super.paint(g);
+        if(dark)
+        {
+            g.setColor(new Color(0, 0, 0, 140));
+            g.fillRect(0, 0, getWidth(), getHeight());
+        }
     }
     
     public void ActivarPanel(int index)
@@ -523,61 +560,72 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
         // TODO add your handling code here:
-        int dialog=JOptionPane.YES_NO_OPTION;
-        int result=JOptionPane.showConfirmDialog(null,"¿Desea salir del Login?","Salir",dialog);
-        if(result==0){
-            //System.exit(0);
-            Controlador.main.AccionesVentana(this, this::Cerrar, 3);
-        }
+//        int dialog=JOptionPane.YES_NO_OPTION;
+//        int result=JOptionPane.showConfirmDialog(null,"¿Desea salir del Login?","Salir",dialog);
+//        if(result==0){
+//            //System.exit(0);
+//            Controlador.main.AccionesVentana(this, this::Cerrar, 3);
+//        }
+        salida.Mostrar(this);
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel8MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseMoved
         // TODO add your handling code here:
+        repaint();
         jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
     }//GEN-LAST:event_jLabel8MouseMoved
 
     private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
         // TODO add your handling code here:
+        repaint();
         jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
     }//GEN-LAST:event_jLabel8MouseExited
 
     private void jLabel11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseMoved
         // TODO add your handling code here:
+        repaint();
         jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
     }//GEN-LAST:event_jLabel11MouseMoved
 
     private void jLabel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseExited
         // TODO add your handling code here:
+        repaint();
          jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
     }//GEN-LAST:event_jLabel11MouseExited
 
     private void jLabel17MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseMoved
         // TODO add your handling code here:
+        repaint();
          jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
     }//GEN-LAST:event_jLabel17MouseMoved
 
     private void jLabel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseExited
         // TODO add your handling code here:
+        repaint();
          jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
     }//GEN-LAST:event_jLabel17MouseExited
 
     private void jLabel12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseMoved
         // TODO add your handling code here:
+        repaint();
          jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
     }//GEN-LAST:event_jLabel12MouseMoved
 
     private void jLabel12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseExited
         // TODO add your handling code here:
+        repaint();
          jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
     }//GEN-LAST:event_jLabel12MouseExited
 
     private void jLabel14MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseMoved
         // TODO add your handling code here:
+        repaint();
          jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
     }//GEN-LAST:event_jLabel14MouseMoved
 
     private void jLabel14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseExited
         // TODO add your handling code here:
+        repaint();
          jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
     }//GEN-LAST:event_jLabel14MouseExited
 
