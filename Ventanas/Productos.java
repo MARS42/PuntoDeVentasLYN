@@ -34,17 +34,21 @@ public class Productos extends javax.swing.JFrame implements Conectar{
        int distancia=this.getWidth()-650;
     
         RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, distancia, 600));
+       
        tabla("select * from productos;",Tabla);
-       tabla("select * from productos;",Tabla1);
-        Tabla.getTableHeader().setFont( new Font("Segoe",Font.BOLD,12));
-        Tabla.getTableHeader().setOpaque(false);
-        Tabla.getTableHeader().setBackground(new Color(255,255,255));
-        Tabla.getTableHeader().setForeground(new Color(0,0,0));
+
+        diseñoTabla(Tabla);
+      
         
         Tabla.setRowHeight(35);
        
     }
-  
+  public void  diseñoTabla(JTable Tabla){
+        Tabla.getTableHeader().setFont( new Font("Segoe",Font.BOLD,12));
+        Tabla.getTableHeader().setOpaque(false);
+        Tabla.getTableHeader().setBackground(new Color(255,255,255));
+        Tabla.getTableHeader().setForeground(new Color(0,0,0));
+  }
     void MensajeDeRegistro(){
          AnimationClass internet= new AnimationClass();
         internet.jLabelXRight(-320, 0, 10, 5, Registrro);
@@ -151,42 +155,7 @@ String fila[]= new String[5];
  products.clear();
      MensajeDeRegistro();
  }
-  public void ObtenerProductos1(){
-     //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
-     //a la lista de productos
-     ArrayList<JTextField> cajas= new ArrayList<>();
-     cajas.add(txtCodigoBarra2);
-     cajas.add(txtNombreProducto1);
-     cajas.add(txtPrecioUnitarii1);
-     cajas.add(TxtPrecioMayoreo1);
-     cajas.add(txtUnidades1);
-     ArrayList<Object> products= new ArrayList<>();
-     //Tenemos q llenar la lsta con daros vasios por si el usuario no los introduce se pongas estos datos
-    products.add("");
-    products.add("");
-    products.add(0);
-    products.add(0);
-    products.add(0);
-     for(int i=0; i<cajas.size(); i++){
-        if(obtenerValor(cajas.get(i)).equals("")){
-            if(i==0){
-                products.set(0,GenerarBarras(txtNombreProducto.getText()));
-            }
-        }else{
-          products.set(i,cajas.get(i).getText());  
-        }
-        }
-     for(int i=0; i<products.size(); i++){
-         cajas.get(i).setText("");
-     }
-     cajas.clear();
-     Conec.update("update productos set "+
-     "',NombreP='"+products.get(1)+"',PrecioUnitario="+products.get(2)+
-             ",PrecioMayoreo="+products.get(3)+",Unidades="+products.get(4)+"where codigoBarras='"
-             +products.get(0)+"';","Productos actualizados ");
- products.clear();
-     
- }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -218,30 +187,6 @@ String fila[]= new String[5];
         jSeparator6 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         JPActualizar = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jSeparator7 = new javax.swing.JSeparator();
-        jLabel11 = new javax.swing.JLabel();
-        txtNombreProducto1 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jSeparator8 = new javax.swing.JSeparator();
-        txtPrecioUnitarii1 = new javax.swing.JTextField();
-        jSeparator9 = new javax.swing.JSeparator();
-        jLabel13 = new javax.swing.JLabel();
-        TxtPrecioMayoreo1 = new javax.swing.JTextField();
-        jSeparator10 = new javax.swing.JSeparator();
-        jLabel14 = new javax.swing.JLabel();
-        txtUnidades1 = new javax.swing.JTextField();
-        jSeparator11 = new javax.swing.JSeparator();
-        jButton3 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Tabla1 = new javax.swing.JTable();
-        jLabel15 = new javax.swing.JLabel();
-        txtBuscar1 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jSeparator12 = new javax.swing.JSeparator();
-        jSeparator13 = new javax.swing.JSeparator();
-        txtCodigoBarra2 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
 
@@ -254,15 +199,16 @@ String fila[]= new String[5];
         RegistroProductos.setBackground(new java.awt.Color(255, 255, 255));
         RegistroProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel1.setText("Codigo de Barras ");
-        RegistroProductos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 50));
+        RegistroProductos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 50));
 
-        jLabel2.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Corbel", 0, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Registro de productos");
-        RegistroProductos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 40, 480, 50));
+        RegistroProductos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 40, 520, 50));
 
-        txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCodigoBarra.setBorder(null);
         RegistroProductos.add(txtCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 320, 50));
 
@@ -270,11 +216,11 @@ String fila[]= new String[5];
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         RegistroProductos.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 490, 30));
 
-        jLabel3.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel3.setText("Nombre del producto ");
-        RegistroProductos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 50));
+        RegistroProductos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 50));
 
-        txtNombreProducto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtNombreProducto.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtNombreProducto.setBorder(null);
         txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -287,11 +233,11 @@ String fila[]= new String[5];
         jSeparator2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         RegistroProductos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 320, 30));
 
-        jLabel4.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel4.setText("Precio unitario");
-        RegistroProductos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 50));
+        RegistroProductos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, 50));
 
-        txtPrecioUnitarii.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPrecioUnitarii.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtPrecioUnitarii.setBorder(null);
         txtPrecioUnitarii.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -304,11 +250,11 @@ String fila[]= new String[5];
         jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         RegistroProductos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 320, 30));
 
-        jLabel5.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel5.setText("Precio Mayoreo");
-        RegistroProductos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, 50));
+        RegistroProductos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, 50));
 
-        TxtPrecioMayoreo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TxtPrecioMayoreo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         TxtPrecioMayoreo.setBorder(null);
         TxtPrecioMayoreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -321,11 +267,11 @@ String fila[]= new String[5];
         jSeparator4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         RegistroProductos.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 320, 30));
 
-        jLabel6.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel6.setText("Unidades");
-        RegistroProductos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, 50));
+        RegistroProductos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, 50));
 
-        txtUnidades.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtUnidades.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtUnidades.setBorder(null);
         txtUnidades.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -410,162 +356,6 @@ String fila[]= new String[5];
 
         JPActualizar.setBackground(new java.awt.Color(255, 255, 255));
         JPActualizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel9.setText("Codigo de Barras ");
-        JPActualizar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 50));
-
-        jLabel10.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel10.setText("Actualizar productos");
-        JPActualizar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 40, 480, 50));
-
-        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JPActualizar.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 490, 30));
-
-        jLabel11.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel11.setText("Nombre del producto ");
-        JPActualizar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 50));
-
-        txtNombreProducto1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtNombreProducto1.setBorder(null);
-        txtNombreProducto1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreProducto1KeyTyped(evt);
-            }
-        });
-        JPActualizar.add(txtNombreProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 320, 50));
-
-        jLabel12.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel12.setText("Precio unitario");
-        JPActualizar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 50));
-
-        jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JPActualizar.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 320, 30));
-
-        txtPrecioUnitarii1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPrecioUnitarii1.setBorder(null);
-        txtPrecioUnitarii1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioUnitarii1KeyTyped(evt);
-            }
-        });
-        JPActualizar.add(txtPrecioUnitarii1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 320, 50));
-
-        jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JPActualizar.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 320, 30));
-
-        jLabel13.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel13.setText("Precio Mayoreo");
-        JPActualizar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, 50));
-
-        TxtPrecioMayoreo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        TxtPrecioMayoreo1.setBorder(null);
-        TxtPrecioMayoreo1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TxtPrecioMayoreo1KeyTyped(evt);
-            }
-        });
-        JPActualizar.add(TxtPrecioMayoreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 320, 50));
-
-        jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JPActualizar.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 320, 30));
-
-        jLabel14.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel14.setText("Unidades");
-        JPActualizar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, 50));
-
-        txtUnidades1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtUnidades1.setBorder(null);
-        txtUnidades1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUnidades1KeyTyped(evt);
-            }
-        });
-        JPActualizar.add(txtUnidades1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 520, 320, 50));
-
-        jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JPActualizar.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 570, 320, 30));
-
-        jButton3.setBackground(new java.awt.Color(255, 102, 0));
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Actualizar");
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        JPActualizar.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 300, 60));
-
-        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
-
-        Tabla1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Tabla1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Codigo Barras", "Nombre Producto", "Precio Unitario", "Precio Mayoreo", "Unidades"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        Tabla1.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        Tabla1.setRowHeight(35);
-        Tabla1.setSelectionBackground(new java.awt.Color(255, 153, 0));
-        Tabla1.setShowHorizontalLines(false);
-        Tabla1.setShowVerticalLines(false);
-        Tabla1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(Tabla1);
-
-        JPActualizar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 830, 600));
-
-        jLabel15.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel15.setText("Buscar");
-        JPActualizar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 120, 30));
-
-        txtBuscar1.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
-        txtBuscar1.setBorder(null);
-        txtBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscar1KeyTyped(evt);
-            }
-        });
-        JPActualizar.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 490, 40));
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Search_32px_2.png"))); // NOI18N
-        JPActualizar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 60, 30, 40));
-
-        jSeparator12.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JPActualizar.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 320, 30));
-
-        jSeparator13.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JPActualizar.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 320, 30));
-
-        txtCodigoBarra2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtCodigoBarra2.setBorder(null);
-        txtCodigoBarra2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigoBarra2KeyTyped(evt);
-            }
-        });
-        JPActualizar.add(txtCodigoBarra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 320, 50));
-
         jTabbedPane1.addTab("Actualizar productos", JPActualizar);
 
         jPanel3.setBackground(new java.awt.Color(246, 246, 246));
@@ -625,7 +415,7 @@ String fila[]= new String[5];
             else{
               ObtenerProductos();  
             tabla("Select * from productos",Tabla);
-            tabla("Select * from productos",Tabla1); 
+            
             }
           
         }catch(Error e){
@@ -690,61 +480,6 @@ String fila[]= new String[5];
         tabla("select * from productos where codigoBarras='"+txtBuscar.getText()+"'  union select * from productos where NombreP like '%"+txtBuscar.getText()+"%';",Tabla);
     }//GEN-LAST:event_txtBuscarKeyTyped
 
-    private void txtNombreProducto1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProducto1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreProducto1KeyTyped
-
-    private void txtPrecioUnitarii1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitarii1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioUnitarii1KeyTyped
-
-    private void TxtPrecioMayoreo1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioMayoreo1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPrecioMayoreo1KeyTyped
-
-    private void txtUnidades1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidades1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUnidades1KeyTyped
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        try{
-            if((obtenerValor(txtCodigoBarra2)+"").length()>0){
-              ObtenerProductos1();
-            tabla("select * from productos;", Tabla1);   
-            }
-           
-        }catch(Exception e){
-            
-        }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
-        // TODO add your handling code here:
-          tabla("select * from productos where codigoBarras='"+txtBuscar.getText()+"'  union select * from productos where NombreP like '%"+txtBuscar.getText()+"%';",Tabla1);
-    }//GEN-LAST:event_txtBuscar1KeyTyped
-
-    private void txtCodigoBarra2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarra2KeyTyped
-        // TODO add your handling code here:
-       ArrayList<Object> productos= Conec.Select("select * from productos where "
-               + "codigoBarras='"+txtCodigoBarra2.getText()+"';", 5);
-       
-      if(productos.size()>0){
-           ArrayList<JTextField> cajas= new ArrayList<>();
-       cajas.add(txtCodigoBarra2);
-       cajas.add(txtNombreProducto1);
-       cajas.add(txtPrecioUnitarii1);
-          cajas.add(TxtPrecioMayoreo1);
-             cajas.add(txtUnidades1);
-       for(int i=0; i<cajas.size(); i++){
-          cajas.get(i).setText(productos.get(i)+"");
-       }
-       cajas.clear();
-       productos.clear();
-      }
-    }//GEN-LAST:event_txtCodigoBarra2KeyTyped
-
     /**
      * @param args the command line arguments
      */
@@ -785,19 +520,9 @@ String fila[]= new String[5];
     private javax.swing.JPanel RegistroProductos;
     private javax.swing.JLabel Registrro;
     private javax.swing.JTable Tabla;
-    private javax.swing.JTable Tabla1;
     private javax.swing.JTextField TxtPrecioMayoreo;
-    private javax.swing.JTextField TxtPrecioMayoreo1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -805,34 +530,20 @@ String fila[]= new String[5];
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator11;
-    private javax.swing.JSeparator jSeparator12;
-    private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtBuscar1;
     private javax.swing.JTextField txtCodigoBarra;
-    private javax.swing.JTextField txtCodigoBarra2;
     private javax.swing.JTextField txtNombreProducto;
-    private javax.swing.JTextField txtNombreProducto1;
     private javax.swing.JTextField txtPrecioUnitarii;
-    private javax.swing.JTextField txtPrecioUnitarii1;
     private javax.swing.JTextField txtUnidades;
-    private javax.swing.JTextField txtUnidades1;
     // End of variables declaration//GEN-END:variables
 }
