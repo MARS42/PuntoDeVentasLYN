@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Ventanas;
 import Animaciones.Controlador;
 import AppPackage.AnimationClass;
@@ -14,7 +10,7 @@ import java.awt.Graphics;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
-import javax.swing.JComponent;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /**
@@ -242,19 +238,19 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         JPIngreso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel3.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(238, 112, 82));
         jLabel3.setText("Contraseña");
         JPIngreso.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel4.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(238, 112, 82));
         jLabel4.setText("Usuario:");
         JPIngreso.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_User_96px_2.png"))); // NOI18N
-        JPIngreso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, 110));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/UserName120.png"))); // NOI18N
+        JPIngreso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, 140));
 
         txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
@@ -328,7 +324,12 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         });
         JPIngreso.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 425, 120, 40));
 
-        JLInternet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Globe_32px.png"))); // NOI18N
+        JLInternet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/paciente.png"))); // NOI18N
+        JLInternet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JLInternetMouseClicked(evt);
+            }
+        });
         JPIngreso.add(JLInternet, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 60, -1, 40));
 
         BotonesMenu.add(JPIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 550));
@@ -356,7 +357,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pClientes.setOpaque(false);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Handshake_96px.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/comprador.png"))); // NOI18N
         jLabel8.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -374,8 +375,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pClientes.add(jLabel8);
 
         jLabel9.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel9.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel9.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(238, 101, 71));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Clientes");
         jLabel9.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -389,7 +390,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pProductos.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Today_96px.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/papeleria (1).png"))); // NOI18N
         jLabel11.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -407,8 +408,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pProductos.add(jLabel11);
 
         jLabel10.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel10.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel10.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(238, 101, 71));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Productos");
         jLabel10.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -422,7 +423,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pCiber.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Google_Drive_96px.png"))); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/computadora.png"))); // NOI18N
         jLabel17.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -440,8 +441,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pCiber.add(jLabel17);
 
         jLabel16.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel16.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel16.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(238, 101, 71));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Ciber");
         jLabel16.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -455,7 +456,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pCuenta.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_User_96px_2.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seminario-web.png"))); // NOI18N
         jLabel12.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -473,8 +474,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pCuenta.add(jLabel12);
 
         jLabel13.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel13.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel13.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(238, 101, 71));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Cuenta");
         jLabel13.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -488,7 +489,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pVentas.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Maintenance_96px.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carrito-de-compras.png"))); // NOI18N
         jLabel14.setPreferredSize(new java.awt.Dimension(150, 150));
         jLabel14.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -506,8 +507,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pVentas.add(jLabel14);
 
         jLabel15.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel15.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel15.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(238, 101, 71));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Ventas");
         jLabel15.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -733,8 +734,16 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         // TODO add your handling code here:
          if(evt.getKeyCode()==10 && txtPassword.getText().length()>0){
            Login();
+           
        }
     }//GEN-LAST:event_txtUsuarioKeyPressed
+
+    private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
+        // TODO add your handling code here:
+         new CrearCuenta(1).setVisible(true);
+         this.dispose();
+         
+    }//GEN-LAST:event_JLInternetMouseClicked
 
     /**
      * @param args the command line arguments
