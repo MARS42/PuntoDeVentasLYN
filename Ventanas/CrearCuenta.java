@@ -2,6 +2,7 @@ package Ventanas;
 
 import Actores.ObtenerTextos;
 import Actores.TextPrompt;
+import BaseDatos.Query;
 import Principal.Conectar;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;

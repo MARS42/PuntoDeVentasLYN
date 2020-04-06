@@ -6,10 +6,15 @@ import BaseDatos.Encriptar;
 import BaseDatos.Query;
 import Principal.Conectar;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
+import javax.swing.GroupLayout;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,7 +26,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     public static Login ins;
     boolean desbloquear=false;
-    Query sql;
+    Query sql = SplashScrean.sql;
     ArrayList<String> datos;
     ArrayList<JPanel> panelsBotones = new ArrayList<>();
     public Salida salida;
@@ -35,16 +40,17 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     private void Init()
     {
         this.setLocationRelativeTo(null);   
-        sql = new Query();
-        datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
+        //sql = new Query();
+        datos = this.sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
         addWindowListener(this);
         setOpacity(0);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH );
         Controlador.main.AccionesVentana(this, this::Abrir, 4);
         panelsBotones.add(BotonesMenu);
-        panelsBotones.add(JPClientes);
+        //panelsBotones.add(JPClientes);
         salida = new Salida(this);
         salida.setVisible(true);
+        defaultSize.setSize(getWidth(), getHeight());
         //salida.Ocultar();
     }
     
@@ -53,6 +59,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     public void Login(){
         try
         {
+            if (!maxi)setPreferredSize(defaultSize);
             BotonesMenu.setLayout(null);
             datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
@@ -148,9 +155,9 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     private void initComponents() {
 
         JPWindowTools = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        MenuCapas = new javax.swing.JLayeredPane();
         BotonesMenu = new javax.swing.JPanel();
         JPIngreso = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -184,13 +191,10 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        JPClientes = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setSize(new java.awt.Dimension(1080, 580));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPWindowTools.setBackground(new java.awt.Color(255, 255, 255));
         JPWindowTools.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
@@ -206,16 +210,25 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
                 JPWindowToolsMousePressed(evt);
             }
         });
-        JPWindowTools.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        JPWindowTools.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
+        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel20MouseClicked(evt);
+            }
+        });
+        JPWindowTools.add(jLabel20);
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-maximize-button-32.png"))); // NOI18N
         jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel18MouseClicked(evt);
             }
         });
-        JPWindowTools.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 30, 30));
+        JPWindowTools.add(jLabel18);
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Multiply_32px.png"))); // NOI18N
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -224,13 +237,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
                 jLabel19MouseClicked(evt);
             }
         });
-        JPWindowTools.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, -1, 30));
-
-        getContentPane().add(JPWindowTools, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 30));
-
-        MenuCapas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        BotonesMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        JPWindowTools.add(jLabel19);
 
         JPIngreso.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -331,8 +338,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
             }
         });
         JPIngreso.add(JLInternet, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 60, -1, 40));
-
-        BotonesMenu.add(JPIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 550));
 
         JPMenu.setBackground(new java.awt.Color(255, 255, 255));
         JPMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -524,39 +529,83 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         JPMenu.add(subJPMenu);
 
-        BotonesMenu.add(JPMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 790, 550));
+        javax.swing.GroupLayout BotonesMenuLayout = new javax.swing.GroupLayout(BotonesMenu);
+        BotonesMenu.setLayout(BotonesMenuLayout);
+        BotonesMenuLayout.setHorizontalGroup(
+            BotonesMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonesMenuLayout.createSequentialGroup()
+                .addComponent(JPIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(JPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE))
+        );
+        BotonesMenuLayout.setVerticalGroup(
+            BotonesMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(JPIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(JPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-        MenuCapas.add(BotonesMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 550));
-
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        JPClientes.add(jButton2);
-
-        MenuCapas.add(JPClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 550));
-
-        getContentPane().add(MenuCapas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1080, 550));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(JPWindowTools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BotonesMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPWindowTools, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BotonesMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-      
-        AnimationClass internet= new AnimationClass();
-        internet.jLabelXRight(-40, 10, 10, 5, JLInternet);
-        
-        //<---
-        AnimationClass internett= new AnimationClass();
-        internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
-      
-    }//GEN-LAST:event_jLabel6MouseClicked
-
+    Point lastPos;
+    Dimension defaultSize = new Dimension(), d = new Dimension();
+    boolean maxi = false;
+    
+//    public void Resize()
+//    {
+//        //System.out.println(BotonesMenu.getLayout().getClass().getName());
+//        if(BotonesMenu.getLayout() != null)
+//            return;
+//        BotonesMenu.setLayout(new GroupLayout(BotonesMenu));
+//        GroupLayout layout = (GroupLayout)getLayout();
+//        layout.setHorizontalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addComponent(JPWindowTools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//            .addComponent(BotonesMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//        );
+//        layout.setVerticalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addComponent(JPWindowTools, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                .addComponent(BotonesMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+//        );
+//        System.out.println("asdsa");
+//    }
+    
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
         // TODO add your handling code here:
-        Controlador.main.AccionesVentana(this, this::Minimizar, 1);
+        maxi = !maxi;
+        int maxx = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int maxy = Toolkit.getDefaultToolkit().getScreenSize().height;
+        if(maxi)
+        {
+            lastPos = getLocation();
+            d.setSize(maxx, maxy);
+            setPreferredSize(d);
+            setLocation(0, 0);
+        }
+        else
+        {
+            setPreferredSize(defaultSize);
+            setLocation(lastPos);
+        }
+        pack();
     }//GEN-LAST:event_jLabel18MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
@@ -570,144 +619,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         salida.Mostrar(this);
     }//GEN-LAST:event_jLabel19MouseClicked
 
-    private void jLabel8MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseMoved
-        // TODO add your handling code here:
-        repaint();
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
-    }//GEN-LAST:event_jLabel8MouseMoved
-
-    private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
-        // TODO add your handling code here:
-        repaint();
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
-    }//GEN-LAST:event_jLabel8MouseExited
-
-    private void jLabel11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseMoved
-        // TODO add your handling code here:
-        repaint();
-        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
-    }//GEN-LAST:event_jLabel11MouseMoved
-
-    private void jLabel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseExited
-        // TODO add your handling code here:
-        repaint();
-         jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
-    }//GEN-LAST:event_jLabel11MouseExited
-
-    private void jLabel17MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseMoved
-        // TODO add your handling code here:
-        repaint();
-         jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
-    }//GEN-LAST:event_jLabel17MouseMoved
-
-    private void jLabel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseExited
-        // TODO add your handling code here:
-        repaint();
-         jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
-    }//GEN-LAST:event_jLabel17MouseExited
-
-    private void jLabel12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseMoved
-        // TODO add your handling code here:
-        repaint();
-         jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
-    }//GEN-LAST:event_jLabel12MouseMoved
-
-    private void jLabel12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseExited
-        // TODO add your handling code here:
-        repaint();
-         jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
-    }//GEN-LAST:event_jLabel12MouseExited
-
-    private void jLabel14MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseMoved
-        // TODO add your handling code here:
-        repaint();
-         jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
-    }//GEN-LAST:event_jLabel14MouseMoved
-
-    private void jLabel14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseExited
-        // TODO add your handling code here:
-        repaint();
-         jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
-    }//GEN-LAST:event_jLabel14MouseExited
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Login();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
-        // TODO add your handling code here:
-     
-    }//GEN-LAST:event_txtUsuarioMouseClicked
-
-    private void txtUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseExited
-        // TODO add your handling code here:
-  
-    }//GEN-LAST:event_txtUsuarioMouseExited
-
-    private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
-        // TODO add your handling code here:
-   
-    }//GEN-LAST:event_txtPasswordMouseClicked
-
-    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        // TODO add your handling code here:
-       if(evt.getKeyCode()==10){
-           Login();
-       }
-    }//GEN-LAST:event_txtPasswordKeyPressed
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-        //Producto  esto es como un boton  pero es un label
-        if(desbloquear){
-            //abrir una nueva ventana
-            MenuCapas.moveToBack(BotonesMenu);
-            MenuCapas.moveToFront(JPClientes);
-            ActivarPanel(0);
-        }else{
-            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
-        }
-    }//GEN-LAST:event_jLabel8MouseClicked
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-      if(desbloquear){
-            //abrir una nueva ventana 
-                 new Productos().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
-        }
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        // TODO add your handling code here:
-        
-         if(desbloquear){
-            //abrir una nueva ventana 
-       }else{
-            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
-        }
-    }//GEN-LAST:event_jLabel17MouseClicked
-
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        // TODO add your handling code here:
-        
-         if(desbloquear){
-            //abrir una nueva ventana 
-       }else{
-            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
-        }
-    }//GEN-LAST:event_jLabel12MouseClicked
-
-    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-        // TODO add your handling code here:
-         if(desbloquear){
-            //abrir una nueva ventana 
-       }else{
-            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
-        }
-    }//GEN-LAST:event_jLabel14MouseClicked
-
     private int tx, ty;
     private void JPWindowToolsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPWindowToolsMousePressed
         tx = evt.getX();
@@ -716,15 +627,159 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     }//GEN-LAST:event_JPWindowToolsMousePressed
 
     private void JPWindowToolsMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPWindowToolsMouseDragged
+        if(maxi)
+            return;
         setLocation(evt.getXOnScreen() - tx,  evt.getYOnScreen() - ty);
     }//GEN-LAST:event_JPWindowToolsMouseDragged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //VolverMenu
-            MenuCapas.moveToBack(JPClientes);
-            MenuCapas.moveToFront(BotonesMenu);
-            ActivarPanel(1);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
+        // TODO add your handling code here:
+        Controlador.main.AccionesVentana(this, this::Minimizar, 1);
+    }//GEN-LAST:event_jLabel20MouseClicked
+
+    private void jLabel14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseExited
+        // TODO add your handling code here:
+        repaint();
+        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
+    }//GEN-LAST:event_jLabel14MouseExited
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        // TODO add your handling code here:
+        if(desbloquear){
+            //abrir una nueva ventana
+        }else{
+            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
+        }
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel14MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseMoved
+        // TODO add your handling code here:
+        repaint();
+        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
+    }//GEN-LAST:event_jLabel14MouseMoved
+
+    private void jLabel12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseExited
+        // TODO add your handling code here:
+        repaint();
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
+    }//GEN-LAST:event_jLabel12MouseExited
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        // TODO add your handling code here:
+
+        if(desbloquear){
+            //abrir una nueva ventana
+        }else{
+            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
+        }
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseMoved
+        // TODO add your handling code here:
+        repaint();
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
+    }//GEN-LAST:event_jLabel12MouseMoved
+
+    private void jLabel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseExited
+        // TODO add your handling code here:
+        repaint();
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
+    }//GEN-LAST:event_jLabel17MouseExited
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        // TODO add your handling code here:
+
+        if(desbloquear){
+            //abrir una nueva ventana
+        }else{
+            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
+        }
+    }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void jLabel17MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseMoved
+        // TODO add your handling code here:
+        repaint();
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
+    }//GEN-LAST:event_jLabel17MouseMoved
+
+    private void jLabel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseExited
+        // TODO add your handling code here:
+        repaint();
+        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
+    }//GEN-LAST:event_jLabel11MouseExited
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        if(desbloquear){
+            //abrir una nueva ventana
+            new Productos().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
+        }
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseMoved
+        // TODO add your handling code here:
+        repaint();
+        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
+    }//GEN-LAST:event_jLabel11MouseMoved
+
+    private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
+        // TODO add your handling code here:
+        repaint();
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
+    }//GEN-LAST:event_jLabel8MouseExited
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        //Producto  esto es como un boton  pero es un label
+        if(desbloquear){
+            //abrir una nueva ventana
+            ActivarPanel(0);
+        }else{
+            JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
+        }
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel8MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseMoved
+        // TODO add your handling code here:
+        repaint();
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
+    }//GEN-LAST:event_jLabel8MouseMoved
+
+    private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
+        // TODO add your handling code here:
+        new CrearCuenta(1).setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_JLInternetMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Login();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+
+        AnimationClass internet= new AnimationClass();
+        internet.jLabelXRight(-40, 10, 10, 5, JLInternet);
+
+        //<---
+        AnimationClass internett= new AnimationClass();
+        internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
+
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==10){
+            Login();
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtPasswordMouseClicked
 
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // TODO add your handling code here:
@@ -732,65 +787,65 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         // TODO add your handling code here:
-         if(evt.getKeyCode()==10 && txtPassword.getText().length()>0){
-           Login();
-           
-       }
+        if(evt.getKeyCode()==10 && txtPassword.getText().length()>0){
+            Login();
+
+        }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
-    private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
+    private void txtUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseExited
         // TODO add your handling code here:
-         new CrearCuenta(1).setVisible(true);
-         this.dispose();
-         
-    }//GEN-LAST:event_JLInternetMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    }//GEN-LAST:event_txtUsuarioMouseExited
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
+    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtUsuarioMouseClicked
+
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Windows".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Login().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel BotonesMenu;
     private javax.swing.JLabel JLInternet;
-    private javax.swing.JPanel JPClientes;
     private javax.swing.JPanel JPIngreso;
     private javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPWindowTools;
-    private javax.swing.JLayeredPane MenuCapas;
     private javax.swing.JLabel NombreLocal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -803,6 +858,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

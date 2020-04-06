@@ -8,10 +8,16 @@ package Animaciones;
 public class Transform 
 {
     //Posición
-    int px, py;     //Posición en XY
+    private int px, py;     //Posición en XY
+    public void setPos(int x, int y){ px = x; py = y; }
+    public int getX(){ return px; }
+    public int getY(){ return py; }
     
     //Escala
-    int sx, sy;     //Escala en XY
+    private int sx, sy;     //Escala en XY
+    public void setSc(int x, int y){ sx = x; sy = y; }
+    public int getXs(){ return sx; }
+    public int getYs(){ return sy; }
     
     /**
      * Inicia un Transform que contendrá las transformaciones de un componente

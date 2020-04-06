@@ -3,6 +3,7 @@ package Animaciones;
 import Ventanas.Login;
 import java.awt.Component;
 import java.util.concurrent.Callable;
+import javax.swing.GroupLayout;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Controlador
     public int ratioAnimacion = 8;
     
     //Animaciones
-    public Animacion minimizar, maximizar, cerrar, abrir;
+    public Animacion minimizar, maximizar, cerrar, abrir, grande, pequena;
     public Animacion panelIngreso;
     public Animacion panelMenu;
     public Animacion abrirSalida, cerrarSalida;
@@ -96,7 +97,6 @@ public class Controlador
         {
             panelIngreso = new Animacion(c, -c.getWidth(), c.getY(), c.getWidth(), c.getHeight(), null, 3);
             panelMenu = new Animacion(c2, c2.getX() - c.getWidth(), c2.getY(), c2.getWidth() + c.getWidth(), c2.getHeight(), null, 3);
-            
             panelIngreso.Iniciar();
             panelMenu.Iniciar();
         }
@@ -134,8 +134,8 @@ public class Controlador
     Transform LerpTransform(Transform a, Transform b, float t, Transform to, int animType)
     {
         if(to == null)
-            return new Transform((int)Lerp(a.px, b.px, t), (int)Lerp(a.py, b.py, t), 
-                    (int)Lerp(a.sx, b.sx, t), (int)Lerp(a.sy, b.sy, t));
+            return new Transform((int)Lerp(a.getX(), b.getX(), t), (int)Lerp(a.getY(), b.getY(), t), 
+                    (int)Lerp(a.getXs(), b.getXs(), t), (int)Lerp(a.getYs(), b.getYs(), t));
         else
         {
             switch(animType)
@@ -153,10 +153,8 @@ public class Controlador
                     t = animacion_sqrt(t);
                     break;
             }
-            to.px = (int)Lerp(a.px, b.px, t);
-            to.py = (int)Lerp(a.py, b.py, t);
-            to.sx = (int)Lerp(a.sx, b.sx, t);
-            to.sy = (int)Lerp(a.sy, b.sy, t);
+            to.setPos(((int)Lerp(a.getX(), b.getX(), t)), (int)Lerp(a.getY(), b.getY(), t));
+            to.setSc(((int)Lerp(a.getXs(), b.getXs(), t)), (int)Lerp(a.getYs(), b.getYs(), t));
             return to;
         }
     }

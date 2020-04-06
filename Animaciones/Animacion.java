@@ -16,12 +16,13 @@ public class Animacion implements ActionListener
     private final Timer timer;  
     private float lerp = 0f;;
     public float getLerp(){ return lerp; }
-    private final Transform origin_transform;                               //Estado original del componente
     private final Transform from_transform;                                 //Estado inicial del componente
     private final Transform to_transform;                                   //A donde se moverá y escalará el componente
+    public void setTo(int x, int y, int sx, int sy){ to_transform.setPos(x, y); to_transform.setSc(sx, sy);}
     private Transform current_transform;                                    //Estado de la transición 
     private final Component objetivo;
-    private final Callable<Void> action;                                    //Método a llamar al terminar animación
+    private Callable<Void> action;                                    //Método a llamar al terminar animación
+    public void setEndAction(Callable<Void> action){ this.action = action; }
     private Callable<Void> updateAction;                                    //Método que se llamará a cada actualización 
     public void setUpdateAction(Callable<Void> updateAction){ this.updateAction = updateAction; }
     /***
@@ -49,27 +50,23 @@ public class Animacion implements ActionListener
         this.objetivo = o;
         this.action = action;
         this.curve = curve;
-        origin_transform = new Transform(o.getX(), o.getY(), o.getWidth(), o.getHeight());
-        from_transform = new Transform(origin_transform.px, origin_transform.py, origin_transform.sx, origin_transform.sy);
+        from_transform = new Transform(o.getX(), o.getY(), o.getWidth(), o.getHeight());
         to_transform = new Transform(newpx, newpy, newsx, newsy);
-        current_transform = new Transform(origin_transform.px, origin_transform.py, origin_transform.sx, origin_transform.sy);
+        current_transform = new Transform(from_transform.getX(), from_transform.getY(),
+                from_transform.getXs(), from_transform.getYs());
         timer = new Timer(Controlador.main.ratioAnimacion, this);
         timer.setCoalesce(true);
     }
     
     public void Iniciar(){
-        from_transform.px = objetivo.getX();
-        from_transform.py = objetivo.getY();
-        from_transform.sx = objetivo.getWidth();
-        from_transform.sy = objetivo.getHeight();
+        from_transform.setPos(objetivo.getX(), objetivo.getY());
+        from_transform.setSc(objetivo.getWidth(), objetivo.getHeight());
         lerp = 0f;
         timer.start();
     }
     public void Reinciar(){
-        from_transform.px = objetivo.getX();
-        from_transform.py = objetivo.getY();
-        from_transform.sx = objetivo.getWidth();
-        from_transform.sy = objetivo.getHeight();
+        from_transform.setPos(objetivo.getX(), objetivo.getY());
+        from_transform.setSc(objetivo.getWidth(), objetivo.getHeight());
         lerp = 0f;
         timer.restart(); 
     }
@@ -87,8 +84,8 @@ public class Animacion implements ActionListener
             if(lerp <= 1f)
             {
                 current_transform = Controlador.main.LerpTransform(from_transform, to_transform, lerp, current_transform, curve);
-                objetivo.setLocation(current_transform.px, current_transform.py);
-                objetivo.setSize(current_transform.sx, current_transform.sy);
+                objetivo.setLocation(current_transform.getX(), current_transform.getY());
+                objetivo.setSize(current_transform.getXs(), current_transform.getYs());
                 lerp += Controlador.main.velocidadAnim;
                 Login.ins.pack();
                 updateAction.call();
