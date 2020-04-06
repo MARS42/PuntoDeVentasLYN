@@ -4,8 +4,10 @@ Ventana de Animacion de Inicio del sistema
 package Ventanas;
 
 import Principal.Conectar;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 
@@ -18,6 +20,7 @@ public class SplashScrean extends javax.swing.JFrame implements Conectar{
         initComponents();
         setLocationRelativeTo(this);
         mostrarb();
+      
     }
     //Medoto para mandar al login despues de que termine la carga 
     public  void login(){

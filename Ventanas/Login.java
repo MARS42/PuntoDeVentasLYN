@@ -740,7 +740,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
         // TODO add your handling code here:
-         new CrearCuenta(1).setVisible(true);
+         new CrearCuenta().setVisible(true);
          this.dispose();
          
     }//GEN-LAST:event_JLInternetMouseClicked
