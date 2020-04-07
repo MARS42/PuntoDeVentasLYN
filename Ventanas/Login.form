@@ -161,7 +161,7 @@
                   <Color blue="52" green="70" red="ee" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Candara" size="20" style="0"/>
+                  <Font name="Candara" size="20" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="52" green="70" red="ee" type="rgb"/>
@@ -180,7 +180,7 @@
                   <Color blue="52" green="70" red="ee" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Candara" size="20" style="0"/>
+                  <Font name="Candara" size="20" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="52" green="70" red="ee" type="rgb"/>
@@ -457,7 +457,7 @@
                           <Color blue="52" green="70" red="ee" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Candara" size="20" style="0"/>
+                          <Font name="Candara" size="20" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="47" green="65" red="ee" type="rgb"/>
@@ -509,7 +509,7 @@
                           <Color blue="52" green="70" red="ee" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Candara" size="20" style="0"/>
+                          <Font name="Candara" size="20" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="47" green="65" red="ee" type="rgb"/>
@@ -561,7 +561,7 @@
                           <Color blue="52" green="70" red="ee" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Candara" size="20" style="0"/>
+                          <Font name="Candara" size="20" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="47" green="65" red="ee" type="rgb"/>
@@ -613,7 +613,7 @@
                           <Color blue="52" green="70" red="ee" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Candara" size="20" style="0"/>
+                          <Font name="Candara" size="20" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="47" green="65" red="ee" type="rgb"/>
@@ -665,7 +665,7 @@
                           <Color blue="52" green="70" red="ee" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Candara" size="20" style="0"/>
+                          <Font name="Candara" size="20" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="47" green="65" red="ee" type="rgb"/>

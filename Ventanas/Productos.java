@@ -162,6 +162,7 @@ public class Productos extends javax.swing.JFrame implements Conectar {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtCodigoBarra = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         txtNombreProducto = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
@@ -175,17 +176,16 @@ public class Productos extends javax.swing.JFrame implements Conectar {
         txtUnidades = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
         Registrro = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
         JPActualizar = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        txtBuscar = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla = new javax.swing.JTable();
-        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -208,6 +208,10 @@ public class Productos extends javax.swing.JFrame implements Conectar {
         txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCodigoBarra.setBorder(null);
         RegistroProductos.add(txtCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 320, 50));
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 490, 30));
 
         jLabel3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel3.setText("Nombre del producto ");
@@ -290,56 +294,6 @@ public class Productos extends javax.swing.JFrame implements Conectar {
         });
         RegistroProductos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 300, 60));
 
-        Registrro.setBackground(new java.awt.Color(255, 102, 0));
-        Registrro.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        Registrro.setForeground(new java.awt.Color(255, 102, 0));
-        Registrro.setText("Producto Registrado");
-        RegistroProductos.add(Registrro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 706, 310, 40));
-
-        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        RegistroProductos.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 320, 30));
-
-        jTabbedPane1.addTab("Registro del productos ", RegistroProductos);
-
-        JPActualizar.setBackground(new java.awt.Color(255, 255, 255));
-        JPActualizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("Actualizar productos", JPActualizar);
-
-        jPanel3.setBackground(new java.awt.Color(246, 246, 246));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1727, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 749, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Eliminar productos", jPanel3);
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel7.setText("Buscar");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 120, 30));
-
-        txtBuscar.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
-        txtBuscar.setBorder(null);
-        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyTyped(evt);
-            }
-        });
-        jPanel4.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 490, 40));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Search_32px_2.png"))); // NOI18N
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 60, 30, 40));
-
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         Tabla.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -367,11 +321,67 @@ public class Productos extends javax.swing.JFrame implements Conectar {
         Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabla);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 830, 600));
+        RegistroProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 830, 600));
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 490, 30));
+        Registrro.setBackground(new java.awt.Color(255, 102, 0));
+        Registrro.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        Registrro.setForeground(new java.awt.Color(255, 102, 0));
+        Registrro.setText("Producto Registrado");
+        RegistroProductos.add(Registrro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 706, 310, 40));
+
+        txtBuscar.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
+        txtBuscar.setBorder(null);
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+        RegistroProductos.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 490, 40));
+
+        jLabel7.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel7.setText("Buscar");
+        RegistroProductos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 120, 30));
+
+        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        RegistroProductos.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 320, 30));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Search_32px_2.png"))); // NOI18N
+        RegistroProductos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 60, 30, 40));
+
+        jTabbedPane1.addTab("Registro del productos ", RegistroProductos);
+
+        JPActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        JPActualizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane1.addTab("Actualizar productos", JPActualizar);
+
+        jPanel3.setBackground(new java.awt.Color(246, 246, 246));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1727, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 749, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Eliminar productos", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1727, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 749, Short.MAX_VALUE)
+        );
 
         jTabbedPane1.addTab("Inventario", jPanel4);
 

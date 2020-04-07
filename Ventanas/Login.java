@@ -245,13 +245,13 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         JPIngreso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel3.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(238, 112, 82));
         jLabel3.setText("Contraseña");
         JPIngreso.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel4.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(238, 112, 82));
         jLabel4.setText("Usuario:");
         JPIngreso.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
@@ -380,7 +380,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pClientes.add(jLabel8);
 
         jLabel9.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel9.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(238, 101, 71));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Clientes");
@@ -413,7 +413,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pProductos.add(jLabel11);
 
         jLabel10.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel10.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(238, 101, 71));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Productos");
@@ -446,7 +446,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pCiber.add(jLabel17);
 
         jLabel16.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel16.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(238, 101, 71));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Ciber");
@@ -479,7 +479,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pCuenta.add(jLabel12);
 
         jLabel13.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel13.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(238, 101, 71));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Cuenta");
@@ -512,7 +512,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pVentas.add(jLabel14);
 
         jLabel15.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel15.setFont(new java.awt.Font("Candara", 0, 20)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(238, 101, 71));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Ventas");
