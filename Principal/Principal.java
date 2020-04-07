@@ -19,7 +19,7 @@ public class Principal {
         SplashScrean ventana= new SplashScrean();
         AWTUtilities.setWindowOpaque(ventana,false);
         ventana.setVisible(true);
-        new MenuProductos().setVisible(true);
+      
         
     }
     

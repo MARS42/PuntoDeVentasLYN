@@ -17,13 +17,13 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
      boolean UserDisponible;
    
     
-    int k;
+    
     ArrayList<Object> cajasTexto = new ArrayList();
     ArrayList<String> place = new ArrayList();
 
-    public CrearCuenta(int k) {
+    public CrearCuenta() {
         initComponents();
-        this.k = k;
+        
         setLocationRelativeTo(this);
         llenarCajas();
         llenarTextos();
@@ -67,6 +67,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
             }
             cajasTexto.clear();
             place.clear();
+            
         }
 
     }
@@ -259,7 +260,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Primero preguntamos si todos los requisistos indispensables se cumplen
-
+   
         if(UserDisponible && txtNombre.getText().length()>0 && txtPass.getText().length()>0){
             ObtenerTextos tex = new ObtenerTextos();
             tex.add("");//usuario
