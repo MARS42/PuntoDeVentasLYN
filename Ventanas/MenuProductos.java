@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Ventanas;
 
 import Actores.TextPrompt;
@@ -13,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -35,9 +32,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         llenarTextos();
         llenarcajas();
         diseñoTabla(Tabla);
-
+         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage()); 
         tabla("select * from productos;", Tabla);
         PlaceHorlder();
+         TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
 
     }
 
@@ -205,7 +203,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel16 = new javax.swing.JLabel();
         txtUnidades = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
-        jButton2 = new javax.swing.JButton();
+        BtnRegistro = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -236,7 +234,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Inventario");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 44, 200, 40));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 40, 100, 40));
 
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -258,18 +256,18 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Actualizar productos");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 44, 200, 40));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 40, 200, 40));
 
         jLabel6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Eliminar Productos");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 200, 40));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 40, 200, 40));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario.png"))); // NOI18N
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 10, -1, 100));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1520, 10, -1, 100));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro.png"))); // NOI18N
@@ -279,12 +277,12 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, -1, 100));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, 100));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png"))); // NOI18N
         jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, -1, 100));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 10, -1, 100));
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -386,18 +384,29 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jSeparator5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         PanelRegistro.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 550, 320, 30));
 
-        jButton2.setBackground(new java.awt.Color(255, 102, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Registrar");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
+        BtnRegistro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        BtnRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        BtnRegistro.setText("Registrar");
+        BtnRegistro.setBorder(null);
+        BtnRegistro.setBorderPainted(false);
+        BtnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnRegistro.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                BtnRegistroMouseMoved(evt);
             }
         });
-        PanelRegistro.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 630, 400, 50));
+        BtnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnRegistroMouseExited(evt);
+            }
+        });
+        BtnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegistroActionPerformed(evt);
+            }
+        });
+        PanelRegistro.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 630, 400, 50));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pegamento.png"))); // NOI18N
         PanelRegistro.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, 60));
@@ -414,32 +423,37 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/precio.png"))); // NOI18N
         PanelRegistro.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, 60));
 
-        jLabel22.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Buscar");
-        PanelRegistro.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 40, 120, 30));
+        PanelRegistro.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 30, 80, 40));
 
-        txtBuscar.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
+        txtBuscar.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         txtBuscar.setBorder(null);
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, 490, 40));
+        PanelRegistro.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, 430, 40));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 490, 30));
+        PanelRegistro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 430, 30));
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Search_32px_2.png"))); // NOI18N
-        PanelRegistro.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 30, 30, 40));
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        PanelRegistro.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 20, 60, 60));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        Tabla.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Tabla.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "Código Barras", "Nombre Producto", "Precio Unitario", "Precio Mayoreo", "Unidades"
@@ -453,10 +467,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 return canEdit [columnIndex];
             }
         });
+        Tabla.setFocusable(false);
         Tabla.setIntercellSpacing(new java.awt.Dimension(0, 0));
         Tabla.setRowHeight(35);
         Tabla.setSelectionBackground(new java.awt.Color(255, 153, 0));
-        Tabla.setShowHorizontalLines(false);
         Tabla.setShowVerticalLines(false);
         Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabla);
@@ -492,12 +506,12 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     private void jLabel4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseMoved
         // TODO add your handling code here:
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+       
     }//GEN-LAST:event_jLabel4MouseMoved
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:[238,112,82]
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 112, 82)));
+        
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
@@ -550,7 +564,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         }
     }//GEN-LAST:event_txtUnidadesKeyTyped
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
         // TODO add your handling code here:
         try {
             /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
@@ -568,12 +582,23 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         } catch (Error e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
         tabla("select * from productos where codigoBarras='" + txtBuscar.getText() + "'  union select * from productos where NombreP like '%" + txtBuscar.getText() + "%';", Tabla);
     }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void BtnRegistroMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseMoved
+        // TODO add your handling code here:
+        //[255,122,47]
+          BtnRegistro.setBackground(new java.awt.Color(255,122,47));
+    }//GEN-LAST:event_BtnRegistroMouseMoved
+
+    private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
+        // TODO add your handling code here:
+        BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
+    }//GEN-LAST:event_BtnRegistroMouseExited
 
     /**
      * @param args the command line arguments
@@ -614,10 +639,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnRegistro;
     private javax.swing.JPanel PanelRegistro;
     private javax.swing.JTable Tabla;
     private javax.swing.JTextField TxtPrecioMayoreo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

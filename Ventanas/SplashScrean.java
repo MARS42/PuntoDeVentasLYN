@@ -5,7 +5,9 @@ package Ventanas;
 
 import BaseDatos.Query;
 import Principal.Conectar;
+import java.awt.Image;
 import java.util.concurrent.Callable;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 
@@ -18,6 +20,7 @@ public class SplashScrean extends javax.swing.JFrame implements Conectar{
  
     public SplashScrean() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         setLocationRelativeTo(this);
         //Animaciones.Animacion a = new Animaciones.Animacion(this, getX(), getY(), getWidth(), getHeight(), null, 3);
         //a.setUpdateAction(() -> Opacidad(a.getLerp(), false));
