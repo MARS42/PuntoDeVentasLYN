@@ -3,6 +3,7 @@ package Principal;
 import Animaciones.Controlador;
 import BaseDatos.Encriptar;
 import Ventanas.CrearCuenta;
+import Ventanas.MenuProductos;
 import Ventanas.SplashScrean;
 import com.sun.awt.AWTUtilities;
 
@@ -18,6 +19,7 @@ public class Principal {
         SplashScrean ventana= new SplashScrean();
         AWTUtilities.setWindowOpaque(ventana,false);
         ventana.setVisible(true);
+        new MenuProductos().setVisible(true);
         
     }
     

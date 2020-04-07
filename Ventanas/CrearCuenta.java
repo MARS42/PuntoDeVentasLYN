@@ -257,37 +257,34 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Primero preguntamos si todos los requisistos indispensables se cumplen
+
+        if(UserDisponible && txtNombre.getText().length()>0 && txtPass.getText().length()>0){
+            ObtenerTextos tex = new ObtenerTextos();
+            tex.add("");//usuario
+            tex.add("");//Nombre
+
+            tex.add("");//contraseña
+            tex.add(2);//rol
+            tex.add("");//Correo
+            tex.add("");//Telfono
+
+        }else{
+            //Aqui cambia este mensaje por uno como el que hiciste en el login xd
+            JOptionPane.showMessageDialog(this, "Revisa los datos que deben ser obligatorios");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         new Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Primero preguntamos si todos los requisistos indispensables se cumplen
-        
-        if(UserDisponible && txtNombre.getText().length()>0 && txtPass.getText().length()>0){
-              ObtenerTextos tex = new ObtenerTextos();
-        tex.add("");//usuario
-        tex.add("");//Nombre
-
-        tex.add("");//contraseña
-        tex.add(2);//rol
-        tex.add("");//Correo
-        tex.add("");//Telfono
-        
-        
-        }else{
-            //Aqui cambia este mensaje por uno como el que hiciste en el login xd
-            JOptionPane.showMessageDialog(this, "Revisa los datos que deben ser obligatorios");
-        }
-      
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // TODO add your handling code here:
-
     }//GEN-LAST:event_txtUsuarioKeyTyped
 
     private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
@@ -308,7 +305,6 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
                 UserDisponible=true;
             }
         }
-
     }//GEN-LAST:event_txtUsuarioKeyReleased
 
 
