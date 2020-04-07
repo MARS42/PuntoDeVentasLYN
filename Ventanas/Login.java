@@ -2,19 +2,26 @@
 package Ventanas;
 import Animacion.Fade;
 import Animaciones.Controlador;
+import Animaciones.GaussianBlur;
 import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
 import BaseDatos.Query;
 import Principal.Conectar;
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 
 import javax.swing.JOptionPane;
@@ -103,6 +110,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         return null;
     }
     boolean dark = false;
+    GaussianBlur gb;
     public void Darken()
     {
         setEnabled(false);
@@ -113,7 +121,22 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     {
         setEnabled(true);
         dark = false;
+        gb = null;
         repaint();
+    }
+    
+    BufferedImage ss() 
+    {
+        try {
+            Robot r = new Robot();
+            //Rectangle rec = new Rectangle(getX() + 2, getY()-2, getWidth()-2, getHeight()-2);
+            //r.createScreenCapture(getBounds());
+            BufferedImage bi = r.createScreenCapture(getBounds());
+            return bi;
+        } catch (AWTException ex) {
+        }
+        //BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+        return null;
     }
     
     @Override
@@ -122,8 +145,11 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         super.paint(g);
         if(dark)
         {
-            g.setColor(new Color(0, 0, 0, 140));
-            g.fillRect(0, 0, getWidth(), getHeight());
+            if(gb == null){
+            gb = new GaussianBlur(ss(), 12);
+            //g.setColor(new Color(0, 0, 0, 140));
+            //g.fillRect(0, 0, getWidth(), getHeight());
+            gb.imagenBlur(getGraphics(), this);}
         }
     }
     
