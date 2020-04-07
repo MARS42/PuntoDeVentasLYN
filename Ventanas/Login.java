@@ -1,5 +1,6 @@
 
 package Ventanas;
+import Animacion.Fade;
 import Animaciones.Controlador;
 import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
@@ -748,7 +749,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
         // TODO add your handling code here:
-        new CrearCuenta().setVisible(true);
+        // Fade.JFrameFadeIn(1f, 0f, 0.1f, 30, new CrearCuenta());
+       new CrearCuenta().setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_JLInternetMouseClicked
