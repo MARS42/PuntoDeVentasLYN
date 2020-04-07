@@ -270,15 +270,10 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
 
         if (UserDisponible && txtNombre.getText().length() > 0 && txtPass.getText().length() > 0) {
             ObtenerTextos tex = new ObtenerTextos();
-            /* tex.add("");//usuario
-            tex.add("");//Nombre
-
-            tex.add("");//contraseña
-            tex.add(2);//rol
-            tex.add("");//Correo
-            tex.add("");//Telfono*/
-            cajasTexto.add(txtNombre);
+      
             cajasTexto.add(txtUsuario);
+            cajasTexto.add(txtNombre);
+            
             cajasTexto.add(txtPass);
             cajasTexto.add(jComboBox1);
             cajasTexto.add(txtCorreo);
@@ -310,9 +305,14 @@ class javax.swing.JTextField
            }
                
             }
-            for(int i=0; i<cajasTexto.size(); i++){
-                System.out.println(tex.datos.get(i));
-            }
+           Conec.insert("insert into usuarios values (?,?,?,?,?,?);", tex.datos, "No se pudo agregar el Usuario");
+          //RsAni
+           cajasTexto.clear();
+           tex.datos.clear();
+            Mensaje men=new Mensaje();
+           men.jLabel1.setText("El usuario se registro correctamente");
+           men.setVisible(true);
+           
 
         } else {
             //Aqui cambia este mensaje por uno como el que hiciste en el login xd
