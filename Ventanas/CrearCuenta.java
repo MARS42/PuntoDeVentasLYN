@@ -6,6 +6,7 @@ import BaseDatos.Query;
 import Principal.Conectar;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -278,13 +279,39 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
             tex.add("");//Telfono*/
             cajasTexto.add(txtNombre);
             cajasTexto.add(txtUsuario);
-
+            cajasTexto.add(txtPass);
+            cajasTexto.add(jComboBox1);
             cajasTexto.add(txtCorreo);
             cajasTexto.add(txtTelefono);
-            cajasTexto.add(txtPass);
+                /* 
+                run:
+class javax.swing.JTextField
+class javax.swing.JTextField
+class javax.swing.JPasswordField
+class javax.swing.JComboBox
+class javax.swing.JTextField
+class javax.swing.JTextField
+                */ 
             for(int i=0; i<cajasTexto.size(); i++ ){
-                System.out.println(cajasTexto.get(i).getClass());
+           if(String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JTextField")){
+               tex.add(((JTextField)cajasTexto.get(i)).getText());
+           }
+            if(String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JPasswordField")){
+               tex.add(((JPasswordField)cajasTexto.get(i)).getText());
+           }
+               if(String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JComboBox")){
+               int valor=((JComboBox)cajasTexto.get(i)).getSelectedIndex();
+               if(valor==0){
+                  tex.add("2");
+               }
+               if(valor==1){
+                   tex.add("1");
+               }
+           }
                
+            }
+            for(int i=0; i<cajasTexto.size(); i++){
+                System.out.println(tex.datos.get(i));
             }
 
         } else {
