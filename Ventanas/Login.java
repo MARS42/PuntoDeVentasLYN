@@ -232,6 +232,9 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
             }
         });
         JPWindowTools.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JPWindowToolsMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 JPWindowToolsMousePressed(evt);
             }
@@ -828,6 +831,10 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         // TODO add your handling code here:
 
     }//GEN-LAST:event_txtUsuarioMouseClicked
+
+    private void JPWindowToolsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPWindowToolsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JPWindowToolsMouseClicked
 
 //    /**
 //     * @param args the command line arguments
