@@ -4,8 +4,10 @@ import Actores.ObtenerTextos;
 import Actores.TextPrompt;
 import BaseDatos.Query;
 import Principal.Conectar;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -13,18 +15,21 @@ import javax.swing.JTextField;
  * @author omara
  */
 public class CrearCuenta extends javax.swing.JFrame implements Conectar {
+
     //Variables para saber si el usuario esta disponible 
-     boolean UserDisponible;
-      int clicks=0;
-    
-    
+    boolean UserDisponible;
+    int clicks = 0;
+    char prueba;
+
     ArrayList<Object> cajasTexto = new ArrayList();
     ArrayList<String> place = new ArrayList();
 
     public CrearCuenta() {
         initComponents();
-        
+
         setLocationRelativeTo(this);
+
+        prueba = txtPass.getEchoChar();
         llenarCajas();
         llenarTextos();
 
@@ -32,12 +37,10 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
 
         t2.start();
         setExtendedState(this.MAXIMIZED_BOTH);
-        
+        Panel2.setMinimumSize(new Dimension(Panel2.getWidth(), this.MAXIMIZED_VERT));
         setVisible(true);
 
     }
-
-   
 
     public void llenarCajas() {
         cajasTexto.add(txtNombre);
@@ -67,12 +70,10 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
             }
             cajasTexto.clear();
             place.clear();
-            
+
         }
 
     }
-
- 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -131,11 +132,11 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 220, 410, 50));
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 360, 410, 50));
+        jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 360, 410, 50));
 
         jComboBox1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Administrador" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 460, 410, 50));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 460, 410, 50));
 
         jLabel3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 255));
@@ -157,7 +158,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 750, 400, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 750, 400, 50));
 
         jLabel4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel4.setText("Crea una cuenta");
@@ -168,10 +169,10 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 80, 60, 50));
 
         txtCorreo.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 530, 410, 50));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 530, 410, 50));
 
         txtTelefono.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 600, 410, 50));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 600, 410, 50));
 
         jLabel6.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel6.setText("Cargo");
@@ -204,16 +205,16 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
                 VerPaswordMouseClicked(evt);
             }
         });
-        jPanel1.add(VerPasword, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 360, 50, 50));
+        jPanel1.add(VerPasword, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 360, 50, 50));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/equipo.png"))); // NOI18N
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 460, -1, 60));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 460, -1, 60));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 530, -1, 50));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 530, -1, 50));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ui.png"))); // NOI18N
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 600, -1, 50));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 600, -1, 50));
 
         JLDisponibilidadUsuario.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         JLDisponibilidadUsuario.setForeground(new java.awt.Color(255, 0, 0));
@@ -229,7 +230,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jLabel14.setForeground(new java.awt.Color(238, 112, 82));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("* Datos obligatorios");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 690, 390, 50));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 690, 390, 50));
 
         jLabel15.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(238, 112, 82));
@@ -247,7 +248,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jLabel17.setForeground(new java.awt.Color(238, 112, 82));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("*");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 360, 40, 50));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 360, 40, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,18 +266,28 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Primero preguntamos si todos los requisistos indispensables se cumplen
-   
-        if(UserDisponible && txtNombre.getText().length()>0 && txtPass.getText().length()>0){
+
+        if (UserDisponible && txtNombre.getText().length() > 0 && txtPass.getText().length() > 0) {
             ObtenerTextos tex = new ObtenerTextos();
-            tex.add("");//usuario
+            /* tex.add("");//usuario
             tex.add("");//Nombre
 
             tex.add("");//contraseña
             tex.add(2);//rol
             tex.add("");//Correo
-            tex.add("");//Telfono
+            tex.add("");//Telfono*/
+            cajasTexto.add(txtNombre);
+            cajasTexto.add(txtUsuario);
 
-        }else{
+            cajasTexto.add(txtCorreo);
+            cajasTexto.add(txtTelefono);
+            cajasTexto.add(txtPass);
+            for(int i=0; i<cajasTexto.size(); i++ ){
+                System.out.println(cajasTexto.get(i).getClass());
+               
+            }
+
+        } else {
             //Aqui cambia este mensaje por uno como el que hiciste en el login xd
             JOptionPane.showMessageDialog(this, "Revisa los datos que deben ser obligatorios");
         }
@@ -301,14 +312,14 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         } else {
             if (Conec.Select("select usarName from usuarios  where usarName='" + txtUsuario.getText() + "';", 1).size() > 0) {
                 JLDisponibilidadUsuario.setText("Usuario no disponible");
-                UserDisponible=false;
+                UserDisponible = false;
 
                 JLDisponibilidadUsuario1.setText("");
             } else {
                 JLDisponibilidadUsuario.setText("");
 
                 JLDisponibilidadUsuario1.setText("Usuario  disponible");
-                UserDisponible=true;
+                UserDisponible = true;
             }
         }
     }//GEN-LAST:event_txtUsuarioKeyReleased
@@ -316,11 +327,15 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
     private void VerPaswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerPaswordMouseClicked
         // TODO add your handling code here:
         clicks++;
-        if(clicks%2!=0){
+        if (clicks % 2 != 0) {
             //Mostrar Contrañse
-              VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear1.png"))); 
-        }else{
-             VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png")));
+            VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear1.png")));
+
+            txtPass.setEchoChar((char) 0);
+        } else {
+            txtPass.setEchoChar(prueba);
+
+            VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png")));
         }
     }//GEN-LAST:event_VerPaswordMouseClicked
 

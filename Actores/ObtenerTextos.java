@@ -18,8 +18,13 @@ no genere un error por el el programa ya genero los datos
 public class ObtenerTextos {
     //Iniciando la lista
     ArrayList<Object> datos= new ArrayList<>();
-    public void add(Object dato){
-        datos.add(dato);
+    public void add(String dato){
+        if(dato.length()!=0){
+           datos.add(dato); 
+        }else{
+            datos.add("");
+        }
+        
     }
     
 
