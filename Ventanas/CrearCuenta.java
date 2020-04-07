@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 public class CrearCuenta extends javax.swing.JFrame implements Conectar {
     //Variables para saber si el usuario esta disponible 
      boolean UserDisponible;
-   
+      int clicks=0;
     
     
     ArrayList<Object> cajasTexto = new ArrayList();
@@ -32,7 +32,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
 
         t2.start();
         setExtendedState(this.MAXIMIZED_BOTH);
-        Panel2.setSize(830, 2000);
+        
         setVisible(true);
 
     }
@@ -96,7 +96,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        VerPasword = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -197,9 +197,14 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/UserName.png"))); // NOI18N
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 220, -1, 50));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png"))); // NOI18N
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 360, 50, 50));
+        VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png"))); // NOI18N
+        VerPasword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        VerPasword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VerPaswordMouseClicked(evt);
+            }
+        });
+        jPanel1.add(VerPasword, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 360, 50, 50));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/equipo.png"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 460, -1, 60));
@@ -308,11 +313,23 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         }
     }//GEN-LAST:event_txtUsuarioKeyReleased
 
+    private void VerPaswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerPaswordMouseClicked
+        // TODO add your handling code here:
+        clicks++;
+        if(clicks%2!=0){
+            //Mostrar Contrañse
+              VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear1.png"))); 
+        }else{
+             VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png")));
+        }
+    }//GEN-LAST:event_VerPaswordMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLDisponibilidadUsuario;
     private javax.swing.JLabel JLDisponibilidadUsuario1;
     private javax.swing.JPanel Panel2;
+    private javax.swing.JLabel VerPasword;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -330,7 +347,6 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCorreo;
