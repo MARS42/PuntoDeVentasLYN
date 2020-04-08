@@ -1,6 +1,6 @@
 
 package Ventanas;
-import Animacion.Fade;
+
 import Animaciones.Controlador;
 import Animaciones.GaussianBlur;
 import AppPackage.AnimationClass;
@@ -8,21 +8,19 @@ import BaseDatos.Encriptar;
 import BaseDatos.Query;
 import Principal.Conectar;
 import java.awt.AWTException;
-import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Point;
-import java.awt.Rectangle;
+
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -42,6 +40,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     public Login() {
         ins = this;
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         Init();
     }
     

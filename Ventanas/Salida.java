@@ -8,6 +8,7 @@ package Ventanas;
 import Animaciones.Controlador;
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Salida extends javax.swing.JFrame {
      */
     public Salida(Component c) {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         setLocationRelativeTo(c);
         setOpacity(0);
     }

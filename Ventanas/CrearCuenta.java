@@ -2,10 +2,12 @@ package Ventanas;
 
 import Actores.ObtenerTextos;
 import Actores.TextPrompt;
+import BaseDatos.Encriptar;
 import BaseDatos.Query;
 import Principal.Conectar;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -27,7 +29,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
 
     public CrearCuenta() {
         initComponents();
-
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         setLocationRelativeTo(this);
 
         prueba = txtPass.getEchoChar();
@@ -51,7 +53,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         cajasTexto.add(txtTelefono);
 
     }
-
+private String getPass(){ return new Encriptar(txtPass.getText().toString()).Encrip(); }
     public void llenarTextos() {
         place.add("Nombre");
         place.add("Usuario");
@@ -270,15 +272,15 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
 
         if (UserDisponible && txtNombre.getText().length() > 0 && txtPass.getText().length() > 0) {
             ObtenerTextos tex = new ObtenerTextos();
-      
+
             cajasTexto.add(txtUsuario);
             cajasTexto.add(txtNombre);
-            
+
             cajasTexto.add(txtPass);
             cajasTexto.add(jComboBox1);
             cajasTexto.add(txtCorreo);
             cajasTexto.add(txtTelefono);
-                /* 
+            /* 
                 run:
 class javax.swing.JTextField
 class javax.swing.JTextField
@@ -286,33 +288,32 @@ class javax.swing.JPasswordField
 class javax.swing.JComboBox
 class javax.swing.JTextField
 class javax.swing.JTextField
-                */ 
-            for(int i=0; i<cajasTexto.size(); i++ ){
-           if(String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JTextField")){
-               tex.add(((JTextField)cajasTexto.get(i)).getText());
-           }
-            if(String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JPasswordField")){
-               tex.add(((JPasswordField)cajasTexto.get(i)).getText());
-           }
-               if(String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JComboBox")){
-               int valor=((JComboBox)cajasTexto.get(i)).getSelectedIndex();
-               if(valor==0){
-                  tex.add("2");
-               }
-               if(valor==1){
-                   tex.add("1");
-               }
-           }
-               
+             */
+            for (int i = 0; i < cajasTexto.size(); i++) {
+                if (String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JTextField")) {
+                    tex.add(((JTextField) cajasTexto.get(i)).getText());
+                }
+                if (String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JPasswordField")) {
+                    tex.add(getPass());
+                }
+                if (String.valueOf(cajasTexto.get(i).getClass()).equals("class javax.swing.JComboBox")) {
+                    int valor = ((JComboBox) cajasTexto.get(i)).getSelectedIndex();
+                    if (valor == 0) {
+                        tex.add("2");
+                    }
+                    if (valor == 1) {
+                        tex.add("1");
+                    }
+                }
+
             }
-           Conec.insert("insert into usuarios values (?,?,?,?,?,?);", tex.datos, "No se pudo agregar el Usuario");
-          //RsAni
-           cajasTexto.clear();
-           tex.datos.clear();
-            Mensaje men=new Mensaje();
-           men.jLabel1.setText("El usuario se registro correctamente");
-           men.setVisible(true);
-           
+            Conec.insert("insert into usuarios values (?,?,?,?,?,?);", tex.datos, "No se pudo agregar el Usuario");
+            //RsAni
+            cajasTexto.clear();
+            tex.datos.clear();
+            Mensaje men = new Mensaje();
+            men.jLabel1.setText("El usuario se registro correctamente");
+            men.setVisible(true);
 
         } else {
             //Aqui cambia este mensaje por uno como el que hiciste en el login xd

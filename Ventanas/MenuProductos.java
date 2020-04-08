@@ -184,6 +184,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         PanelRegistro = new javax.swing.JPanel();
@@ -283,6 +287,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png"))); // NOI18N
         jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 10, -1, 100));
+        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 90, 170, 20));
+        jPanel2.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 230, 10));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 90, 230, 10));
+        jPanel2.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 90, 230, 10));
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -506,12 +514,12 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     private void jLabel4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseMoved
         // TODO add your handling code here:
-       
+    //   jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
     }//GEN-LAST:event_jLabel4MouseMoved
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:[238,112,82]
-        
+       //   jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238,112,82)));
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
@@ -635,11 +643,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCodigoBarra;
     private javax.swing.JTextField txtNombreProducto;
