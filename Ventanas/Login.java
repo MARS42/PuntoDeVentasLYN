@@ -36,10 +36,12 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     ArrayList<String> datos;
     ArrayList<JPanel> panelsBotones = new ArrayList<>();
     public Salida salida;
-    
+        int clicks = 0;
+    char prueba;
     public Login() {
         ins = this;
         initComponents();
+        prueba = txtPassword.getEchoChar();
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         Init();
     }
@@ -73,7 +75,9 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
                 desbloquear=true;
                 Controlador.main.AnimacionJPIngreso(JPIngreso, JPMenu);
             }else{
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");
+                MensajeError men = new MensajeError();
+            men.Mensaje.setText("Revisa el usuario o contraseña");
+            men.setVisible(true);
             }   
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -331,6 +335,12 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         JPIngreso.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 200, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Key_32px.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         JPIngreso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, 40));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_customer_32px_1.png"))); // NOI18N
@@ -836,6 +846,21 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     private void JPWindowToolsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPWindowToolsMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_JPWindowToolsMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        clicks++;
+        if (clicks % 2 != 0) {
+            //Mostrar Contrañse
+            //VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear1.png")));
+
+            txtPassword.setEchoChar((char) 0);
+        } else {
+            txtPassword.setEchoChar(prueba);
+
+            //txtPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png")));
+        }
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 //    /**
 //     * @param args the command line arguments

@@ -3,14 +3,14 @@ package Ventanas;
 import Actores.ObtenerTextos;
 import Actores.TextPrompt;
 import BaseDatos.Encriptar;
-import BaseDatos.Query;
+
 import Principal.Conectar;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
+
 import javax.swing.JTextField;
 
 /**
