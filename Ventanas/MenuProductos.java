@@ -26,24 +26,32 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     ArrayList<JTextField> cajas = new ArrayList<>();
     ArrayList<String> place = new ArrayList();
     int pocionActual = 0;
-    
+   
 
     public MenuProductos() {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
-        llenarTextos();
-        llenarcajas();
+       
         diseñoTabla(Tabla);
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         tabla("select * from productos;", Tabla);
         PlaceHorlder();
         TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
-        
-    }
-    
 
-  
+    }
+
+    void MostrarVentanaC() {
+        //Mostrando la ventana correspondienrte de acuerdo  la barra 
+        if (pocionActual == 0) {
+            Texto1.setText("Registro de productos");
+            BtnRegistro.setText("Registrar");
+        } else if (pocionActual == 1) {
+            Texto1.setText("Actualizar productos");
+            BtnRegistro.setText("Actualizar");
+        }
+
+    }
 
     public void PlaceHorlder() {
         for (int i = 0; i < cajas.size(); i++) {
@@ -112,7 +120,46 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     }
 
+    public void Actualizar() {
+         llenarTextos();
+        llenarcajas();
+        //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
+        //a la lista de productos
+
+        ArrayList<Object> products = new ArrayList<>();
+        //Tenemos q llenar la lsta con daros vasios por si el usuario no los introduce se pongas estos datos
+        products.add("");
+        products.add("");
+        products.add(0);
+        products.add(0);
+        products.add(0);
+        for (int i = 0; i < cajas.size(); i++) {
+            if (obtenerValor(cajas.get(i)).equals("")) {
+                if (i == 0) {
+                    products.set(0, GenerarBarras(txtNombreProducto.getText()));
+                }
+            } else {
+                products.set(i, cajas.get(i).getText());
+            }
+        }
+        for (int i = 0; i < products.size(); i++) {
+            cajas.get(i).setText("");
+        }
+        cajas.clear();
+
+        Conec.update("update productos set NombreP='" + products.get(1)
+                + "', PrecioUnitario =" + products.get(2)
+                + ", PrecioMayoreo=" + products.get(3) + ", Unidades=" + products.get(4)
+                + " where codigoBarras='" + products.get(0) + "';",
+                 "No se pudo actualizar los produtos");
+
+        products.clear();
+
+    }
+
     public void ObtenerProductos() {
+         llenarTextos();
+        llenarcajas();
         //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
         //a la lista de productos
 
@@ -178,11 +225,14 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        Label = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -192,7 +242,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jPanel1 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         PanelRegistro = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        Texto1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtCodigoBarra = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
@@ -220,6 +270,24 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel23 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+
+        jPopupMenu1.setBackground(new java.awt.Color(255, 255, 255));
+        jPopupMenu1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+
+        jMenuItem1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jMenuItem1.setText("Actualizar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem2.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jMenuItem2.setText("Eliminar");
+        jPopupMenu1.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -251,24 +319,24 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         });
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 30, 130, 70));
 
-        jLabel4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Registro Productos");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        Label.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        Label.setForeground(new java.awt.Color(255, 255, 255));
+        Label.setText("Registro Productos");
+        Label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Label.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel4MouseMoved(evt);
+                LabelMouseMoved(evt);
             }
         });
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                LabelMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
+                LabelMouseExited(evt);
             }
         });
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 44, 180, 40));
+        jPanel2.add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 44, 180, 40));
 
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -280,6 +348,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
             }
         });
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jLabel5MouseExited(evt);
             }
@@ -337,10 +408,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         PanelRegistro.setBackground(new java.awt.Color(255, 255, 255));
         PanelRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel11.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Registro de productos");
-        PanelRegistro.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 920, 60));
+        Texto1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        Texto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Texto1.setText("Registro de productos");
+        PanelRegistro.add(Texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 920, 60));
 
         jLabel12.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel12.setText("Código de Barras ");
@@ -505,6 +576,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 return canEdit [columnIndex];
             }
         });
+        Tabla.setComponentPopupMenu(jPopupMenu1);
         Tabla.setFocusable(false);
         Tabla.setIntercellSpacing(new java.awt.Dimension(0, 0));
         Tabla.setRowHeight(35);
@@ -542,21 +614,21 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseMoved
+    private void LabelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseMoved
         // TODO add your handling code here:
-         jLabel4.setFont(new java.awt.Font("Corbel", 1, 22));
-         jLabel14.setText("Registro productos");
-jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro1.png")));
+        Label.setFont(new java.awt.Font("Corbel", 1, 22));
+        Label.setText("Registro productos");
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro1.png")));
 //   jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
-    }//GEN-LAST:event_jLabel4MouseMoved
+    }//GEN-LAST:event_LabelMouseMoved
 
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+    private void LabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseExited
         // TODO add your handling code here:[238,112,82]
-          jLabel4.setFont(new java.awt.Font("Corbel", 1, 20));
-         jLabel14.setText("Registro productos");
-       jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro.png")));
+        Label.setFont(new java.awt.Font("Corbel", 1, 20));
+        Label.setText("Registro productos");
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro.png")));
         //   jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238,112,82)));
-    }//GEN-LAST:event_jLabel4MouseExited
+    }//GEN-LAST:event_LabelMouseExited
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
         // TODO add your handling code here:
@@ -610,21 +682,30 @@ jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro1
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
         // TODO add your handling code here:
-        try {
-            /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
+        if (pocionActual == 0) {
+
+            try {
+                /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
             producto tiene un nombre pero puede faltar su codigo de barras
-             */
-            if (txtNombreProducto.getText().length() == 0 || txtPrecioUnitarii.getText().length() == 0) {
+                 */
+                if (txtNombreProducto.getText().length() == 0 || txtPrecioUnitarii.getText().length() == 0) {
+                    MensajeError men = new MensajeError();
+                    men.Mensaje.setText("Debes ingresar el nombre del\n producto o el precio unitario");
+                    men.setVisible(true);
 
-                JOptionPane.showMessageDialog(this, "Debes ingresar el nombre del producto o el precio unitario");
-            } else {
-                ObtenerProductos();
-                tabla("Select * from productos", Tabla);
+                } else {
+                    ObtenerProductos();
+                    tabla("Select * from productos", Tabla);
 
+                }
+
+            } catch (Error e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
-
-        } catch (Error e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        if (pocionActual == 1) {
+            //Aqui es donde ponemos lo de actualizar los prodcutos 
+            Actualizar();
         }
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
@@ -644,62 +725,84 @@ jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro1
         BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
     }//GEN-LAST:event_BtnRegistroMouseExited
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
- 
-    }//GEN-LAST:event_jLabel4MouseClicked
+    private void LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseClicked
+        pocionActual = 0;
+        MostrarVentanaC();
+    }//GEN-LAST:event_LabelMouseClicked
 
     private void jLabel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseMoved
         // TODO add your handling code here:
-       jLabel5.setFont(new java.awt.Font("Corbel", 1, 22));
-         jLabel5.setText("Actualizar productos");
-jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar1.png")));
+        jLabel5.setFont(new java.awt.Font("Corbel", 1, 22));
+        jLabel5.setText("Actualizar productos");
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar1.png")));
     }//GEN-LAST:event_jLabel5MouseMoved
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         // TODO add your handling code here:
-         jLabel5.setFont(new java.awt.Font("Corbel", 1, 20));
-         jLabel5.setText("Actualizar productos");
-jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png")));
+        jLabel5.setFont(new java.awt.Font("Corbel", 1, 20));
+        jLabel5.setText("Actualizar productos");
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png")));
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
         // TODO add your handling code here:
-                 jLabel6.setFont(new java.awt.Font("Corbel", 1, 20));
-         jLabel6.setText("Eliminar Productos");
-jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png")));
+        jLabel6.setFont(new java.awt.Font("Corbel", 1, 20));
+        jLabel6.setText("Eliminar Productos");
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png")));
     }//GEN-LAST:event_jLabel6MouseExited
 
     private void jLabel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseMoved
         // TODO add your handling code here:
-                 jLabel6.setFont(new java.awt.Font("Corbel", 1, 22));
-         jLabel6.setText("Eliminar Productos");
-jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura1.png")));
+        jLabel6.setFont(new java.awt.Font("Corbel", 1, 22));
+        jLabel6.setText("Eliminar Productos");
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura1.png")));
     }//GEN-LAST:event_jLabel6MouseMoved
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-                 jLabel3.setFont(new java.awt.Font("Corbel", 1, 20));
-         jLabel3.setText("Inventario");
-jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario.png")));
+        jLabel3.setFont(new java.awt.Font("Corbel", 1, 20));
+        jLabel3.setText("Inventario");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario.png")));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseMoved
         // TODO add your handling code here:
-          jLabel3.setFont(new java.awt.Font("Corbel", 1, 22));
-         jLabel3.setText("Inventario");
-jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario1.png")));
+        jLabel3.setFont(new java.awt.Font("Corbel", 1, 22));
+        jLabel3.setText("Inventario");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario1.png")));
     }//GEN-LAST:event_jLabel3MouseMoved
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        pocionActual = 1;
+        MostrarVentanaC();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        int fila = Tabla.getSelectedRow();
+        if (fila >= 0) {
+            pocionActual = 1;
+            MostrarVentanaC();
+            llenarcajas();
+            for (int i = 0; i < 5; i++) {
+
+                cajas.get(i).setText(Tabla.getValueAt(fila, i) + "");
+            }
+            cajas.clear();
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegistro;
+    private javax.swing.JLabel Label;
     private javax.swing.JPanel PanelRegistro;
     private javax.swing.JTable Tabla;
+    private javax.swing.JLabel Texto1;
     private javax.swing.JTextField TxtPrecioMayoreo;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -714,14 +817,16 @@ jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inve
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

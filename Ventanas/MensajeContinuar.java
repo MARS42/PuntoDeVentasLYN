@@ -14,17 +14,17 @@ import java.awt.Toolkit;
  *
  * @author omara
  */
-public class MensajeError extends javax.swing.JFrame {
+public class MensajeContinuar extends javax.swing.JFrame {
 
     /**
      * Creates new form Mensaje
      */
     Dimension screenSize;
     int xCenter, yCenter;
-
-    public MensajeError() {
+   public  boolean continar;
+    public MensajeContinuar( boolean continar) {
         initComponents();
-        
+        this.continar=continar;
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         xCenter = (screenSize.width - this.getWidth())/2;
         yCenter = 0;
@@ -58,6 +58,7 @@ public class MensajeError extends javax.swing.JFrame {
         BtnRegistro = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Mensaje = new javax.swing.JTextPane();
+        BtnRegistro1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -89,7 +90,7 @@ public class MensajeError extends javax.swing.JFrame {
                 BtnRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 230, 50));
+        jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 140, 50));
 
         Mensaje.setEditable(false);
         Mensaje.setBorder(null);
@@ -98,11 +99,35 @@ public class MensajeError extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 190));
 
+        BtnRegistro1.setBackground(new java.awt.Color(255, 0, 0));
+        BtnRegistro1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        BtnRegistro1.setForeground(new java.awt.Color(255, 255, 255));
+        BtnRegistro1.setText("Cancelar");
+        BtnRegistro1.setBorder(null);
+        BtnRegistro1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnRegistro1.setFocusable(false);
+        BtnRegistro1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                BtnRegistro1MouseMoved(evt);
+            }
+        });
+        BtnRegistro1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnRegistro1MouseExited(evt);
+            }
+        });
+        BtnRegistro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegistro1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 140, 50));
+
         jPanel2.setBackground(new java.awt.Color(238, 112, 82));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Error");
+        jLabel1.setText("Advertencia");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -110,7 +135,7 @@ public class MensajeError extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -140,7 +165,8 @@ public class MensajeError extends javax.swing.JFrame {
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
         // TODO add your handling code here:
-        Fade.JFrameFadeOut(1f, 0f, 0.1f, 30, this,Fade.DISPOSE);
+        continar=true;
+          Fade.JFrameFadeOut(1f, 0f, 0.1f, 30, this,Fade.DISPOSE);
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
@@ -151,13 +177,29 @@ public class MensajeError extends javax.swing.JFrame {
     private void BtnRegistroMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseMoved
         // TODO add your handling code here:
         //[255,122,47]
+        
         BtnRegistro.setBackground(new java.awt.Color(255, 122, 47));
     }//GEN-LAST:event_BtnRegistroMouseMoved
+
+    private void BtnRegistro1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistro1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnRegistro1MouseMoved
+
+    private void BtnRegistro1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistro1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnRegistro1MouseExited
+
+    private void BtnRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistro1ActionPerformed
+        // TODO add your handling code here:
+        Fade.JFrameFadeOut(1f, 0f, 0.1f, 30, this,Fade.DISPOSE);
+        continar=false;
+    }//GEN-LAST:event_BtnRegistro1ActionPerformed
 
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegistro;
+    private javax.swing.JButton BtnRegistro1;
     public static javax.swing.JTextPane Mensaje;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

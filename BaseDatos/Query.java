@@ -5,6 +5,7 @@ arreglos o listas con los datos de las tablas
 package BaseDatos;
 
 import Principal.Conectar;
+import Ventanas.MensajeError;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +31,9 @@ public class Query implements Conectar{
             }
            
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null,mensaje+e.getMessage());     
+           MensajeError men = new MensajeError();
+                    men.Mensaje.setText(mensaje);
+                    men.setVisible(true);     
         }
     }  
 
@@ -39,10 +42,13 @@ public class Query implements Conectar{
             Connection cn=c.getConnection();
             PreparedStatement pst= cn.prepareStatement(query);
             if(pst.executeUpdate()>0){
-            JOptionPane.showMessageDialog(null, mensaje);
+            
             }   
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error "+ex.getMessage());
+             MensajeError men = new MensajeError();
+                    men.Mensaje.setText(mensaje+"\n"+ex.getMessage());
+                    men.setVisible(true);
+                    
         }
     }
     public void delete(String query,String mensaje){
@@ -53,7 +59,9 @@ public class Query implements Conectar{
                 JOptionPane.showMessageDialog(null, mensaje);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e.getMessage());    
+            MensajeError men = new MensajeError();
+                    men.Mensaje.setText(mensaje);
+                    men.setVisible(true);  
         }
     }
     public ArrayList Select(String query,int columnas){
@@ -68,7 +76,9 @@ public class Query implements Conectar{
                 }
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            MensajeError men = new MensajeError();
+                    men.Mensaje.setText(e.getMessage());
+                    men.setVisible(true);
         }
         return datos;    
     }  
