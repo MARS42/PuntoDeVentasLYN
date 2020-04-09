@@ -16,15 +16,13 @@ import java.awt.Toolkit;
  */
 public class MensajeContinuar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Mensaje
-     */
+   
     Dimension screenSize;
     int xCenter, yCenter;
    public  boolean continar;
-    public MensajeContinuar( boolean continar) {
+    public MensajeContinuar( ) {
         initComponents();
-        this.continar=continar;
+        
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         xCenter = (screenSize.width - this.getWidth())/2;
         yCenter = 0;

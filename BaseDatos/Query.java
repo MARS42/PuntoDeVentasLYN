@@ -56,7 +56,7 @@ public class Query implements Conectar{
         try {
             PreparedStatement psd=cn.prepareStatement(query);
             if(psd.executeUpdate()>0){
-                JOptionPane.showMessageDialog(null, mensaje);
+                
             }
         } catch (Exception e) {
             MensajeError men = new MensajeError();

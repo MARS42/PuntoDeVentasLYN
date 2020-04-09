@@ -39,7 +39,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         Thread t2 = new Thread(new placeHolder());
 
         t2.start();
-        setExtendedState(this.MAXIMIZED_BOTH);
+        setResizable(false);
         Panel2.setMinimumSize(new Dimension(Panel2.getWidth(), this.MAXIMIZED_VERT));
         setVisible(true);
 
@@ -307,13 +307,13 @@ class javax.swing.JTextField
                 }
 
             }
-            Conec.insert("insert into usuarios values (?,?,?,?,?,?);", tex.datos, "No se pudo agregar el Usuario");
+            //Madamos los datos
+            OnlyLogin autorizar=new OnlyLogin(tex.datos);
+            autorizar.setVisible(true);
             //RsAni
-            cajasTexto.clear();
-            tex.datos.clear();
-            Mensaje men = new Mensaje();
-            men.jLabel1.setText("El usuario se registro correctamente");
-            men.setVisible(true);
+            //cajasTexto.clear();
+            //tex.datos.clear();
+            
 
         } else {
             //Aqui cambia este mensaje por uno como el que hiciste en el login xd

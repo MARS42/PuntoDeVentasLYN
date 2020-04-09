@@ -26,13 +26,12 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     ArrayList<JTextField> cajas = new ArrayList<>();
     ArrayList<String> place = new ArrayList();
     int pocionActual = 0;
-   
 
     public MenuProductos() {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
-       
+
         diseñoTabla(Tabla);
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         tabla("select * from productos;", Tabla);
@@ -121,7 +120,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     }
 
     public void Actualizar() {
-         llenarTextos();
+        llenarTextos();
         llenarcajas();
         //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
         //a la lista de productos
@@ -151,14 +150,14 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 + "', PrecioUnitario =" + products.get(2)
                 + ", PrecioMayoreo=" + products.get(3) + ", Unidades=" + products.get(4)
                 + " where codigoBarras='" + products.get(0) + "';",
-                 "No se pudo actualizar los produtos");
+                "No se pudo actualizar los produtos");
 
         products.clear();
 
     }
 
     public void ObtenerProductos() {
-         llenarTextos();
+        llenarTextos();
         llenarcajas();
         //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
         //a la lista de productos
@@ -287,6 +286,11 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jMenuItem2.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jMenuItem2.setText("Eliminar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -419,6 +423,11 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
         txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCodigoBarra.setBorder(null);
+        txtCodigoBarra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraKeyTyped(evt);
+            }
+        });
         PanelRegistro.add(txtCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 320, 50));
 
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
@@ -706,6 +715,8 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         if (pocionActual == 1) {
             //Aqui es donde ponemos lo de actualizar los prodcutos 
             Actualizar();
+
+            tabla("Select * from productos", Tabla);
         }
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
@@ -791,6 +802,35 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
             cajas.clear();
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void txtCodigoBarraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraKeyTyped
+        // TODO add your handling code here:
+        if (pocionActual == 1) {
+            String sql = "select * from productos where codigoBarras='" + txtBuscar.getText() + "';";
+            ArrayList<String> lista = Conec.Select(sql, 5);
+            if (lista.size() != 0) {
+                llenarcajas();
+
+                for (int i = 0; i < lista.size(); i++) {
+                    if (lista.get(i).length() != 0) {
+                        cajas.get(i).setText(lista.get(i));
+                    }
+                }
+                cajas.clear();
+            }
+        }
+
+
+    }//GEN-LAST:event_txtCodigoBarraKeyTyped
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        int fila = Tabla.getSelectedRow();
+        if (fila >= 0) {
+            Conec.delete("delete from productos where codigoBarras='" + Tabla.getValueAt(fila, 0) + "';", "No se pudo eliminar el producto");
+            tabla("select * from productos;", Tabla);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
