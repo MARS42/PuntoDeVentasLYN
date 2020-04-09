@@ -240,7 +240,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
              datos = Conec.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                //Registrar
-                System.out.println("si es usuario");
+                System.out.println("si es usuario ");
                //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
             }else{
                 MensajeError men = new MensajeError();

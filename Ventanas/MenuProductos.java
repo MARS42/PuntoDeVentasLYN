@@ -233,11 +233,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel3 = new javax.swing.JLabel();
         Label = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         PanelRegistro = new javax.swing.JPanel();
@@ -321,7 +319,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 jLabel3MouseExited(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 30, 130, 70));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 30, 130, 70));
 
         Label.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         Label.setForeground(new java.awt.Color(255, 255, 255));
@@ -340,7 +338,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 LabelMouseExited(evt);
             }
         });
-        jPanel2.add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 44, 180, 40));
+        jPanel2.add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, 180, 40));
 
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -359,43 +357,22 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 jLabel5MouseExited(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 40, 200, 40));
-
-        jLabel6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Eliminar Productos");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel6MouseMoved(evt);
-            }
-        });
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel6MouseExited(evt);
-            }
-        });
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 40, 200, 40));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 50, 200, 40));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario.png"))); // NOI18N
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 10, -1, 100));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 10, -1, 100));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro.png"))); // NOI18N
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, -1, 100));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, 100));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, 100));
-
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png"))); // NOI18N
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, -1, 100));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, 100));
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -424,6 +401,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCodigoBarra.setBorder(null);
         txtCodigoBarra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoBarraKeyTyped(evt);
             }
@@ -689,85 +669,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         }
     }//GEN-LAST:event_txtUnidadesKeyTyped
 
-    private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-        // TODO add your handling code here:
-        if (pocionActual == 0) {
-
-            try {
-                /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
-            producto tiene un nombre pero puede faltar su codigo de barras
-                 */
-                if (txtNombreProducto.getText().length() == 0 || txtPrecioUnitarii.getText().length() == 0) {
-                    MensajeError men = new MensajeError();
-                    men.Mensaje.setText("Debes ingresar el nombre del\n producto o el precio unitario");
-                    men.setVisible(true);
-
-                } else {
-                    ObtenerProductos();
-                    tabla("Select * from productos", Tabla);
-
-                }
-
-            } catch (Error e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }
-        if (pocionActual == 1) {
-            //Aqui es donde ponemos lo de actualizar los prodcutos 
-            Actualizar();
-
-            tabla("Select * from productos", Tabla);
-        }
-    }//GEN-LAST:event_BtnRegistroActionPerformed
-
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
         tabla("select * from productos where codigoBarras='" + txtBuscar.getText() + "'  union select * from productos where NombreP like '%" + txtBuscar.getText() + "%';", Tabla);
     }//GEN-LAST:event_txtBuscarKeyTyped
 
-    private void BtnRegistroMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseMoved
-        // TODO add your handling code here:
-        //[255,122,47]
-        BtnRegistro.setBackground(new java.awt.Color(255, 122, 47));
-    }//GEN-LAST:event_BtnRegistroMouseMoved
-
-    private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
-        // TODO add your handling code here:
-        BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
-    }//GEN-LAST:event_BtnRegistroMouseExited
-
     private void LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseClicked
         pocionActual = 0;
         MostrarVentanaC();
     }//GEN-LAST:event_LabelMouseClicked
-
-    private void jLabel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseMoved
-        // TODO add your handling code here:
-        jLabel5.setFont(new java.awt.Font("Corbel", 1, 22));
-        jLabel5.setText("Actualizar productos");
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar1.png")));
-    }//GEN-LAST:event_jLabel5MouseMoved
-
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-        // TODO add your handling code here:
-        jLabel5.setFont(new java.awt.Font("Corbel", 1, 20));
-        jLabel5.setText("Actualizar productos");
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png")));
-    }//GEN-LAST:event_jLabel5MouseExited
-
-    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
-        // TODO add your handling code here:
-        jLabel6.setFont(new java.awt.Font("Corbel", 1, 20));
-        jLabel6.setText("Eliminar Productos");
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png")));
-    }//GEN-LAST:event_jLabel6MouseExited
-
-    private void jLabel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseMoved
-        // TODO add your handling code here:
-        jLabel6.setFont(new java.awt.Font("Corbel", 1, 22));
-        jLabel6.setText("Eliminar Productos");
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura1.png")));
-    }//GEN-LAST:event_jLabel6MouseMoved
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
@@ -782,12 +692,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel3.setText("Inventario");
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario1.png")));
     }//GEN-LAST:event_jLabel3MouseMoved
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-        pocionActual = 1;
-        MostrarVentanaC();
-    }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int fila = Tabla.getSelectedRow();
@@ -805,20 +709,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     private void txtCodigoBarraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraKeyTyped
         // TODO add your handling code here:
-        if (pocionActual == 1) {
-            String sql = "select * from productos where codigoBarras='" + txtBuscar.getText() + "';";
-            ArrayList<String> lista = Conec.Select(sql, 5);
-            if (lista.size() != 0) {
-                llenarcajas();
-
-                for (int i = 0; i < lista.size(); i++) {
-                    if (lista.get(i).length() != 0) {
-                        cajas.get(i).setText(lista.get(i));
-                    }
-                }
-                cajas.clear();
-            }
-        }
+    
 
 
     }//GEN-LAST:event_txtCodigoBarraKeyTyped
@@ -832,6 +723,92 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
+        // TODO add your handling code here:
+        if (pocionActual == 0) {
+
+            try {
+                /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
+                producto tiene un nombre pero puede faltar su codigo de barras
+                */
+                if (txtNombreProducto.getText().length() == 0 || txtPrecioUnitarii.getText().length() == 0) {
+                    MensajeError men = new MensajeError();
+                    men.Mensaje.setText("Debes ingresar el nombre del\n producto o el precio unitario");
+                    men.setVisible(true);
+
+                } else {
+                    ObtenerProductos();
+                    tabla("Select * from productos", Tabla);
+
+                }
+
+            } catch (Error e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }
+        if (pocionActual == 1) {
+            //Aqui es donde ponemos lo de actualizar los prodcutos
+            Actualizar();
+
+            tabla("Select * from productos", Tabla);
+        }
+    }//GEN-LAST:event_BtnRegistroActionPerformed
+
+    private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
+        // TODO add your handling code here:
+        BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
+    }//GEN-LAST:event_BtnRegistroMouseExited
+
+    private void BtnRegistroMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseMoved
+        // TODO add your handling code here:
+        //[255,122,47]
+        BtnRegistro.setBackground(new java.awt.Color(255, 122, 47));
+    }//GEN-LAST:event_BtnRegistroMouseMoved
+
+    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
+        // TODO add your handling code here:
+        jLabel5.setFont(new java.awt.Font("Corbel", 1, 20));
+        jLabel5.setText("Actualizar productos");
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png")));
+    }//GEN-LAST:event_jLabel5MouseExited
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        pocionActual = 1;
+        MostrarVentanaC();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseMoved
+        // TODO add your handling code here:
+        jLabel5.setFont(new java.awt.Font("Corbel", 1, 22));
+        jLabel5.setText("Actualizar productos");
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar1.png")));
+    }//GEN-LAST:event_jLabel5MouseMoved
+
+    private void txtCodigoBarraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraKeyPressed
+        // TODO add your handling code here:
+          if(evt.getKeyCode()==10){
+               if (pocionActual == 1) {
+           
+             
+         String sql = "select * from productos where codigoBarras='" + txtCodigoBarra.getText() + "';";
+            ArrayList<String> lista = Conec.Select(sql, 5);
+            if (lista.size() != 0) {
+                llenarcajas();
+
+                for (int i = 1; i < lista.size(); i++) {
+                    if (lista.get(i).length() != 0) {
+                        cajas.get(i).setText(lista.get(i));
+                    }
+                }
+                cajas.clear();
+            }else{
+                JOptionPane.showMessageDialog(this, "No se encuentra ningun producto con ese codigo de barrras");
+            }
+        }
+        }
+    }//GEN-LAST:event_txtCodigoBarraKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegistro;
@@ -842,7 +819,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private javax.swing.JTextField TxtPrecioMayoreo;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -858,7 +834,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

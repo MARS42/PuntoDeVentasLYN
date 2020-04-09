@@ -74,6 +74,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                 desbloquear=true;
                 Controlador.main.AnimacionJPIngreso(JPIngreso, JPMenu);
+                
             }else{
                 MensajeError men = new MensajeError();
             men.Mensaje.setText("Revisa el usuario o contraseña");
@@ -245,7 +246,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         });
         JPWindowTools.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Expand_Arrow_32px.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/minimizar.png"))); // NOI18N
         jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -254,7 +255,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         });
         JPWindowTools.add(jLabel20);
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-maximize-button-32.png"))); // NOI18N
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/maximizar.png"))); // NOI18N
         jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -263,7 +264,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         });
         JPWindowTools.add(jLabel18);
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Multiply_32px.png"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cerrar.png"))); // NOI18N
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -579,7 +580,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         );
         BotonesMenuLayout.setVerticalGroup(
             BotonesMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(JPIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
             .addComponent(JPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
