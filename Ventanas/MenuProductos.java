@@ -57,12 +57,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     }
 
     public void PlaceHorlder() {
+        llenarTextos();
+        llenarcajas();
         for (int i = 0; i < cajas.size(); i++) {
 
             TextPrompt prueba = new TextPrompt(place.get(i), cajas.get(i));
 
         }
         place.clear();
+        cajas.clear();
     }
 
     public void llenarTextos() {

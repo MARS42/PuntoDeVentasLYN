@@ -34,13 +34,13 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
-        //Borrar.setVisible(false);
+    
         diseñoTabla(Tabla);
-        //diseñoTabla(Tabla2);
+        
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
-        tabla("select * from productos;", Tabla);
+        tabla("select * from clientes;", Tabla);
         PlaceHorlder();
-        TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
+        TextPrompt prueba = new TextPrompt("Escribe el nombre del cliente", txtBuscar);
 
     }
 
@@ -66,11 +66,9 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     }
 
     public void llenarTextos() {
-        place.add("Ingrese código B");
-        place.add("Ej. Cartulina");
-        place.add("EJ. 10");
-        place.add("EJ. 9.50");
-        place.add("EJ. 100");
+        place.add("Nombre de la persona");
+        place.add("Telefono celular");
+        place.add("Correo electronico");
     }
 
     public void diseñoTabla(JTable Tabla) {
@@ -83,8 +81,8 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     public void llenarcajas() {
         cajas.add(txtNombreCliente);
-        cajas.add(txtNombreProducto);
-        cajas.add(txtPrecioUnitarii);
+        cajas.add(txtTelefono);
+        cajas.add(txtCorrreo);
        
     }
 
@@ -138,7 +136,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         for (int i = 0; i < cajas.size(); i++) {
             if (obtenerValor(cajas.get(i)).equals("")) {
                 if (i == 0) {
-                    products.set(0, GenerarBarras(txtNombreProducto.getText()));
+                    products.set(0, GenerarBarras(txtTelefono.getText()));
                 }
             } else {
                 products.set(i, cajas.get(i).getText());
@@ -175,7 +173,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         for (int i = 0; i < cajas.size(); i++) {
             if (obtenerValor(cajas.get(i)).equals("")) {
                 if (i == 0) {
-                    products.set(0, GenerarBarras(txtNombreProducto.getText()));
+                    products.set(0, GenerarBarras(txtTelefono.getText()));
                 }
             } else {
                 products.set(i, cajas.get(i).getText());
@@ -193,22 +191,21 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     public void tabla(String sql, JTable Tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Código Barras");
-        modelo.addColumn("Producto");
-        modelo.addColumn("Precio Unitario");
-        modelo.addColumn("Precio Mayoreo");
-        modelo.addColumn("Cantidad");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Correo");
+       
 
         Tabla.setModel(modelo);
         setVisible(true);
 
-        ArrayList<String> datos = Conec.Select(sql, 5);
+        ArrayList<String> datos = Conec.Select(sql, 3);
 
         int j = 0;
-        String fila[] = new String[5];
+        String fila[] = new String[3];
         for (int i = 0; i < datos.size();) {
 
-            while (j < 5) {
+            while (j < 3) {
                 fila[j] = datos.get(i);
 
                 i++;
@@ -247,10 +244,10 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         txtNombreCliente = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
-        txtNombreProducto = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
-        txtPrecioUnitarii = new javax.swing.JTextField();
+        txtCorrreo = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         BtnRegistro = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -416,14 +413,14 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         jLabel13.setText("Telefono");
         PanelRegistro.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 300, 50));
 
-        txtNombreProducto.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        txtNombreProducto.setBorder(null);
-        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtTelefono.setBorder(null);
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreProductoKeyTyped(evt);
+                txtTelefonoKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 320, 60));
+        PanelRegistro.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 320, 60));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -433,14 +430,14 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         jLabel14.setText("Correo");
         PanelRegistro.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, 50));
 
-        txtPrecioUnitarii.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        txtPrecioUnitarii.setBorder(null);
-        txtPrecioUnitarii.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCorrreo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtCorrreo.setBorder(null);
+        txtCorrreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioUnitariiKeyTyped(evt);
+                txtCorrreoKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtPrecioUnitarii, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 320, 50));
+        PanelRegistro.add(txtCorrreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 320, 50));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -563,18 +560,11 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     private void LabelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseMoved
         // TODO add your handling code here:
-        Label.setFont(new java.awt.Font("Corbel", 1, 22));
-        Label.setText("Registro productos");
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro1.png")));
-//   jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,255,255)));
+      
     }//GEN-LAST:event_LabelMouseMoved
 
     private void LabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseExited
-        // TODO add your handling code here:[238,112,82]
-        Label.setFont(new java.awt.Font("Corbel", 1, 20));
-        Label.setText("Registro productos");
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro.png")));
-        //   jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238,112,82)));
+      
     }//GEN-LAST:event_LabelMouseExited
 
     private void LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseClicked
@@ -611,10 +601,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-        // TODO add your handling code here:
-        jLabel5.setFont(new java.awt.Font("Corbel", 1, 20));
-        jLabel5.setText("Actualizar productos");
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png")));
+      
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -627,10 +614,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseMoved
-        // TODO add your handling code here:
-        jLabel5.setFont(new java.awt.Font("Corbel", 1, 22));
-        jLabel5.setText("Actualizar productos");
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar1.png")));
+       
     }//GEN-LAST:event_jLabel5MouseMoved
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -639,34 +623,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-        // TODO add your handling code here:
-        if (pocionActual == 0) {
-
-            try {
-                /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
-                producto tiene un nombre pero puede faltar su codigo de barras
-                */
-                if (txtNombreProducto.getText().length() == 0 || txtPrecioUnitarii.getText().length() == 0) {
-                    MensajeError men = new MensajeError();
-                    men.Mensaje.setText("Debes ingresar el nombre del\n producto o el precio unitario");
-                    men.setVisible(true);
-
-                } else {
-                    ObtenerProductos();
-                    tabla("Select * from productos", Tabla);
-
-                }
-
-            } catch (Error e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }
-        if (pocionActual == 1) {
-            //Aqui es donde ponemos lo de actualizar los prodcutos
-            Actualizar();
-
-            tabla("Select * from productos", Tabla);
-        }
+      
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
@@ -680,24 +637,24 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         BtnRegistro.setBackground(new java.awt.Color(255, 122, 47));
     }//GEN-LAST:event_BtnRegistroMouseMoved
 
-    private void txtPrecioUnitariiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitariiKeyTyped
+    private void txtCorrreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorrreoKeyTyped
         // TODO add your handling code here:
         char mander = evt.getKeyChar();
         String ex = mander + "";
         if (ex.equalsIgnoreCase(".")) {
-            if (!txtPrecioUnitarii.getText().contains(".")) {
-                txtPrecioUnitarii.setText(txtPrecioUnitarii.getText() + ".");
+            if (!txtCorrreo.getText().contains(".")) {
+                txtCorrreo.setText(txtCorrreo.getText() + ".");
             }
 
         }
         if (!Character.isDigit(mander)) {
             evt.consume();
         }
-    }//GEN-LAST:event_txtPrecioUnitariiKeyTyped
+    }//GEN-LAST:event_txtCorrreoKeyTyped
 
-    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreProductoKeyTyped
+    }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreClienteKeyTyped
         // TODO add your handling code here:
@@ -773,8 +730,8 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtCorrreo;
     private javax.swing.JTextField txtNombreCliente;
-    private javax.swing.JTextField txtNombreProducto;
-    private javax.swing.JTextField txtPrecioUnitarii;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
