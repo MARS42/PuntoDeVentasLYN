@@ -24,8 +24,16 @@ public class ObtenerTextos {
         }else{
             datos.add("");
         }
+       
         
     }
-    
+     public void add(String dato,Object elemento){
+        if(dato.length()!=0){
+           datos.add(dato); 
+        }else{
+            datos.add(elemento);
+        }
+        
+    }
 
 }

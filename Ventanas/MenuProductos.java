@@ -1,6 +1,5 @@
 package Ventanas;
 
-
 import Actores.TextPrompt;
 
 import Principal.Conectar;
@@ -35,14 +34,38 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
         Borrar.setVisible(false);
-        diseñoTabla(Tabla);
-        diseñoTabla(Tabla2);
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
-        tabla("select * from productos;", Tabla);
-        PlaceHorlder();
-        TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
+        Thread Formato= new Thread(new FormatoTabla());
+        Thread hint = new Thread(new Hint());
+        Formato.start();
+        hint.start();
+        
 
     }
+
+    //Hilos para q la carga sea mas rapida
+    //el hilo se encargara de dar diseño a la tabla 
+    class FormatoTabla implements Runnable {
+
+        @Override
+        public void run() {
+            diseñoTabla(Tabla);
+            diseñoTabla(Tabla2);
+            tabla("select * from productos;", Tabla);
+        }
+
+    }
+    //Hilo dos se encarga de cargar los place holder en las cajjas de texto
+    class Hint implements Runnable{
+
+        @Override
+        public void run() {
+           PlaceHorlder();
+        TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
+        }
+        
+    }
+            
 
     void MostrarVentanaC() {
         //Mostrando la ventana correspondienrte de acuerdo  la barra 
@@ -722,13 +745,13 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_LabelMouseExited
 
     private void LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseClicked
-   
-            pocionActual = 0;
-            
-            Borrar.setVisible(false);
-            PanelRegistro.setVisible(true);
-            MostrarVentanaC();
-       
+
+        pocionActual = 0;
+
+        Borrar.setVisible(false);
+        PanelRegistro.setVisible(true);
+        MostrarVentanaC();
+
     }//GEN-LAST:event_LabelMouseClicked
 
     private void InventarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InventarioMouseExited
@@ -777,10 +800,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        
+
         pocionActual = 1;
-           Borrar.setVisible(false);
-            PanelRegistro.setVisible(true);
+        Borrar.setVisible(false);
+        PanelRegistro.setVisible(true);
         MostrarVentanaC();
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -796,7 +819,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         Borrar.setVisible(true);
         tabla("select * from productos;", Tabla2);
         PanelRegistro.setVisible(false);
-        
+
     }//GEN-LAST:event_InventarioMouseClicked
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -811,7 +834,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
             try {
                 /* Preguntamos si los  datos como nombre son nulos esos daros no pueden ser nulos ya que todo
                 producto tiene un nombre pero puede faltar su codigo de barras
-                */
+                 */
                 if (txtNombreProducto.getText().length() == 0 || txtPrecioUnitarii.getText().length() == 0) {
                     MensajeError men = new MensajeError();
                     men.Mensaje.setText("Debes ingresar el nombre del\n producto o el precio unitario");
@@ -902,7 +925,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     private void txtCodigoBarraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==10){
+        if (evt.getKeyCode() == 10) {
             if (pocionActual == 1) {
 
                 String sql = "select * from productos where codigoBarras='" + txtCodigoBarra.getText() + "';";
@@ -916,7 +939,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                         }
                     }
                     cajas.clear();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(this, "No se encuentra ningun producto con ese codigo de barrras");
                 }
             }

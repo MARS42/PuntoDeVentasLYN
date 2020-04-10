@@ -1,6 +1,6 @@
 package Ventanas;
 
-
+import Actores.ObtenerTextos;
 import Actores.TextPrompt;
 
 import Principal.Conectar;
@@ -29,43 +29,69 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     ArrayList<JTextField> cajas = new ArrayList<>();
     ArrayList<String> place = new ArrayList();
     int pocionActual = 0;
-
+    String id;
     public Clientes() {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
-    
-        diseñoTabla(Tabla);
-        
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
-        tabla("select * from clientes;", Tabla);
-        PlaceHorlder();
-        TextPrompt prueba = new TextPrompt("Escribe el nombre del cliente", txtBuscar);
+        Thread Formato = new Thread(new FormatoTabla());
+        Thread hint = new Thread(new Hint());
+        Formato.start();
+        hint.start();
+    }
+
+    //Hilos para q la carga sea mas rapida
+    //el hilo se encargara de dar diseño a la tabla 
+    class FormatoTabla implements Runnable {
+
+        @Override
+        public void run() {
+            diseñoTabla(Tabla);
+
+            tabla("select * from clientes;", Tabla);
+        }
+
+    }
+
+    //Hilo dos se encarga de cargar los place holder en las cajjas de texto
+    class Hint implements Runnable {
+
+        @Override
+        public void run() {
+            PlaceHorlder();
+            TextPrompt prueba = new TextPrompt("Escribe el  nombre del cliente ", txtBuscar);
+        }
 
     }
 
     void MostrarVentanaC() {
         //Mostrando la ventana correspondienrte de acuerdo  la barra 
         if (pocionActual == 0) {
-            Texto1.setText("Registro de productos");
+            Texto1.setText("Registro de clientes");
             BtnRegistro.setText("Registrar");
         } else if (pocionActual == 1) {
-            Texto1.setText("Actualizar productos");
+            Texto1.setText("Actualizar de clientes");
             BtnRegistro.setText("Actualizar");
         }
 
     }
 
     public void PlaceHorlder() {
+        llenarTextos();
+        llenarcajas();
         for (int i = 0; i < cajas.size(); i++) {
 
             TextPrompt prueba = new TextPrompt(place.get(i), cajas.get(i));
 
         }
         place.clear();
+        cajas.clear();
+
     }
 
     public void llenarTextos() {
+        
         place.add("Nombre de la persona");
         place.add("Telefono celular");
         place.add("Correo electronico");
@@ -83,129 +109,71 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         cajas.add(txtNombreCliente);
         cajas.add(txtTelefono);
         cajas.add(txtCorrreo);
-       
-    }
-
-    public Object obtenerValor(JTextField caja) {
-        return caja.getText();
-    }
-    //Generarion de Codigos de barras para los productos q no tienen codigo de barras
-
-    /* 
- Para generar los codigos se toma en cuenta lo siguinte 
- el numero de letras del nombre del producto
- los numeros de la fecha actual y el numero de registros q tiene la tabla actualmente 
- mas un numero randon entre el 0-20
- ejemplo Escuadra Baco
- num de letras 12
- fecha actual 29/03/2020/11/1
- numero random 20
- numero de registros actuales es de 10
- entonces el codigo de barras quedaria asi 
- 12290320202011110
-     */
-    public Object GenerarBarras(String nombre) {
-        int numLetras = nombre.length();
-        Calendar fecha = Calendar.getInstance();
-        int año = fecha.get(Calendar.YEAR);
-        int mes = fecha.get(Calendar.MONTH) + 1;
-        int dia = fecha.get(Calendar.DAY_OF_MONTH);
-        int hora = fecha.get(Calendar.HOUR_OF_DAY);
-        int minuto = fecha.get(Calendar.MINUTE);
-        int segundo = fecha.get(Calendar.SECOND);
-        int numero = (int) (Math.random() * 20);
-        int registros = Conec.Select("Select * from productos;", 5).size();
-
-        return numLetras + "" + año + "" + mes + "" + dia + "" + hora + "" + minuto + "" + segundo + "" + numero + "" + registros;
 
     }
 
-    public void Actualizar() {
-        llenarTextos();
+   
+public void Actualizar() {
+      
         llenarcajas();
         //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
         //a la lista de productos
-
-        ArrayList<Object> products = new ArrayList<>();
-        //Tenemos q llenar la lsta con daros vasios por si el usuario no los introduce se pongas estos datos
-        products.add("");
-        products.add("");
-        products.add(0);
-        products.add(0);
-        products.add(0);
+         ObtenerTextos tex=new ObtenerTextos();
+         for(int i=1; i<cajas.size(); i++){
+             tex.add(cajas.get(i).getText());
+         }
+       
         for (int i = 0; i < cajas.size(); i++) {
-            if (obtenerValor(cajas.get(i)).equals("")) {
-                if (i == 0) {
-                    products.set(0, GenerarBarras(txtTelefono.getText()));
-                }
-            } else {
-                products.set(i, cajas.get(i).getText());
-            }
-        }
-        for (int i = 0; i < products.size(); i++) {
             cajas.get(i).setText("");
         }
-        cajas.clear();
-
-        Conec.update("update productos set NombreP='" + products.get(1)
-                + "', PrecioUnitario =" + products.get(2)
-                + ", PrecioMayoreo=" + products.get(3) + ", Unidades=" + products.get(4)
-                + " where codigoBarras='" + products.get(0) + "';",
-                "No se pudo actualizar los produtos");
-
-        products.clear();
+       
+       Conec.update("update clientes set nombre='"+tex.datos.get(0)+
+               "' telefono='"+tex.datos.get(1)+
+               "' correo='"+tex.datos.get(2)+"' where id_cliente="+id+";","No se pudieron actilizar los datos");
+         tex.datos.clear();
+         cajas.clear();
 
     }
+
+
 
     public void ObtenerProductos() {
-        llenarTextos();
+      
         llenarcajas();
         //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
         //a la lista de productos
-
-        ArrayList<Object> products = new ArrayList<>();
-        //Tenemos q llenar la lsta con daros vasios por si el usuario no los introduce se pongas estos datos
-        products.add("");
-        products.add("");
-        products.add(0);
-        products.add(0);
-        products.add(0);
+         ObtenerTextos tex=new ObtenerTextos();
+         for(int i=0; i<cajas.size(); i++){
+             tex.add(cajas.get(i).getText());
+         }
+       
         for (int i = 0; i < cajas.size(); i++) {
-            if (obtenerValor(cajas.get(i)).equals("")) {
-                if (i == 0) {
-                    products.set(0, GenerarBarras(txtTelefono.getText()));
-                }
-            } else {
-                products.set(i, cajas.get(i).getText());
-            }
-        }
-        for (int i = 0; i < products.size(); i++) {
             cajas.get(i).setText("");
         }
         cajas.clear();
-        Conec.insert("insert into productos values (?,?,?,?,?);", products, "No se pudieron agregar los productos ");
-
-        products.clear();
+        Conec.insert("insert into clientes (nombre,telefono,correo) values (?,?,?);", tex.datos, "No se pudieron agregar los clientes ");
+         tex.datos.clear();
+        
 
     }
 
     public void tabla(String sql, JTable Tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("#");
         modelo.addColumn("Nombre");
         modelo.addColumn("Telefono");
         modelo.addColumn("Correo");
-       
 
         Tabla.setModel(modelo);
         setVisible(true);
 
-        ArrayList<String> datos = Conec.Select(sql, 3);
+        ArrayList<String> datos = Conec.Select(sql, 4);
 
         int j = 0;
-        String fila[] = new String[3];
+        String fila[] = new String[4];
         for (int i = 0; i < datos.size();) {
 
-            while (j < 3) {
+            while (j < 4) {
                 fila[j] = datos.get(i);
 
                 i++;
@@ -387,7 +355,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         Texto1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         Texto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Texto1.setText("Registro de Clientes");
-        PanelRegistro.add(Texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 920, 60));
+        PanelRegistro.add(Texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 550, 60));
 
         jLabel12.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel12.setText("Nombre del Cliente");
@@ -411,7 +379,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
         jLabel13.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel13.setText("Telefono");
-        PanelRegistro.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 300, 50));
+        PanelRegistro.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 300, 50));
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtTelefono.setBorder(null);
@@ -420,15 +388,15 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 txtTelefonoKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 320, 60));
+        PanelRegistro.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 320, 60));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 320, 30));
+        PanelRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 320, 30));
 
         jLabel14.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel14.setText("Correo");
-        PanelRegistro.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, 50));
+        PanelRegistro.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, -1, 50));
 
         txtCorrreo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCorrreo.setBorder(null);
@@ -437,11 +405,11 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 txtCorrreoKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtCorrreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 320, 50));
+        PanelRegistro.add(txtCorrreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 320, 50));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 320, 30));
+        PanelRegistro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 320, 30));
 
         BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
         BtnRegistro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -465,21 +433,21 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 BtnRegistroActionPerformed(evt);
             }
         });
-        PanelRegistro.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 510, 400, 50));
+        PanelRegistro.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 630, 290, 50));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/llamada50.png"))); // NOI18N
-        PanelRegistro.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, 60));
+        PanelRegistro.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, 60));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/nombre50.png"))); // NOI18N
         PanelRegistro.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, 60));
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
-        PanelRegistro.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, 60));
+        PanelRegistro.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, 60));
 
         jLabel22.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Buscar");
-        PanelRegistro.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 30, 80, 40));
+        PanelRegistro.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 80, 40));
 
         txtBuscar.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         txtBuscar.setBorder(null);
@@ -488,14 +456,14 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 txtBuscarKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, 430, 40));
+        PanelRegistro.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 430, 40));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 430, 30));
+        PanelRegistro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 60, 430, 30));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        PanelRegistro.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 20, 60, 60));
+        PanelRegistro.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 10, 60, 60));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -529,7 +497,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabla);
 
-        PanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 100, 700, 600));
+        PanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 1130, 600));
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -560,21 +528,21 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     private void LabelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseMoved
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_LabelMouseMoved
 
     private void LabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseExited
-      
+
     }//GEN-LAST:event_LabelMouseExited
 
     private void LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseClicked
-   
-            pocionActual = 0;
-            
-          //  Borrar.setVisible(false);
-            PanelRegistro.setVisible(true);
-            MostrarVentanaC();
-       
+
+        pocionActual = 0;
+
+        //  Borrar.setVisible(false);
+        PanelRegistro.setVisible(true);
+        MostrarVentanaC();
+
     }//GEN-LAST:event_LabelMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -601,20 +569,20 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-      
+
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        
+
         pocionActual = 1;
-           //Borrar.setVisible(false);
-            PanelRegistro.setVisible(true);
+        //Borrar.setVisible(false);
+        PanelRegistro.setVisible(true);
         MostrarVentanaC();
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseMoved
-       
+
     }//GEN-LAST:event_jLabel5MouseMoved
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -623,7 +591,18 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-      
+   if(pocionActual==0){
+       if(txtNombreCliente.getText().length()!=0){
+         
+           ObtenerProductos();
+           tabla("select * from clientes;", Tabla);
+       }else{
+           JOptionPane.showMessageDialog(this, "Debes ingresar el nombre del cliente");
+       }
+   }
+   if(pocionActual==1){
+       
+   }
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
@@ -639,17 +618,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     private void txtCorrreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorrreoKeyTyped
         // TODO add your handling code here:
-        char mander = evt.getKeyChar();
-        String ex = mander + "";
-        if (ex.equalsIgnoreCase(".")) {
-            if (!txtCorrreo.getText().contains(".")) {
-                txtCorrreo.setText(txtCorrreo.getText() + ".");
-            }
-
-        }
-        if (!Character.isDigit(mander)) {
-            evt.consume();
-        }
+     
     }//GEN-LAST:event_txtCorrreoKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
@@ -663,11 +632,11 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     private void txtNombreClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreClienteKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==10){
+        if (evt.getKeyCode() == 10) {
             if (pocionActual == 1) {
 
-                String sql = "select * from productos where codigoBarras='" + txtNombreCliente.getText() + "';";
-                ArrayList<String> lista = Conec.Select(sql, 5);
+                String sql = "select * from clientes where nombre='" + txtNombreCliente.getText() + "';";
+                ArrayList<String> lista = Conec.Select(sql, 4);
                 if (lista.size() != 0) {
                     llenarcajas();
 
@@ -677,8 +646,8 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                         }
                     }
                     cajas.clear();
-                }else{
-                    JOptionPane.showMessageDialog(this, "No se encuentra ningun producto con ese codigo de barrras");
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encuentra ningun cliente con ese nombre");
                 }
             }
         }
