@@ -30,6 +30,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     ArrayList<String> place = new ArrayList();
     int pocionActual = 0;
     String id;
+
     public Clientes() {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
@@ -65,18 +66,6 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     }
 
-    void MostrarVentanaC() {
-        //Mostrando la ventana correspondienrte de acuerdo  la barra 
-        if (pocionActual == 0) {
-            Texto1.setText("Registro de clientes");
-            BtnRegistro.setText("Registrar");
-        } else if (pocionActual == 1) {
-            Texto1.setText("Actualizar de clientes");
-            BtnRegistro.setText("Actualizar");
-        }
-
-    }
-
     public void PlaceHorlder() {
         llenarTextos();
         llenarcajas();
@@ -91,7 +80,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     }
 
     public void llenarTextos() {
-        
+
         place.add("Nombre de la persona");
         place.add("Telefono celular");
         place.add("Correo electronico");
@@ -112,48 +101,45 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     }
 
-   
-public void Actualizar() {
-      
+    public void Actualizar() {
+
         llenarcajas();
         //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
         //a la lista de productos
-         ObtenerTextos tex=new ObtenerTextos();
-         for(int i=1; i<cajas.size(); i++){
-             tex.add(cajas.get(i).getText());
-         }
-       
+        ObtenerTextos tex = new ObtenerTextos();
+        for (int i = 0; i < cajas.size(); i++) {
+            tex.add(cajas.get(i).getText());
+        }
+
+        String sql = "update clientes set nombre='" + tex.datos.get(0)
+                + "', telefono='" + tex.datos.get(1)
+                + "', correo='" + tex.datos.get(2) + "' where id_cliente=" + id + ";";
+      
+         Conec.update(sql,"No se pudieron actilizar los datos");
+
         for (int i = 0; i < cajas.size(); i++) {
             cajas.get(i).setText("");
         }
-       
-       Conec.update("update clientes set nombre='"+tex.datos.get(0)+
-               "' telefono='"+tex.datos.get(1)+
-               "' correo='"+tex.datos.get(2)+"' where id_cliente="+id+";","No se pudieron actilizar los datos");
-         tex.datos.clear();
-         cajas.clear();
-
+        tex.datos.clear();
+        cajas.clear();
     }
 
-
-
     public void ObtenerProductos() {
-      
+
         llenarcajas();
         //Primero meto tadas las cajas en una lista para con un for obtener sus datos y meterlos 
         //a la lista de productos
-         ObtenerTextos tex=new ObtenerTextos();
-         for(int i=0; i<cajas.size(); i++){
-             tex.add(cajas.get(i).getText());
-         }
-       
+        ObtenerTextos tex = new ObtenerTextos();
+        for (int i = 0; i < cajas.size(); i++) {
+            tex.add(cajas.get(i).getText());
+        }
+
         for (int i = 0; i < cajas.size(); i++) {
             cajas.get(i).setText("");
         }
         cajas.clear();
         Conec.insert("insert into clientes (nombre,telefono,correo) values (?,?,?);", tex.datos, "No se pudieron agregar los clientes ");
-         tex.datos.clear();
-        
+        tex.datos.clear();
 
     }
 
@@ -198,12 +184,7 @@ public void Actualizar() {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Label = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         PanelRegistro = new javax.swing.JPanel();
@@ -265,77 +246,10 @@ public void Actualizar() {
         jLabel2.setText("Papelería L y N");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 225, 31));
 
-        Label.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        Label.setForeground(new java.awt.Color(255, 255, 255));
-        Label.setText("Registro clientes");
-        Label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Label.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                LabelMouseMoved(evt);
-            }
-        });
-        Label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LabelMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                LabelMouseExited(evt);
-            }
-        });
-        jPanel2.add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, 180, 40));
-
-        jLabel5.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Actualizar clientes");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel5MouseMoved(evt);
-            }
-        });
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel5MouseExited(evt);
-            }
-        });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 50, 200, 40));
-
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carnet50.png"))); // NOI18N
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, 100));
-
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar50.png"))); // NOI18N
-        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, 100));
-
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png"))); // NOI18N
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 20, -1, 100));
-
-        jLabel4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Eliminar Clientes");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel4MouseMoved(evt);
-            }
-        });
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
-            }
-        });
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 50, 190, 40));
+        jLabel3.setFont(new java.awt.Font("Corbel", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Administración de los clientes ");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -526,34 +440,16 @@ public void Actualizar() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LabelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseMoved
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_LabelMouseMoved
-
-    private void LabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseExited
-
-    }//GEN-LAST:event_LabelMouseExited
-
-    private void LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseClicked
-
-        pocionActual = 0;
-
-        //  Borrar.setVisible(false);
-        PanelRegistro.setVisible(true);
-        MostrarVentanaC();
-
-    }//GEN-LAST:event_LabelMouseClicked
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int fila = Tabla.getSelectedRow();
         if (fila >= 0) {
+            id = Tabla.getValueAt(fila, 0) + "";
             pocionActual = 1;
-            MostrarVentanaC();
-            llenarcajas();
-            for (int i = 0; i < 5; i++) {
 
-                cajas.get(i).setText(Tabla.getValueAt(fila, i) + "");
+            llenarcajas();
+            for (int i = 0; i < 3; i++) {
+
+                cajas.get(i).setText(Tabla.getValueAt(fila, i + 1) + "");
             }
             cajas.clear();
         }
@@ -563,46 +459,30 @@ public void Actualizar() {
         // TODO add your handling code here:
         int fila = Tabla.getSelectedRow();
         if (fila >= 0) {
-            Conec.delete("delete from productos where codigoBarras='" + Tabla.getValueAt(fila, 0) + "';", "No se pudo eliminar el producto");
-            tabla("select * from productos;", Tabla);
+            Conec.delete("delete from clientes where id_cliente='" + Tabla.getValueAt(fila, 0) + "';", "No se pudo eliminar el producto");
+            tabla("select * from clientes;", Tabla);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-
-    }//GEN-LAST:event_jLabel5MouseExited
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-
-        pocionActual = 1;
-        //Borrar.setVisible(false);
-        PanelRegistro.setVisible(true);
-        MostrarVentanaC();
-    }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void jLabel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseMoved
-
-    }//GEN-LAST:event_jLabel5MouseMoved
-
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
-        tabla("select * from productos where codigoBarras='" + txtBuscar.getText() + "'  union select * from productos where NombreP like '%" + txtBuscar.getText() + "%';", Tabla);
+        tabla("select * from clientes where  nombre like '%"+txtBuscar.getText()+"%';", Tabla);
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-   if(pocionActual==0){
-       if(txtNombreCliente.getText().length()!=0){
-         
-           ObtenerProductos();
-           tabla("select * from clientes;", Tabla);
-       }else{
-           JOptionPane.showMessageDialog(this, "Debes ingresar el nombre del cliente");
-       }
-   }
-   if(pocionActual==1){
-       
-   }
+        if (pocionActual == 0) {
+            if (txtNombreCliente.getText().length() != 0) {
+
+                ObtenerProductos();
+                tabla("select * from clientes;", Tabla);
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes ingresar el nombre del cliente");
+            }
+        }
+        if (pocionActual == 1) {
+            Actualizar();
+            tabla("select * from clientes;", Tabla);
+        }
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
@@ -618,7 +498,7 @@ public void Actualizar() {
 
     private void txtCorrreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorrreoKeyTyped
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_txtCorrreoKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
@@ -653,28 +533,14 @@ public void Actualizar() {
         }
     }//GEN-LAST:event_txtNombreClienteKeyPressed
 
-    private void jLabel4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4MouseMoved
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4MouseClicked
-
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4MouseExited
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegistro;
-    private javax.swing.JLabel Label;
     private javax.swing.JPanel PanelRegistro;
     private javax.swing.JTable Tabla;
     private javax.swing.JLabel Texto1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -684,10 +550,7 @@ public void Actualizar() {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
