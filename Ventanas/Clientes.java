@@ -24,19 +24,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author omara
  */
-public class MenuProductos extends javax.swing.JFrame implements Conectar {
+public class Clientes extends javax.swing.JFrame implements Conectar {
 
     ArrayList<JTextField> cajas = new ArrayList<>();
     ArrayList<String> place = new ArrayList();
     int pocionActual = 0;
 
-    public MenuProductos() {
+    public Clientes() {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
-        Borrar.setVisible(false);
+        //Borrar.setVisible(false);
         diseñoTabla(Tabla);
-        diseñoTabla(Tabla2);
+        //diseñoTabla(Tabla2);
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         tabla("select * from productos;", Tabla);
         PlaceHorlder();
@@ -82,11 +82,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     }
 
     public void llenarcajas() {
-        cajas.add(txtCodigoBarra);
+        cajas.add(txtNombreCliente);
         cajas.add(txtNombreProducto);
         cajas.add(txtPrecioUnitarii);
-        cajas.add(TxtPrecioMayoreo);
-        cajas.add(txtUnidades);
+       
     }
 
     public Object obtenerValor(JTextField caja) {
@@ -234,18 +233,18 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Inventario = new javax.swing.JLabel();
         Label = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        InventarioLogo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         PanelRegistro = new javax.swing.JPanel();
         Texto1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txtCodigoBarra = new javax.swing.JTextField();
+        txtNombreCliente = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
         txtNombreProducto = new javax.swing.JTextField();
@@ -253,17 +252,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel14 = new javax.swing.JLabel();
         txtPrecioUnitarii = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel15 = new javax.swing.JLabel();
-        TxtPrecioMayoreo = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
-        txtUnidades = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
         BtnRegistro = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -271,14 +262,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel23 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
-        Borrar = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
-        txtBuscar1 = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
-        jLabel25 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Tabla2 = new javax.swing.JTable();
 
         jPopupMenu1.setBackground(new java.awt.Color(255, 255, 255));
         jPopupMenu1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
@@ -317,28 +300,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel2.setText("Papelería L y N");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 225, 31));
 
-        Inventario.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        Inventario.setForeground(new java.awt.Color(255, 255, 255));
-        Inventario.setText("Inventario");
-        Inventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Inventario.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                InventarioMouseMoved(evt);
-            }
-        });
-        Inventario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                InventarioMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                InventarioMouseExited(evt);
-            }
-        });
-        jPanel2.add(Inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 50, 130, 40));
-
         Label.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         Label.setForeground(new java.awt.Color(255, 255, 255));
-        Label.setText("Registro Productos");
+        Label.setText("Registro clientes");
         Label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Label.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -357,7 +321,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Actualizar productos");
+        jLabel5.setText("Actualizar clientes");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -374,20 +338,39 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         });
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 50, 200, 40));
 
-        InventarioLogo.setForeground(new java.awt.Color(255, 255, 255));
-        InventarioLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario.png"))); // NOI18N
-        InventarioLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(InventarioLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 20, -1, 100));
-
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pro.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carnet50.png"))); // NOI18N
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, 100));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar50.png"))); // NOI18N
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, 100));
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/basura.png"))); // NOI18N
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 20, -1, 100));
+
+        jLabel4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Eliminar Clientes");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel4MouseMoved(evt);
+            }
+        });
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
+        });
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 50, 190, 40));
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -406,31 +389,31 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
         Texto1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         Texto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Texto1.setText("Registro de productos");
+        Texto1.setText("Registro de Clientes");
         PanelRegistro.add(Texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 920, 60));
 
         jLabel12.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel12.setText("Código de Barras ");
+        jLabel12.setText("Nombre del Cliente");
         PanelRegistro.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 310, 50));
 
-        txtCodigoBarra.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        txtCodigoBarra.setBorder(null);
-        txtCodigoBarra.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreCliente.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtNombreCliente.setBorder(null);
+        txtNombreCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoBarraKeyPressed(evt);
+                txtNombreClienteKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigoBarraKeyTyped(evt);
+                txtNombreClienteKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 320, 50));
+        PanelRegistro.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 320, 50));
 
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         PanelRegistro.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 320, 30));
 
         jLabel13.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel13.setText("Nombre del producto ");
+        jLabel13.setText("Telefono");
         PanelRegistro.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 300, 50));
 
         txtNombreProducto.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -447,7 +430,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         PanelRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 320, 30));
 
         jLabel14.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel14.setText("Precio unitario");
+        jLabel14.setText("Correo");
         PanelRegistro.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, 50));
 
         txtPrecioUnitarii.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -462,40 +445,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         PanelRegistro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 320, 30));
-
-        jLabel15.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel15.setText("Precio mayoreo");
-        PanelRegistro.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, -1, 50));
-
-        TxtPrecioMayoreo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        TxtPrecioMayoreo.setBorder(null);
-        TxtPrecioMayoreo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TxtPrecioMayoreoKeyTyped(evt);
-            }
-        });
-        PanelRegistro.add(TxtPrecioMayoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 320, 50));
-
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 320, 30));
-
-        jLabel16.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel16.setText("Unidades");
-        PanelRegistro.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, 80, 50));
-
-        txtUnidades.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        txtUnidades.setBorder(null);
-        txtUnidades.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUnidadesKeyTyped(evt);
-            }
-        });
-        PanelRegistro.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, 320, 50));
-
-        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 550, 320, 30));
 
         BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
         BtnRegistro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -519,21 +468,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 BtnRegistroActionPerformed(evt);
             }
         });
-        PanelRegistro.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 630, 400, 50));
+        PanelRegistro.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 510, 400, 50));
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pegamento.png"))); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/llamada50.png"))); // NOI18N
         PanelRegistro.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, 60));
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rebaja.png"))); // NOI18N
-        PanelRegistro.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, -1, 60));
-
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/codigo-de-barras.png"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/nombre50.png"))); // NOI18N
         PanelRegistro.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, 60));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/proveedor.png"))); // NOI18N
-        PanelRegistro.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, 60));
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/precio.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
         PanelRegistro.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, 60));
 
         jLabel22.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
@@ -562,18 +505,18 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         Tabla.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Código Barras", "Nombre Producto", "Precio Unitario", "Precio Mayoreo", "Unidades"
+                "Nombre", "Correo", "Telefono"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false
+                true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -591,99 +534,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
         PanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 100, 700, 600));
 
-        Borrar.setBackground(new java.awt.Color(255, 255, 255));
-        Borrar.setLayout(new java.awt.BorderLayout());
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel24.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("Buscar");
-
-        txtBuscar1.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        txtBuscar1.setBorder(null);
-        txtBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscar1KeyTyped(evt);
-            }
-        });
-
-        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(586, Short.MAX_VALUE)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(354, 354, 354))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-
-        Borrar.add(jPanel3, java.awt.BorderLayout.PAGE_START);
-
-        Tabla2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        Tabla2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        Tabla2.setSelectionBackground(new java.awt.Color(255, 153, 0));
-        Tabla2.setShowVerticalLines(false);
-        jScrollPane2.setViewportView(Tabla2);
-
-        Borrar.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 1756, Short.MAX_VALUE)
-            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                    .addGap(108, 108, 108)
-                    .addComponent(Borrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(108, 108, 108)))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
-            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(Borrar, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -722,25 +581,11 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
    
             pocionActual = 0;
             
-            Borrar.setVisible(false);
+          //  Borrar.setVisible(false);
             PanelRegistro.setVisible(true);
             MostrarVentanaC();
        
     }//GEN-LAST:event_LabelMouseClicked
-
-    private void InventarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InventarioMouseExited
-        // TODO add your handling code here:
-        Inventario.setFont(new java.awt.Font("Corbel", 1, 20));
-        Inventario.setText("Inventario");
-        InventarioLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario.png")));
-    }//GEN-LAST:event_InventarioMouseExited
-
-    private void InventarioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InventarioMouseMoved
-        // TODO add your handling code here:
-        Inventario.setFont(new java.awt.Font("Corbel", 1, 22));
-        Inventario.setText("Inventario");
-        InventarioLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inventario1.png")));
-    }//GEN-LAST:event_InventarioMouseMoved
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int fila = Tabla.getSelectedRow();
@@ -776,7 +621,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         // TODO add your handling code here:
         
         pocionActual = 1;
-           Borrar.setVisible(false);
+           //Borrar.setVisible(false);
             PanelRegistro.setVisible(true);
         MostrarVentanaC();
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -787,14 +632,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jLabel5.setText("Actualizar productos");
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar1.png")));
     }//GEN-LAST:event_jLabel5MouseMoved
-
-    private void InventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InventarioMouseClicked
-        // TODO add your handling code here:
-        Borrar.setVisible(true);
-        tabla("select * from productos;", Tabla2);
-        PanelRegistro.setVisible(false);
-        
-    }//GEN-LAST:event_InventarioMouseClicked
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
@@ -843,36 +680,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         BtnRegistro.setBackground(new java.awt.Color(255, 122, 47));
     }//GEN-LAST:event_BtnRegistroMouseMoved
 
-    private void txtUnidadesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidadesKeyTyped
-        // TODO add your handling code here:
-        char mander = evt.getKeyChar();
-        String ex = mander + "";
-        if (ex.equalsIgnoreCase(".")) {
-            if (!txtUnidades.getText().contains(".")) {
-                txtUnidades.setText(txtUnidades.getText() + ".");
-            }
-
-        }
-        if (!Character.isDigit(mander)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtUnidadesKeyTyped
-
-    private void TxtPrecioMayoreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioMayoreoKeyTyped
-        // TODO add your handling code here:
-        char mander = evt.getKeyChar();
-        String ex = mander + "";
-        if (ex.equalsIgnoreCase(".")) {
-            if (!TxtPrecioMayoreo.getText().contains(".")) {
-                TxtPrecioMayoreo.setText(TxtPrecioMayoreo.getText() + ".");
-            }
-
-        }
-        if (!Character.isDigit(mander)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_TxtPrecioMayoreoKeyTyped
-
     private void txtPrecioUnitariiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitariiKeyTyped
         // TODO add your handling code here:
         char mander = evt.getKeyChar();
@@ -892,17 +699,17 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreProductoKeyTyped
 
-    private void txtCodigoBarraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraKeyTyped
+    private void txtNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreClienteKeyTyped
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_txtCodigoBarraKeyTyped
+    }//GEN-LAST:event_txtNombreClienteKeyTyped
 
-    private void txtCodigoBarraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraKeyPressed
+    private void txtNombreClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreClienteKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==10){
             if (pocionActual == 1) {
 
-                String sql = "select * from productos where codigoBarras='" + txtCodigoBarra.getText() + "';";
+                String sql = "select * from productos where codigoBarras='" + txtNombreCliente.getText() + "';";
                 ArrayList<String> lista = Conec.Select(sql, 5);
                 if (lista.size() != 0) {
                     llenarcajas();
@@ -918,41 +725,40 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 }
             }
         }
-    }//GEN-LAST:event_txtCodigoBarraKeyPressed
+    }//GEN-LAST:event_txtNombreClienteKeyPressed
 
-    private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
+    private void jLabel4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscar1KeyTyped
+    }//GEN-LAST:event_jLabel4MouseMoved
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Borrar;
     private javax.swing.JButton BtnRegistro;
-    private javax.swing.JLabel Inventario;
-    private javax.swing.JLabel InventarioLogo;
     private javax.swing.JLabel Label;
     private javax.swing.JPanel PanelRegistro;
     private javax.swing.JTable Tabla;
-    private javax.swing.JTable Tabla2;
     private javax.swing.JLabel Texto1;
-    private javax.swing.JTextField TxtPrecioMayoreo;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -960,22 +766,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtBuscar1;
-    private javax.swing.JTextField txtCodigoBarra;
+    private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecioUnitarii;
-    private javax.swing.JTextField txtUnidades;
     // End of variables declaration//GEN-END:variables
 }
