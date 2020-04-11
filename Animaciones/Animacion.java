@@ -2,6 +2,7 @@ package Animaciones;
 
 import Ventanas.Login;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.Callable;
@@ -77,25 +78,24 @@ public class Animacion implements ActionListener
     {
         Animar();
     }
-    
+    Dimension d = new Dimension();
     private void Animar()
     {
-        try {
-            if(lerp <= 1f)
-            {
-                current_transform = Controlador.main.LerpTransform(from_transform, to_transform, lerp, current_transform, curve);
-                objetivo.setLocation(current_transform.getX(), current_transform.getY());
-                objetivo.setSize(current_transform.getXs(), current_transform.getYs());
-                lerp += Controlador.main.velocidadAnim;
-                Login.ins.pack();
-                updateAction.call();
-            }
-            else
-            {
-                action.call();
-                timer.stop();
-            }
+        if(lerp <= 1f)
+        {
+            current_transform = Controlador.main.LerpTransform(from_transform, to_transform, lerp, current_transform, curve);
+            objetivo.setLocation(current_transform.getX(), current_transform.getY());
+            d.setSize(current_transform.getXs(), current_transform.getYs());
+            objetivo.setPreferredSize(d);
+            try{Login.ins.pack();}catch(Exception e){}
+            try{updateAction.call();}catch(Exception e){}
+            //objetivo.setSize(current_transform.getXs(), current_transform.getYs());
+            lerp += Controlador.main.velocidadAnim;
         }
-        catch (Exception ex) { }
+        else
+        {
+            try{action.call();}catch(Exception e){}
+            timer.stop();
+        }
     }
 }

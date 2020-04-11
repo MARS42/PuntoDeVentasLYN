@@ -6,6 +6,7 @@ package Ventanas;
 import BaseDatos.Query;
 import Principal.Conectar;
 import java.awt.Image;
+import java.util.Random;
 import java.util.concurrent.Callable;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
@@ -36,7 +37,8 @@ public class SplashScrean extends javax.swing.JFrame implements Conectar{
     //Medoto para mandar al login despues de que termine la carga 
     public  void login(){
         
-         new Login().setVisible(true);
+        //new Login().setVisible(true);
+        new OnlyLogin().setVisible(true);
          //this.dispose();
         a.Reinciar();
     }
@@ -67,7 +69,8 @@ public class SplashScrean extends javax.swing.JFrame implements Conectar{
         progreso.setStringPainted(true);
         time=  new Timer(SEGUNDOS,(e) -> 
         {
-            contador++;
+            contador+= 5;
+            contador = contador > 100 ? 100 : contador;
             setOpacity(contador / 100f);
             progreso.setValue(contador);
             if(progreso.getValue()==100){

@@ -6,9 +6,14 @@
 package Ventanas;
 
 
+import Animaciones.*;
 import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
 import Principal.Conectar;
+import java.awt.AWTException;
+import java.awt.Graphics;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,12 +25,39 @@ import javax.swing.JOptionPane;
 public class OnlyLogin extends javax.swing.JFrame implements Conectar{
     ArrayList<String>datos;
      ArrayList<Object>datosUsuario;
+     
+    Salida salida;
+    
+    Animacion abrir, cerrar, minimizar;
+    
     public OnlyLogin(ArrayList<Object>datosUsuario) {
         initComponents();
         Init();
         this.datosUsuario=datosUsuario;
         JOptionPane.showMessageDialog(null, "Necesitas autorizacion para poder registrarte \n"
                 + "pidele a algun admin que te de permiso para poder continuar\n creando tu cuenta");
+        salida = new Salida(this, "¿Seguro?", () -> { unDarken(); return null; }, () -> { Darken(); return null; }, () ->cerrarDef());
+                setLocation(0, 0);
+        abrir = new Animacion(this, getX(), getY(), getWidth(), getHeight(), null, 3);
+    }
+    public OnlyLogin()
+    {
+        initComponents();
+        Init();
+        
+        setOpacity(0);
+        setLocationRelativeTo(null);
+        abrir = new Animacion(this, getX(), getY(), getWidth(), getHeight(), () -> Opacidad(1), 4);
+        abrir.setUpdateAction(() -> Opacidad(abrir.getLerp(), false));
+        cerrar = new Animacion(this, getX(), 0, getWidth(), getHeight(), () -> { System.exit(0); return null; }, 4);
+        minimizar = new Animacion(this, getX(), 0, getWidth(), getHeight(), () -> Opacidad(0), 4);
+        cerrar.setUpdateAction(() -> Opacidad(cerrar.getLerp(), true));
+        minimizar.setUpdateAction(() -> Opacidad(cerrar.getLerp(), true));
+        setLocation(getX(),0);
+        abrir.Iniciar();
+                
+        salida = new Salida(this, "¿Seguro?", () -> { unDarken(); return null; }, () -> { Darken(); return null; },
+        ()-> { unDarken(); cerrarDef();return null; });
     }
     
     private void Init()
@@ -33,8 +65,76 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         //setPreferredSize(new Dimension(300, 400));
         setLocationRelativeTo(null);
     }
+    
+        boolean dark = false;
+    GaussianBlur gb;
+    public void Darken()
+    {
+        //setEnabled(false);
+        dark = true;
+        repaint();
+    }
+    public void unDarken()
+    {
+        //setEnabled(true);
+        dark = false;
+        gb = null;
+        repaint();
+    }
+    
+    BufferedImage ss() 
+    {
+        try {
+            Robot r = new Robot();
+            //Rectangle rec = new Rectangle(getX() + 2, getY()-2, getWidth()-2, getHeight()-2);
+            //r.createScreenCapture(getBounds());
+            BufferedImage bi = r.createScreenCapture(getBounds());
+            return bi;
+        } catch (AWTException ex) {
+        }
+        //BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+        return null;
+    }
+    
+    @Override
+    public void paint(Graphics g)
+    {
+        super.paint(g);
+        if(dark)
+        {
+            if(gb == null){
+            gb = new GaussianBlur(ss(), 12);
+            //g.setColor(new Color(0, 0, 0, 140));
+            //g.fillRect(0, 0, getWidth(), getHeight());
+            gb.imagenBlur(getGraphics(), this);}
+        }
+    }
+    
+    public Void Opacidad(float lerp, boolean min)
+    {
+        if(min)
+            setOpacity(1 - lerp);
+        else
+            setOpacity(lerp);
+        return null;
+    }
+    
+    public Void Opacidad(float val)
+    {
+        setOpacity(val);
+        if(val == 0)
+            dispose();
+        return null;
+    }
+    
+    Void cerrarDef()
+    {
+        cerrar.Iniciar();
+        //System.exit(0);
+        return null;
+    }
 
-       private String getUsuario(){ return txtUsuario.getText(); }
+    private String getUsuario(){ return txtUsuario.getText(); }
     private String getPass(){ return new Encriptar(txtPassword.getText().toString()).Encrip(); }
     
     @SuppressWarnings("unchecked")
@@ -241,6 +341,8 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                //Registrar
                 System.out.println("si es usuario ");
+                Principal.Principal.gestorVentanas.MostrarMenu();
+                minimizar.Reinciar();
                //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
             }else{
                 MensajeError men = new MensajeError();
@@ -267,8 +369,9 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
             //            //System.exit(0);
             //            Controlador.main.AccionesVentana(this, this::Cerrar, 3);
             //        }
-        //salida.Mostrar(this);
-       System.exit(0);
+        //Principal.Principal.gestorVentanas.MostrarSalida(this, "¿Seguro?");
+        salida.Mostrar();
+        //System.exit(0);
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void JPIngresoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPIngresoMouseDragged

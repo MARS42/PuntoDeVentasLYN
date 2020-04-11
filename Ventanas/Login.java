@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 public class Login extends javax.swing.JFrame implements Conectar, WindowListener{
 
     public static Login ins;
-    boolean desbloquear=false;
+    boolean desbloquear=true;
     Query sql = SplashScrean.sql;
     ArrayList<String> datos;
     ArrayList<JPanel> panelsBotones = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     public Login() {
         ins = this;
         initComponents();
-        prueba = txtPassword.getEchoChar();
+        //prueba = txtPassword.getEchoChar();
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         Init();
     }
@@ -50,39 +50,42 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     {
         this.setLocationRelativeTo(null);   
         //sql = new Query();
-        datos = this.sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
+        //datos = this.sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
         addWindowListener(this);
         setOpacity(0);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH );
         Controlador.main.AccionesVentana(this, this::Abrir, 4);
         panelsBotones.add(BotonesMenu);
         //panelsBotones.add(JPClientes);
-        salida = new Salida(this);
-        salida.setVisible(true);
+        //salida = new Salida(this);
+        salida = new Salida(this, "¿Salir del programa?", () -> {unDarken(); return null;}, () -> { Darken(); return null; },
+        ()->{ Controlador.main.AccionesVentana(this, this::Cerrar, 3); return null; });
         defaultSize.setSize(getWidth(), getHeight());
+        setPreferredSize(defaultSize);
+        pack();
         //salida.Ocultar();
     }
     
-    private String getUsuario(){ return txtUsuario.getText(); }
-    private String getPass(){ return new Encriptar(txtPassword.getText().toString()).Encrip(); }
+    //private String getUsuario(){ return txtUsuario.getText(); }
+    //private String getPass(){ return new Encriptar(txtPassword.getText().toString()).Encrip(); }
     public void Login(){
-        try
-        {
-            if (!maxi)setPreferredSize(defaultSize);
-            BotonesMenu.setLayout(null);
-            datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
-            if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
-                desbloquear=true;
-                Controlador.main.AnimacionJPIngreso(JPIngreso, JPMenu);
-                
-            }else{
-                MensajeError men = new MensajeError();
-            men.Mensaje.setText("Revisa el usuario o contraseña");
-            men.setVisible(true);
-            }   
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+//        try
+//        {
+//            if (!maxi)setPreferredSize(defaultSize);
+//            BotonesMenu.setLayout(null);
+//            datos = sql.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
+//            if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
+//                desbloquear=true;
+//                Controlador.main.AnimacionJPIngreso(JPIngreso, JPMenu);
+//                
+//            }else{
+//                MensajeError men = new MensajeError();
+//            men.Mensaje.setText("Revisa el usuario o contraseña");
+//            men.setVisible(true);
+//            }   
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e.getMessage());
+//        }
     }
     public Void Minimizar()
     {
@@ -117,13 +120,13 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     GaussianBlur gb;
     public void Darken()
     {
-        setEnabled(false);
+        //setEnabled(false);
         dark = true;
         repaint();
     }
     public void unDarken()
     {
-        setEnabled(true);
+        //setEnabled(true);
         dark = false;
         gb = null;
         repaint();
@@ -190,19 +193,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         BotonesMenu = new javax.swing.JPanel();
-        JPIngreso = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        txtPassword = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        JLInternet = new javax.swing.JLabel();
         JPMenu = new javax.swing.JPanel();
         NombreLocal = new javax.swing.JLabel();
         subJPMenu = new javax.swing.JPanel();
@@ -221,7 +211,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         pVentas = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -273,112 +262,6 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         });
         JPWindowTools.add(jLabel19);
 
-        JPIngreso.setBackground(new java.awt.Color(255, 255, 255));
-        JPIngreso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        JPIngreso.setForeground(new java.awt.Color(255, 255, 255));
-        JPIngreso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel3.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel3.setText("Contraseña");
-        JPIngreso.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
-
-        jLabel4.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel4.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel4.setText("Usuario:");
-        JPIngreso.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/UserName120.png"))); // NOI18N
-        JPIngreso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, 140));
-
-        txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        txtUsuario.setBorder(null);
-        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtUsuarioMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtUsuarioMouseExited(evt);
-            }
-        });
-        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtUsuarioKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUsuarioKeyTyped(evt);
-            }
-        });
-        JPIngreso.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 200, 40));
-
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        JPIngreso.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 210, 10));
-
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        JPIngreso.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 210, 10));
-
-        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(187, 187, 187));
-        txtPassword.setBorder(null);
-        txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPasswordMouseClicked(evt);
-            }
-        });
-        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyPressed(evt);
-            }
-        });
-        JPIngreso.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 200, 40));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Key_32px.png"))); // NOI18N
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-        JPIngreso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, 40));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_customer_32px_1.png"))); // NOI18N
-        JPIngreso.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 40));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Menu_32px_1.png"))); // NOI18N
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
-            }
-        });
-        JPIngreso.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 30));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_OFF.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
-        jButton1.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
-        jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        JPIngreso.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 425, 120, 40));
-
-        JLInternet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/paciente.png"))); // NOI18N
-        JLInternet.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JLInternetMouseClicked(evt);
-            }
-        });
-        JPIngreso.add(JLInternet, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 60, -1, 40));
-
         JPMenu.setBackground(new java.awt.Color(255, 255, 255));
         JPMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         JPMenu.setForeground(new java.awt.Color(255, 255, 255));
@@ -389,13 +272,12 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         NombreLocal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         NombreLocal.setText("Papeleria L Y N");
         NombreLocal.setPreferredSize(new java.awt.Dimension(800, 30));
-        JPMenu.add(NombreLocal);
 
         subJPMenu.setBackground(new java.awt.Color(255, 255, 255));
         subJPMenu.setForeground(new java.awt.Color(255, 255, 255));
         subJPMenu.setOpaque(false);
         subJPMenu.setPreferredSize(new java.awt.Dimension(800, 450));
-        subJPMenu.setLayout(new java.awt.GridLayout(2, 3));
+        subJPMenu.setLayout(new java.awt.GridLayout());
 
         pClientes.setBackground(new java.awt.Color(255, 255, 255));
         pClientes.setForeground(new java.awt.Color(255, 255, 255));
@@ -561,26 +443,37 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         subJPMenu.add(pVentas);
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel8.setOpaque(false);
-        jPanel8.setPreferredSize(new java.awt.Dimension(100, 100));
-        subJPMenu.add(jPanel8);
-
-        JPMenu.add(subJPMenu);
+        javax.swing.GroupLayout JPMenuLayout = new javax.swing.GroupLayout(JPMenu);
+        JPMenu.setLayout(JPMenuLayout);
+        JPMenuLayout.setHorizontalGroup(
+            JPMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(NombreLocal, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(JPMenuLayout.createSequentialGroup()
+                .addGap(225, 225, 225)
+                .addComponent(subJPMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(224, 224, 224))
+        );
+        JPMenuLayout.setVerticalGroup(
+            JPMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPMenuLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(NombreLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(subJPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(34, 34, 34))
+        );
 
         javax.swing.GroupLayout BotonesMenuLayout = new javax.swing.GroupLayout(BotonesMenu);
         BotonesMenu.setLayout(BotonesMenuLayout);
         BotonesMenuLayout.setHorizontalGroup(
             BotonesMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonesMenuLayout.createSequentialGroup()
-                .addComponent(JPIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(JPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE))
+            .addComponent(JPMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BotonesMenuLayout.setVerticalGroup(
             BotonesMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
             .addComponent(JPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -637,15 +530,17 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         {
             lastPos = getLocation();
             d.setSize(maxx, maxy);
-            setPreferredSize(d);
-            setLocation(0, 0);
+            //setPreferredSize(d);
+            //setLocation(0, 0);
+            Controlador.main.GranPe(this, true, maxx, maxy, lastPos);
         }
         else
         {
-            setPreferredSize(defaultSize);
-            setLocation(lastPos);
+            //setPreferredSize(defaultSize);
+            //setLocation(lastPos);
+            Controlador.main.GranPe(this, false, (int)defaultSize.getWidth(), (int)defaultSize.getHeight(), lastPos);
         }
-        pack();
+        //pack();
     }//GEN-LAST:event_jLabel18MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
@@ -656,7 +551,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 //            //System.exit(0);
 //            Controlador.main.AccionesVentana(this, this::Cerrar, 3);
 //        }
-        salida.Mostrar(this);
+        salida.Mostrar();
+        //Principal.Principal.gestorVentanas.MostrarSalida(this, "¿Salir del programa?");
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private int tx, ty;
@@ -787,82 +683,9 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153,153,153)));
     }//GEN-LAST:event_jLabel8MouseMoved
 
-    private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
-        // TODO add your handling code here:
-        // Fade.JFrameFadeIn(1f, 0f, 0.1f, 30, new CrearCuenta());
-       new CrearCuenta().setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_JLInternetMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Login();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-
-        AnimationClass internet= new AnimationClass();
-        internet.jLabelXRight(-40, 10, 10, 5, JLInternet);
-
-        //<---
-        AnimationClass internett= new AnimationClass();
-        internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
-
-    }//GEN-LAST:event_jLabel6MouseClicked
-
-    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==10){
-            Login();
-        }
-    }//GEN-LAST:event_txtPasswordKeyPressed
-
-    private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtPasswordMouseClicked
-
-    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioKeyTyped
-
-    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==10 && txtPassword.getText().length()>0){
-            Login();
-
-        }
-    }//GEN-LAST:event_txtUsuarioKeyPressed
-
-    private void txtUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseExited
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtUsuarioMouseExited
-
-    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtUsuarioMouseClicked
-
     private void JPWindowToolsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPWindowToolsMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_JPWindowToolsMouseClicked
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-        clicks++;
-        if (clicks % 2 != 0) {
-            //Mostrar Contrañse
-            //VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear1.png")));
-
-            txtPassword.setEchoChar((char) 0);
-        } else {
-            txtPassword.setEchoChar(prueba);
-
-            //txtPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png")));
-        }
-    }//GEN-LAST:event_jLabel2MouseClicked
 
 //    /**
 //     * @param args the command line arguments
@@ -901,13 +724,9 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel BotonesMenu;
-    private javax.swing.JLabel JLInternet;
-    private javax.swing.JPanel JPIngreso;
     private javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPWindowTools;
     private javax.swing.JLabel NombreLocal;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -918,25 +737,15 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel pCiber;
     private javax.swing.JPanel pClientes;
     private javax.swing.JPanel pCuenta;
     private javax.swing.JPanel pProductos;
     private javax.swing.JPanel pVentas;
     private javax.swing.JPanel subJPMenu;
-    private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
     @Override

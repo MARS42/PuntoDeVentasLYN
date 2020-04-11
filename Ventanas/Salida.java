@@ -5,9 +5,11 @@
  */
 package Ventanas;
 
+import Animaciones.Animacion;
 import Animaciones.Controlador;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.concurrent.Callable;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,33 +17,56 @@ import javax.swing.ImageIcon;
  * @author Robert
  */
 public class Salida extends javax.swing.JFrame {
-
+    
+    Component c;
+    Callable<Void> callcerrar, callmostrar, callcerrartodo;
+    
     /**
      * Creates new form Salida
      */
-    public Salida(Component c) {
+//    public Salida() {
+//        initComponents();
+//        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
+//        //setLocationRelativeTo(c);
+//        setOpacity(0);
+//    }
+    
+    public Salida(Component c, String pregunta, Callable<Void> callin, Callable<Void> callout, Callable end) {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
-        setLocationRelativeTo(c);
-        setOpacity(0);
+        //setLocationRelativeTo(c);
+        //setOpacity(0);
+        preguntaa.setText(pregunta);
+        this.c = c;
+        this.callcerrar = callin;
+        this.callmostrar = callout;
+        this.callcerrartodo = end;
+        
+        setVisible(false);
     }
 
-    public void Mostrar(Component c)
+    public void Mostrar()
     {
-        //setLocationRelativeTo(c);
+        setLocationRelativeTo(c);
         requestFocus();
-        Login.ins.Darken();
-        Controlador.main.AccionesVentana(this, () -> { setOpacity(1);setVisible(true); return null;}, 6);
+        //Login.ins.Darken();
+        //preguntaa.setText(pregunta);
+        c.setEnabled(false);
+        try{ callmostrar.call(); }catch(Exception ex){}
+        //Controlador.main.AccionesVentana(this, () -> { setOpacity(1);setVisible(true); return null;}, 6);
+        setVisible(true);
     }
-    public void Ocultar()
+    public void Ocultar(boolean todo)
     {
-        Login.ins.unDarken();
-        Controlador.main.AccionesVentana(this, () -> { setOpacity(0); return null;}, 5);
-    }
-    
-    public void Ocultar2()
-    {
-        Controlador.main.AccionesVentana(this, () -> { setOpacity(0); return null;}, 5);
+        c.setEnabled(true);
+        setVisible(false);
+        try
+        {
+            if(!todo)
+                callcerrar.call();
+            else
+                callcerrartodo.call();
+        }catch(Exception e){}
     }
     
     
@@ -51,6 +76,7 @@ public class Salida extends javax.swing.JFrame {
             setOpacity(1 - lerp);
         else
             setOpacity(lerp);
+        System.out.println("dsads");
         return null;
     }
     
@@ -124,13 +150,14 @@ public class Salida extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Ocultar2();
-        Login.ins.CerrarDef();
+        //SI
+        Ocultar(true);
+        //Login.ins.CerrarDef();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Ocultar();
+        Ocultar(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 //    /**

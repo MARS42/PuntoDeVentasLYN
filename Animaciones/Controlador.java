@@ -2,8 +2,11 @@ package Animaciones;
 
 import Ventanas.Login;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.concurrent.Callable;
 import javax.swing.GroupLayout;
+import javax.swing.JFrame;
 
 /**
  *
@@ -73,6 +76,7 @@ public class Controlador
                 {
                     cerrarSalida = new Animacion(f, f.getX()+200, f.getY()-150, f.getWidth(), f.getHeight(), action, 3);
                     cerrarSalida.setUpdateAction(() -> Login.ins.salida.Opacidad(cerrarSalida.getLerp(), true));
+                    //cerrarSalida.setUpdateAction(() -> Principal.Principal.gestorVentanas.salida.Opacidad(cerrarSalida.getLerp(), true));
                     cerrarSalida.Iniciar();
                 }
                 else
@@ -83,6 +87,7 @@ public class Controlador
                 {
                     abrirSalida = new Animacion(f, f.getX(), f.getY(), f.getWidth(), f.getHeight(), action, 3);
                     abrirSalida.setUpdateAction(() -> Login.ins.salida.Opacidad(abrirSalida.getLerp(), false));
+                    //abrirSalida.setUpdateAction(() -> Principal.Principal.gestorVentanas.salida.Opacidad(cerrarSalida.getLerp(), false));
                     abrirSalida.Iniciar();
                 }
                 else
@@ -90,7 +95,6 @@ public class Controlador
                 break;
         }
     }
-    
     public void AnimacionJPIngreso(Component c, Component c2)
     {
         if(panelIngreso == null)
@@ -104,6 +108,33 @@ public class Controlador
         {
             panelIngreso.Reinciar();
             panelMenu.Reinciar();
+        }
+    }
+    
+    public void GranPe(JFrame c, boolean maxi, int maxx, int maxy, Point p)
+    {
+        if(maxi)
+        {
+            if(grande == null)
+            {
+                grande = new Animacion(c, 0, 0, maxx, maxy, () -> {  c.setSize(maxx, maxy); c.setLocation(0, 0); return null; }, 3);
+                //grande.setUpdateAction(() -> { c.pack(); return null; });
+                grande.Iniciar();
+            }
+            else
+                grande.Reinciar();
+        }
+        else
+        {
+            if(pequena == null)
+            {
+                pequena = new Animacion(c, (int)p.getX(), (int)p.getY(), maxx, maxy, 
+                        () -> {  c.setSize(maxx, maxy); c.setLocation( (int)p.getX(),  (int)p.getY()); return null; }, 3);
+                //pequena.setUpdateAction(() -> { c.pack(); return null; });
+                pequena.Iniciar();
+            }
+            else
+                pequena.Reinciar();
         }
     }
     
@@ -157,5 +188,9 @@ public class Controlador
             to.setSc(((int)Lerp(a.getXs(), b.getXs(), t)), (int)Lerp(a.getYs(), b.getYs(), t));
             return to;
         }
+    }
+    
+    public void ConfirmarSalida(boolean salir, Component c)
+    {
     }
 }
