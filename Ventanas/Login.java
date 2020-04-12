@@ -277,7 +277,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         subJPMenu.setForeground(new java.awt.Color(255, 255, 255));
         subJPMenu.setOpaque(false);
         subJPMenu.setPreferredSize(new java.awt.Dimension(800, 450));
-        subJPMenu.setLayout(new java.awt.GridLayout());
+        subJPMenu.setLayout(new java.awt.GridLayout(2, 3));
 
         pClientes.setBackground(new java.awt.Color(255, 255, 255));
         pClientes.setForeground(new java.awt.Color(255, 255, 255));
@@ -447,23 +447,18 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         JPMenu.setLayout(JPMenuLayout);
         JPMenuLayout.setHorizontalGroup(
             JPMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(NombreLocal, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(JPMenuLayout.createSequentialGroup()
                 .addGap(225, 225, 225)
-                .addComponent(subJPMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(subJPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
                 .addGap(224, 224, 224))
+            .addComponent(NombreLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         JPMenuLayout.setVerticalGroup(
             JPMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPMenuLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(NombreLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(subJPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(34, 34, 34))
+                .addComponent(NombreLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subJPMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout BotonesMenuLayout = new javax.swing.GroupLayout(BotonesMenu);
