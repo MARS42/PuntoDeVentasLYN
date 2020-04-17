@@ -5,7 +5,6 @@
  */
 package Ventanas;
 
-
 import Animaciones.*;
 import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
@@ -22,68 +21,87 @@ import javax.swing.JOptionPane;
  *
  * @author Robert
  */
-public class OnlyLogin extends javax.swing.JFrame implements Conectar{
-    ArrayList<String>datos;
-     ArrayList<Object>datosUsuario;
-     
+public class OnlyLogin extends javax.swing.JFrame implements Conectar {
+
+    ArrayList<String> datos;
+    ArrayList<Object> datosUsuario;
+
     Salida salida;
-    
+
     Animacion abrir, cerrar, minimizar;
-    
-    public OnlyLogin(ArrayList<Object>datosUsuario) {
+    int clicks=0; char prueba;
+    public OnlyLogin(ArrayList<Object> datosUsuario) {
         initComponents();
         Init();
-        this.datosUsuario=datosUsuario;
+        this.datosUsuario = datosUsuario;
         JOptionPane.showMessageDialog(null, "Necesitas autorizacion para poder registrarte \n"
                 + "pidele a algun admin que te de permiso para poder continuar\n creando tu cuenta");
-        salida = new Salida(this, "¿Seguro?", () -> { unDarken(); return null; }, () -> { Darken(); return null; }, () ->cerrarDef());
-                setLocation(0, 0);
+        salida = new Salida(this, "¿Seguro?", () -> {
+            unDarken();
+            return null;
+        }, () -> {
+            Darken();
+            return null;
+        }, () -> cerrarDef());
+        setLocation(0, 0);
         abrir = new Animacion(this, getX(), getY(), getWidth(), getHeight(), null, 3);
+        prueba = txtPassword.getEchoChar();
     }
-    public OnlyLogin()
-    {
+
+    public OnlyLogin() {
         initComponents();
         Init();
-        
+
         setOpacity(0);
         setLocationRelativeTo(null);
         abrir = new Animacion(this, getX(), getY(), getWidth(), getHeight(), () -> Opacidad(1), 4);
         abrir.setUpdateAction(() -> Opacidad(abrir.getLerp(), false));
-        cerrar = new Animacion(this, getX(), 0, getWidth(), getHeight(), () -> { System.exit(0); return null; }, 4);
+        cerrar = new Animacion(this, getX(), 0, getWidth(), getHeight(), () -> {
+            System.exit(0);
+            return null;
+        }, 4);
         minimizar = new Animacion(this, getX(), 0, getWidth(), getHeight(), () -> Opacidad(0), 4);
         cerrar.setUpdateAction(() -> Opacidad(cerrar.getLerp(), true));
         minimizar.setUpdateAction(() -> Opacidad(cerrar.getLerp(), true));
-        setLocation(getX(),0);
+        setLocation(getX(), 0);
         abrir.Iniciar();
-                
-        salida = new Salida(this, "¿Seguro?", () -> { unDarken(); return null; }, () -> { Darken(); return null; },
-        ()-> { unDarken(); cerrarDef();return null; });
+
+        salida = new Salida(this, "¿Seguro?", () -> {
+            unDarken();
+            return null;
+        }, () -> {
+            Darken();
+            return null;
+        },
+                () -> {
+                    unDarken();
+                    cerrarDef();
+                    return null;
+                });
     }
-    
-    private void Init()
-    {
+
+    private void Init() {
         //setPreferredSize(new Dimension(300, 400));
         setLocationRelativeTo(null);
     }
-    
-        boolean dark = false;
+
+    boolean dark = false;
     GaussianBlur gb;
-    public void Darken()
-    {
+
+    public void Darken() {
         //setEnabled(false);
         dark = true;
         repaint();
     }
-    public void unDarken()
-    {
+
+    public void unDarken() {
         //setEnabled(true);
         dark = false;
         gb = null;
         repaint();
     }
-    
-    BufferedImage ss() 
-    {
+
+    BufferedImage ss() {
         try {
             Robot r = new Robot();
             //Rectangle rec = new Rectangle(getX() + 2, getY()-2, getWidth()-2, getHeight()-2);
@@ -95,48 +113,51 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         //BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         return null;
     }
-    
+
     @Override
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         super.paint(g);
-        if(dark)
-        {
-            if(gb == null){
-            gb = new GaussianBlur(ss(), 12);
-            //g.setColor(new Color(0, 0, 0, 140));
-            //g.fillRect(0, 0, getWidth(), getHeight());
-            gb.imagenBlur(getGraphics(), this);}
+        if (dark) {
+            if (gb == null) {
+                gb = new GaussianBlur(ss(), 12);
+                //g.setColor(new Color(0, 0, 0, 140));
+                //g.fillRect(0, 0, getWidth(), getHeight());
+                gb.imagenBlur(getGraphics(), this);
+            }
         }
     }
-    
-    public Void Opacidad(float lerp, boolean min)
-    {
-        if(min)
+
+    public Void Opacidad(float lerp, boolean min) {
+        if (min) {
             setOpacity(1 - lerp);
-        else
+        } else {
             setOpacity(lerp);
+        }
         return null;
     }
-    
-    public Void Opacidad(float val)
-    {
+
+    public Void Opacidad(float val) {
         setOpacity(val);
-        if(val == 0)
+        if (val == 0) {
             dispose();
+        }
         return null;
     }
-    
-    Void cerrarDef()
-    {
+
+    Void cerrarDef() {
         cerrar.Iniciar();
         //System.exit(0);
         return null;
     }
 
-    private String getUsuario(){ return txtUsuario.getText(); }
-    private String getPass(){ return new Encriptar(txtPassword.getText().toString()).Encrip(); }
-    
+    private String getUsuario() {
+        return txtUsuario.getText();
+    }
+
+    private String getPass() {
+        return new Encriptar(txtPassword.getText().toString()).Encrip();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -241,6 +262,12 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         JPIngreso.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 200, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_Key_32px.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         JPIngreso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, 40));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_customer_32px_1.png"))); // NOI18N
@@ -302,7 +329,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
 
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==10 && txtPassword.getText().length()>0){
+        if (evt.getKeyCode() == 10 && txtPassword.getText().length() > 0) {
             //Login();
 
         }
@@ -318,44 +345,60 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==10){
-            //Login();
+        if (evt.getKeyCode() == 10) {
+            try {
+                datos = Conec.Select("select usarName,password from usuarios where usarName='" + getUsuario() + "';", 2);
+                if (datos.get(0).equals(getUsuario()) && datos.get(1).equals(getPass())) {
+                    //Registrar
+                    jButtonEnter.setEnabled(false);
+                    System.out.println("si es usuario ");
+                    Principal.Principal.gestorVentanas.MostrarMenu();
+                    minimizar.Reinciar();
+                    //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
+                } else {
+                    MensajeError men = new MensajeError();
+                    men.Mensaje.setText("Revisa el usuario o contraseña");
+                    men.setVisible(true);
+                }
+            } catch (Exception e) {
+
+            }
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
 
-        AnimationClass internet= new AnimationClass();
+        AnimationClass internet = new AnimationClass();
         internet.jLabelXRight(-40, 10, 10, 5, JLInternet);
 
         //<---
-        AnimationClass internett= new AnimationClass();
+        AnimationClass internett = new AnimationClass();
         internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jButtonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnterActionPerformed
         // TODO add your handling code here:
         //Login();
-        try{
-             datos = Conec.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
-            if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
-               //Registrar
-               jButtonEnter.setEnabled(false);
+        try {
+            datos = Conec.Select("select usarName,password from usuarios where usarName='" + getUsuario() + "';", 2);
+            if (datos.get(0).equals(getUsuario()) && datos.get(1).equals(getPass())) {
+                //Registrar
+                jButtonEnter.setEnabled(false);
                 System.out.println("si es usuario ");
                 Principal.Principal.gestorVentanas.MostrarMenu();
                 minimizar.Reinciar();
-               //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
-            }else{
+                //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
+            } else {
                 MensajeError men = new MensajeError();
-            men.Mensaje.setText("Revisa el usuario o contraseña");
-            men.setVisible(true);
-            } 
-        }catch(Exception e){
-            
+                men.Mensaje.setText("Revisa el usuario o contraseña");
+                men.setVisible(true);
+            }
+        } catch (Exception e) {
+
         }
     }//GEN-LAST:event_jButtonEnterActionPerformed
 
-    
+
     private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
         // TODO add your handling code here:
         new CrearCuenta().setVisible(true);
@@ -367,9 +410,9 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         //        int dialog=JOptionPane.YES_NO_OPTION;
         //        int result=JOptionPane.showConfirmDialog(null,"¿Desea salir del Login?","Salir",dialog);
         //        if(result==0){
-            //            //System.exit(0);
-            //            Controlador.main.AccionesVentana(this, this::Cerrar, 3);
-            //        }
+        //            //System.exit(0);
+        //            Controlador.main.AccionesVentana(this, this::Cerrar, 3);
+        //        }
         //Principal.Principal.gestorVentanas.MostrarSalida(this, "¿Seguro?");
         salida.Mostrar();
         //System.exit(0);
@@ -377,7 +420,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
 
     private void JPIngresoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPIngresoMouseDragged
         // TODO add your handling code here:
-        setLocation(evt.getXOnScreen() - tx,  evt.getYOnScreen() - ty);
+        setLocation(evt.getXOnScreen() - tx, evt.getYOnScreen() - ty);
     }//GEN-LAST:event_JPIngresoMouseDragged
 
     private int tx, ty;
@@ -393,7 +436,21 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         ty = evt.getY();
     }//GEN-LAST:event_JPIngresoMousePressed
 
- 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        clicks++;
+        if (clicks % 2 != 0) {
+            //Mostrar Contrañse
+          
+
+            txtPassword.setEchoChar((char) 0);
+        } else {
+            txtPassword.setEchoChar(prueba);
+
+           
+        }
+    }//GEN-LAST:event_jLabel2MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLInternet;

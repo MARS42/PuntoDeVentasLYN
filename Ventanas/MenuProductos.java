@@ -975,7 +975,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 .addContainerGap())
         );
 
-        Tabla2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        Tabla2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         Tabla2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

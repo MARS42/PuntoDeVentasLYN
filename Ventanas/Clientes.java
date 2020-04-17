@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Font;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -114,8 +113,8 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         String sql = "update clientes set nombre='" + tex.datos.get(0)
                 + "', telefono='" + tex.datos.get(1)
                 + "', correo='" + tex.datos.get(2) + "' where id_cliente=" + id + ";";
-      
-         Conec.update(sql,"No se pudieron actilizar los datos");
+
+        Conec.update(sql, "No se pudieron actilizar los datos");
 
         for (int i = 0; i < cajas.size(); i++) {
             cajas.get(i).setText("");
@@ -319,7 +318,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                     .addComponent(jLabel12)
                     .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pNombreClienteLayout.setVerticalGroup(
             pNombreClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,7 +635,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
-        tabla("select * from clientes where  nombre like '%"+txtBuscar.getText()+"%';", Tabla);
+        tabla("select * from clientes where  nombre like '%" + txtBuscar.getText() + "%';", Tabla);
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
