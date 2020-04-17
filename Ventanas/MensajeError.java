@@ -5,8 +5,9 @@
  */
 package Ventanas;
 
-import Animacion.Animacion;
-import Animacion.Fade;
+import Animaciones.Animacion;
+//import Animacion.Animacion;
+//import Animacion.Fade;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -21,6 +22,8 @@ public class MensajeError extends javax.swing.JFrame {
      */
     Dimension screenSize;
     int xCenter, yCenter;
+    
+    Animacion show, hide;
 
     public MensajeError() {
         initComponents();
@@ -29,21 +32,50 @@ public class MensajeError extends javax.swing.JFrame {
         xCenter = (screenSize.width - this.getWidth())/2;
         yCenter = 0;
         this.setLocation(xCenter, yCenter);
-        animacion();
+        
+        show = new Animaciones.Animacion(this, getX(), getY() + getHeight() / 2, getWidth(), getHeight(), 
+                () -> { setOpacity(1); return null; }, 3);
+        show.setUpdateAction(() -> Opacidad(show.getLerp(), false));
+        hide = new Animaciones.Animacion(this, getX(), getY(), getWidth(), getHeight(), () -> { setOpacity(0); return null; }, 3);
+        hide.setUpdateAction(() -> Opacidad(hide.getLerp(), true));
+        //animacion();
+        setOpacity(0);
+        setVisible(true);
     }
 
-    public void animacion() {
-        
-       
-          if ((this.getY() + (this.getHeight())) > screenSize.height) {
-            
-        } else {
-            Animacion.bajar(this.getY(), (this.getY() + (this.getHeight() / 2)), 1, 2, this);
-//            Animacion.subir(this.getY(), (this.getY()-(this.getHeight()/2)), 2, 5, this);
-        }  
-       
-       
+    public Void Opacidad(float lerp, boolean min)
+    {
+        if(min)
+            setOpacity(1 - lerp);
+        else
+            setOpacity(lerp);
+        System.out.println("dsads");
+        return null;
     }
+    
+    public void Mostrar(String err)
+    {
+        Mensaje.setText(err);
+        requestFocus();
+        //Login.ins.Darken();
+        //preguntaa.setText(pregunta);
+        //Controlador.main.AccionesVentana(this, () -> { setOpacity(1);setVisible(true); return null;}, 6);
+        //setVisible(true);
+        show.Reinciar();
+    }
+    
+//    public void animacion() {
+//        
+//       
+//          if ((this.getY() + (this.getHeight())) > screenSize.height) {
+//            
+//        } else {
+//            Animacion.bajar(this.getY(), (this.getY() + (this.getHeight() / 2)), 1, 2, this);
+////            Animacion.subir(this.getY(), (this.getY()-(this.getHeight()/2)), 2, 5, this);
+//        }  
+//       
+//       
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +95,7 @@ public class MensajeError extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setType(java.awt.Window.Type.UTILITY);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,22 +129,23 @@ public class MensajeError extends javax.swing.JFrame {
         Mensaje.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jScrollPane1.setViewportView(Mensaje);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 360, 190));
 
         jPanel2.setBackground(new java.awt.Color(238, 112, 82));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Error");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +174,8 @@ public class MensajeError extends javax.swing.JFrame {
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
         // TODO add your handling code here:
-        Fade.JFrameFadeOut(1f, 0f, 0.1f, 30, this,Fade.DISPOSE);
+        //Fade.JFrameFadeOut(1f, 0f, 0.1f, 30, this,Fade.DISPOSE);
+        hide.Reinciar();
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited

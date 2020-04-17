@@ -188,6 +188,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        canvas1 = new java.awt.Canvas();
         JPWindowTools = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -722,6 +723,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     private javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPWindowTools;
     private javax.swing.JLabel NombreLocal;
+    private java.awt.Canvas canvas1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

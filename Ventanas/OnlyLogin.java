@@ -152,7 +152,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonEnter = new javax.swing.JButton();
         JLInternet = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
 
@@ -255,20 +255,20 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         });
         JPIngreso.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 30));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_OFF.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
-        jButton1.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
-        jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEnter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_OFF.png"))); // NOI18N
+        jButtonEnter.setBorder(null);
+        jButtonEnter.setBorderPainted(false);
+        jButtonEnter.setContentAreaFilled(false);
+        jButtonEnter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEnter.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
+        jButtonEnter.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
+        jButtonEnter.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Enter_ON.png"))); // NOI18N
+        jButtonEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonEnterActionPerformed(evt);
             }
         });
-        JPIngreso.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 140, 40));
+        JPIngreso.add(jButtonEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 140, 40));
 
         JLInternet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/paciente.png"))); // NOI18N
         JLInternet.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -333,13 +333,14 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         internett.jLabelXLeft(10, -40, 10, 5, JLInternet);
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnterActionPerformed
         // TODO add your handling code here:
         //Login();
         try{
              datos = Conec.Select("select usarName,password from usuarios where usarName='"+getUsuario()+"';", 2);
             if(datos.get(0).equals(getUsuario())&& datos.get(1).equals(getPass())){
                //Registrar
+               jButtonEnter.setEnabled(false);
                 System.out.println("si es usuario ");
                 Principal.Principal.gestorVentanas.MostrarMenu();
                 minimizar.Reinciar();
@@ -352,7 +353,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
         }catch(Exception e){
             
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonEnterActionPerformed
 
     
     private void JLInternetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInternetMouseClicked
@@ -397,7 +398,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLInternet;
     private javax.swing.JPanel JPIngreso;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonEnter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;

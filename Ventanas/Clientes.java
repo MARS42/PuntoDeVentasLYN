@@ -186,20 +186,25 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         PanelRegistro = new javax.swing.JPanel();
-        Texto1 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        Title = new javax.swing.JLabel();
+        pCampos = new javax.swing.JPanel();
+        pNombreCliente = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
         txtNombreCliente = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
+        pTelefono = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel17 = new javax.swing.JLabel();
+        pCorreo = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txtCorrreo = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        BtnRegistro = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        BtnRegistro = new javax.swing.JButton();
+        pBuscar = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -232,8 +237,8 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(1100, 600));
-        setPreferredSize(new java.awt.Dimension(1100, 600));
+        setMinimumSize(new java.awt.Dimension(1150, 650));
+        setPreferredSize(new java.awt.Dimension(1150, 650));
         setSize(new java.awt.Dimension(1100, 600));
 
         jPanel2.setBackground(new java.awt.Color(238, 112, 82));
@@ -246,6 +251,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
 
         jLabel3.setFont(new java.awt.Font("Corbel", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Administración de los clientes ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -255,10 +261,9 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap())
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,16 +279,16 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         );
 
         PanelRegistro.setBackground(new java.awt.Color(255, 255, 255));
-        PanelRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Texto1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        Texto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Texto1.setText("Registro de Clientes");
-        PanelRegistro.add(Texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 550, 60));
+        Title.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Title.setText("Registro de Clientes");
 
-        jLabel12.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel12.setText("Nombre del Cliente");
-        PanelRegistro.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 310, 50));
+        pCampos.setBackground(new java.awt.Color(255, 255, 255));
+
+        pNombreCliente.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/nombre50.png"))); // NOI18N
 
         txtNombreCliente.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtNombreCliente.setBorder(null);
@@ -295,15 +300,47 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 txtNombreClienteKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 320, 50));
+
+        jLabel12.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel12.setText("Nombre del Cliente");
 
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 320, 30));
+
+        javax.swing.GroupLayout pNombreClienteLayout = new javax.swing.GroupLayout(pNombreCliente);
+        pNombreCliente.setLayout(pNombreClienteLayout);
+        pNombreClienteLayout.setHorizontalGroup(
+            pNombreClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pNombreClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addGroup(pNombreClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        pNombreClienteLayout.setVerticalGroup(
+            pNombreClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pNombreClienteLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNombreClienteLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel19)
+                .addGap(20, 20, 20))
+        );
+
+        pTelefono.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel13.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel13.setText("Telefono");
-        PanelRegistro.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 300, 50));
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtTelefono.setBorder(null);
@@ -312,15 +349,45 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 txtTelefonoKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 320, 60));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 320, 30));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/llamada50.png"))); // NOI18N
+
+        javax.swing.GroupLayout pTelefonoLayout = new javax.swing.GroupLayout(pTelefono);
+        pTelefono.setLayout(pTelefonoLayout);
+        pTelefonoLayout.setHorizontalGroup(
+            pTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pTelefonoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pTelefonoLayout.setVerticalGroup(
+            pTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTelefonoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pTelefonoLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pCorreo.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel14.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel14.setText("Correo");
-        PanelRegistro.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, -1, 50));
 
         txtCorrreo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCorrreo.setBorder(null);
@@ -329,11 +396,40 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 txtCorrreoKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtCorrreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 320, 50));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 320, 30));
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
+
+        javax.swing.GroupLayout pCorreoLayout = new javax.swing.GroupLayout(pCorreo);
+        pCorreo.setLayout(pCorreoLayout);
+        pCorreoLayout.setHorizontalGroup(
+            pCorreoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pCorreoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pCorreoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCorrreo, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pCorreoLayout.setVerticalGroup(
+            pCorreoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pCorreoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pCorreoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pCorreoLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCorrreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         BtnRegistro.setBackground(new java.awt.Color(255, 102, 0));
         BtnRegistro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -357,21 +453,37 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 BtnRegistroActionPerformed(evt);
             }
         });
-        PanelRegistro.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 630, 290, 50));
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/llamada50.png"))); // NOI18N
-        PanelRegistro.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, 60));
+        javax.swing.GroupLayout pCamposLayout = new javax.swing.GroupLayout(pCampos);
+        pCampos.setLayout(pCamposLayout);
+        pCamposLayout.setHorizontalGroup(
+            pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCamposLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
+        );
+        pCamposLayout.setVerticalGroup(
+            pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pCamposLayout.createSequentialGroup()
+                .addComponent(pNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnRegistro)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/nombre50.png"))); // NOI18N
-        PanelRegistro.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, 60));
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
-        PanelRegistro.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, 60));
+        pBuscar.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel22.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Buscar");
-        PanelRegistro.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 80, 40));
 
         txtBuscar.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         txtBuscar.setBorder(null);
@@ -380,14 +492,44 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 txtBuscarKeyTyped(evt);
             }
         });
-        PanelRegistro.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 430, 40));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        PanelRegistro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 60, 430, 30));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        PanelRegistro.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 10, 60, 60));
+
+        javax.swing.GroupLayout pBuscarLayout = new javax.swing.GroupLayout(pBuscar);
+        pBuscar.setLayout(pBuscarLayout);
+        pBuscarLayout.setHorizontalGroup(
+            pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addComponent(txtBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel23)
+                .addGap(15, 15, 15))
+        );
+        pBuscarLayout.setVerticalGroup(
+            pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBuscarLayout.createSequentialGroup()
+                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pBuscarLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pBuscarLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pBuscarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel23)))
+                .addContainerGap())
+        );
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -421,22 +563,48 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabla);
 
-        PanelRegistro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 1130, 600));
+        javax.swing.GroupLayout PanelRegistroLayout = new javax.swing.GroupLayout(PanelRegistro);
+        PanelRegistro.setLayout(PanelRegistroLayout);
+        PanelRegistroLayout.setHorizontalGroup(
+            PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelRegistroLayout.createSequentialGroup()
+                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PanelRegistroLayout.setVerticalGroup(
+            PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelRegistroLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelRegistroLayout.createSequentialGroup()
+                        .addComponent(pBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(PanelRegistroLayout.createSequentialGroup()
+                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(pCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(PanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 1710, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(PanelRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -540,7 +708,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     private javax.swing.JButton BtnRegistro;
     private javax.swing.JPanel PanelRegistro;
     private javax.swing.JTable Tabla;
-    private javax.swing.JLabel Texto1;
+    private javax.swing.JLabel Title;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -561,6 +729,11 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JPanel pBuscar;
+    private javax.swing.JPanel pCampos;
+    private javax.swing.JPanel pCorreo;
+    private javax.swing.JPanel pNombreCliente;
+    private javax.swing.JPanel pTelefono;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCorrreo;
     private javax.swing.JTextField txtNombreCliente;
