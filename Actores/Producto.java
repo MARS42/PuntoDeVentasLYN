@@ -8,32 +8,21 @@ package Actores;
  * @author omara
  */
 public class Producto {
-   int codigoBarras;
-   String NombreP;
-   double PrecioUnitario,PrecioMayoreo;
-   double unidades;
+   public String  codigoBarras;
+   public String NombreP;
+   public double PrecioUnitario,PrecioMayoreo;
+   public double unidades;
    Producto siguinte;
 
-    public Producto(int codigoBarras, String NombreP, double PrecioUnitario, double PrecioMayoreo, double unidades, Producto siguinte) {
+    public Producto(String  codigoBarras, String NombreP, double unidades) {
         this.codigoBarras = codigoBarras;
         this.NombreP = NombreP;
-        this.PrecioUnitario = PrecioUnitario;
-        this.PrecioMayoreo = PrecioMayoreo;
-        this.unidades = unidades;
-        this.siguinte = siguinte;
-    }
-
-    public Producto(int codigoBarras, String NombreP, double PrecioUnitario, double PrecioMayoreo, double unidades) {
-        this.codigoBarras = codigoBarras;
-        this.NombreP = NombreP;
-        this.PrecioUnitario = PrecioUnitario;
-        this.PrecioMayoreo = PrecioMayoreo;
         this.unidades = unidades;
     }
-
-    public int getCodigoBarras() {
-        return codigoBarras;
+    public void mostrarDatos(){
+        System.out.println("CB "+codigoBarras+ " Nombre "+NombreP+" Unidades "+unidades);
     }
+   
 
     public String getNombreP() {
         return NombreP;

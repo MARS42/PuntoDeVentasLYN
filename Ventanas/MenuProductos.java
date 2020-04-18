@@ -1,6 +1,7 @@
 package Ventanas;
 
-import Actores.EnviarCorreos;
+
+import Actores.Producto;
 import Actores.TextPrompt;
 
 import Principal.Conectar;
@@ -29,7 +30,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     ArrayList<JTextField> cajas = new ArrayList<>();
     ArrayList<String> place = new ArrayList();
     int pocionActual = 0;
-    
+
     Confirmacion confirmacion = new Confirmacion(this);
     MensajeError msjerror = new MensajeError();
 
@@ -39,14 +40,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         setLocationRelativeTo(this);
         PanelBorrar.setVisible(false);
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
-        Thread Formato= new Thread(new FormatoTabla());
+        Thread Formato = new Thread(new FormatoTabla());
         Thread hint = new Thread(new Hint());
         Formato.start();
         hint.start();
+        //Cambiar 
         
-
     }
 
+    //clase para detertar cuando un producto ya no esta disponible 
     //Hilos para q la carga sea mas rapida
     //el hilo se encargara de dar diseño a la tabla 
     class FormatoTabla implements Runnable {
@@ -59,17 +61,17 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         }
 
     }
+
     //Hilo dos se encarga de cargar los place holder en las cajjas de texto
-    class Hint implements Runnable{
+    class Hint implements Runnable {
 
         @Override
         public void run() {
-           PlaceHorlder();
-        TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
+            PlaceHorlder();
+            TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
         }
-        
+
     }
-            
 
     void MostrarVentanaC() {
         //Mostrando la ventana correspondienrte de acuerdo  la barra 
@@ -153,9 +155,10 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     }
 
-    public Void ActualizarV(){
-        Log.setText(Log.getText() + "\n["+ hora() + "] " + txtNombreProducto.getText() + " actualizado con éxito");
-        Actualizar(); tabla("Select * from productos", Tabla); 
+    public Void ActualizarV() {
+        Log.setText(Log.getText() + "\n[" + hora() + "] " + txtNombreProducto.getText() + " actualizado con éxito");
+        Actualizar();
+        tabla("Select * from productos", Tabla);
         pocionActual = 0;
 
         PanelBorrar.setVisible(false);
@@ -163,12 +166,14 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         MostrarVentanaC();
         return null;
     }
-    
-    String hora(){ return java.time.LocalTime.now().toString(); }
-    public Void Borrar()
-    {
+
+    String hora() {
+        return java.time.LocalTime.now().toString();
+    }
+
+    public Void Borrar() {
         int fila = Tabla.getSelectedRow();
-        Log.setText(Log.getText() + "\n["+ hora() + "] SE ELIMINÓ " + Tabla.getValueAt(fila, 1).toString());
+        Log.setText(Log.getText() + "\n[" + hora() + "] SE ELIMINÓ " + Tabla.getValueAt(fila, 1).toString());
         if (fila >= 0) {
             Conec.delete("delete from productos where codigoBarras='" + Tabla.getValueAt(fila, 0) + "';", "No se pudo eliminar el producto");
             tabla("select * from productos;", Tabla);
@@ -180,7 +185,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         MostrarVentanaC();
         return null;
     }
-    
+
     public void Actualizar() {
         llenarTextos();
         llenarcajas();
@@ -281,7 +286,26 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         datos.clear();
 
     }
-
+   private String  getName(JTable tabla, int i , int j){
+       //Metodo para obtener un string de la tabla
+       return tabla.getValueAt(i,j)+"";
+   }
+   private int getUnidades(JTable tabla , int i ,int j){
+       return Integer.parseInt(tabla.getValueAt(i, j)+"");
+   }
+   
+   //Metodo para pintar de colores  la fila de los productos q tengan menos de 10
+    private  void pintar(JTable tabla){
+        ArrayList<Producto> p= new ArrayList<>();
+       for( int i =0; i<tabla.getRowCount(); i++){
+           if(getUnidades(tabla, i, 4)<10){
+              Producto temporal= new Producto(getName(tabla, i, 0),getName(tabla, i, 1), getUnidades(tabla, i, 4));
+               //Lo q se hace es cambiar el color de la letra 
+               
+           }
+       }
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -289,6 +313,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -342,7 +369,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         txtBuscar1 = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla2 = new javax.swing.JTable();
 
@@ -368,6 +394,19 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
             }
         });
         jPopupMenu1.add(jMenuItem2);
+
+        jPopupMenu2.setBackground(new java.awt.Color(255, 255, 255));
+        jPopupMenu2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+
+        jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jMenuItem3.setText("Ver de forma grafica");
+        jPopupMenu2.add(jMenuItem3);
+
+        jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jMenuItem4.setText("Ver alertas");
+        jPopupMenu2.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -914,7 +953,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 .addContainerGap()
                 .addComponent(pane_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -945,19 +984,12 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
 
-        jButton1.setText("Enviar Correos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(108, Short.MAX_VALUE)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -965,33 +997,26 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                     .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134)
-                .addComponent(jButton1)
-                .addGap(141, 141, 141))
+                .addGap(392, 392, 392))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(25, 25, 25))))
+                                .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
 
-        Tabla2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        Tabla2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         Tabla2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1003,6 +1028,8 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Tabla2.setComponentPopupMenu(jPopupMenu2);
+        Tabla2.setRowHeight(25);
         Tabla2.setSelectionBackground(new java.awt.Color(255, 153, 0));
         Tabla2.setShowVerticalLines(false);
         jScrollPane2.setViewportView(Tabla2);
@@ -1139,7 +1166,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         PanelBorrar.setVisible(true);
         tabla("select * from productos;", Tabla2);
         PanelRegistro.setVisible(false);
-
+        pintar(Tabla2);
     }//GEN-LAST:event_InventarioMouseClicked
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -1162,7 +1189,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
                     //men.setVisible(true);
 
                 } else {
-                    Log.setText(Log.getText() + "\n["+ hora() + "] " + txtNombreProducto.getText() + " registrado con éxito");
+                    Log.setText(Log.getText() + "\n[" + hora() + "] " + txtNombreProducto.getText() + " registrado con éxito");
                     ObtenerProductos();
                     tabla("Select * from productos", Tabla);
                 }
@@ -1173,8 +1200,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
             }
         }
         if (pocionActual == 1) {
-            if(Tabla.getSelectionModel().isSelectionEmpty())
+            if (Tabla.getSelectionModel().isSelectionEmpty()) {
                 return;
+            }
             //Aqui es donde ponemos lo de actualizar los prodcutos
             confirmacion.Mostrar("¿Actualizar " + Tabla.getValueAt(Tabla.getSelectedRow(), 1).toString() + "?", this::ActualizarV);
             //Actualizar();
@@ -1273,6 +1301,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
         // TODO add your handling code here:
+        tabla("select * from productos where codigoBarras='" + txtBuscar.getText() + "'  union select * from productos where NombreP like '%" + txtBuscar1.getText() + "%';", Tabla2);
     }//GEN-LAST:event_txtBuscar1KeyTyped
 
     private void txtCodigoBarraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBarraActionPerformed
@@ -1282,11 +1311,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreProductoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-      new EnviarCorreos();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1301,7 +1325,6 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private javax.swing.JTable Tabla;
     private javax.swing.JTable Tabla2;
     private javax.swing.JTextField TxtPrecioMayoreo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1324,9 +1347,12 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -15,6 +15,7 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +34,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
     public OnlyLogin(ArrayList<Object> datosUsuario) {
         initComponents();
         Init();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         this.datosUsuario = datosUsuario;
         JOptionPane.showMessageDialog(null, "Necesitas autorizacion para poder registrarte \n"
                 + "pidele a algun admin que te de permiso para poder continuar\n creando tu cuenta");
@@ -51,6 +53,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
     public OnlyLogin() {
         initComponents();
         Init();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
 
         setOpacity(0);
         setLocationRelativeTo(null);
@@ -447,7 +450,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
         } else {
             txtPassword.setEchoChar(prueba);
 
-           
+           setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 

@@ -5,8 +5,7 @@ package Ventanas;
 
 import BaseDatos.Query;
 import Principal.Conectar;
-import java.awt.Image;
-import java.util.Random;
+
 import java.util.concurrent.Callable;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
