@@ -8,16 +8,20 @@ import Principal.Conectar;
 import static Principal.Conectar.Conec;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.time.temporal.Temporal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -293,19 +297,13 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
    private int getUnidades(JTable tabla , int i ,int j){
        return Integer.parseInt(tabla.getValueAt(i, j)+"");
    }
-   
-   //Metodo para pintar de colores  la fila de los productos q tengan menos de 10
-    private  void pintar(JTable tabla){
-        ArrayList<Producto> p= new ArrayList<>();
-       for( int i =0; i<tabla.getRowCount(); i++){
-           if(getUnidades(tabla, i, 4)<10){
-              Producto temporal= new Producto(getName(tabla, i, 0),getName(tabla, i, 1), getUnidades(tabla, i, 4));
-               //Lo q se hace es cambiar el color de la letra 
-               
-           }
-       }
-        
+    void pintarColumnaTabla(JTable tabla){
+        ColorearFilas color = new ColorearFilas(4);
+        tabla.getColumnModel().getColumn(4).setCellRenderer(color);
     }
+   //Metodo para pintar de colores  la fila de los productos q tengan menos de 10
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1166,7 +1164,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         PanelBorrar.setVisible(true);
         tabla("select * from productos;", Tabla2);
         PanelRegistro.setVisible(false);
-        pintar(Tabla2);
+        pintarColumnaTabla(Tabla2);
     }//GEN-LAST:event_InventarioMouseClicked
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
