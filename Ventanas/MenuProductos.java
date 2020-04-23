@@ -398,7 +398,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
         jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jMenuItem3.setText("Ver de forma grafica");
+        jMenuItem3.setText("Generar reporte");
         jPopupMenu2.add(jMenuItem3);
 
         jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));

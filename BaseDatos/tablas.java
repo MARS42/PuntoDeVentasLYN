@@ -6,7 +6,7 @@ inserta registros etc
 package BaseDatos;
 
 import Principal.Conectar;
-import java.util.ArrayList;
+
 
 /**
  *

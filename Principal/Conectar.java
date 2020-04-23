@@ -10,5 +10,6 @@ import BaseDatos.Sql;
 
 public interface Conectar {
     Sql c= new Sql();
+    
     Query Conec= new Query();
 }
