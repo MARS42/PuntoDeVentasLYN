@@ -76,11 +76,47 @@ public class Query implements Conectar{
                 }
             }
         }catch(Exception e){
+            System.out.println(e.getMessage());
             MensajeError men = new MensajeError();
                     men.Mensaje.setText(e.getMessage());
                     men.setVisible(true);
+                    
         }
         return datos;    
-    }  
-  
+    }
+       public void create_table(String query,String mensaje){
+        try { 
+            Connection cn=c.getConnection();
+            PreparedStatement pst= cn.prepareStatement(query);
+            if(pst.executeUpdate()>0){
+                System.out.println("Tabla creada");
+            }   
+        } catch (SQLException ex) {
+            System.out.println("Error "+ex.getSQLState());
+             MensajeError men = new MensajeError();
+                    men.Mensaje.setText(mensaje+"\n"+ex.getMessage());
+                    men.setVisible(true);
+                    
+        }
+    }
+  public ArrayList tabla(String query){
+        ArrayList<String> datos= new ArrayList();
+        try{
+            Connection cn=c.getConnection();
+            Statement st=cn.createStatement();
+            ResultSet rs=st.executeQuery(query);
+            while (rs.next()){
+                
+                    datos.add(rs.getString(1)); 
+                
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            MensajeError men = new MensajeError();
+                    men.Mensaje.setText(e.getMessage());
+                    men.setVisible(true);
+                    
+        }
+        return datos;    
+    } 
 }
