@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import Actores.User;
 import Animaciones.*;
 import AppPackage.AnimationClass;
 import BaseDatos.Encriptar;
@@ -353,6 +354,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
                 datos = Conec.Select("select usarName,password from usuarios where usarName='" + getUsuario() + "';", 2);
                 if (datos.get(0).equals(getUsuario()) && datos.get(1).equals(getPass())) {
                     //Registrar
+                    User.usuario=datos.get(0);
                     jButtonEnter.setEnabled(false);
                     System.out.println("si es usuario ");
                     Principal.Principal.gestorVentanas.MostrarMenu();
@@ -386,6 +388,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
             datos = Conec.Select("select usarName,password from usuarios where usarName='" + getUsuario() + "';", 2);
             if (datos.get(0).equals(getUsuario()) && datos.get(1).equals(getPass())) {
                 //Registrar
+                User.usuario=datos.get(0);
                 jButtonEnter.setEnabled(false);
                 System.out.println("si es usuario ");
                 Principal.Principal.gestorVentanas.MostrarMenu();

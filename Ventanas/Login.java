@@ -579,6 +579,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         // TODO add your handling code here:
         if(desbloquear){
             //abrir una nueva ventana
+             new Ventas().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
         }
