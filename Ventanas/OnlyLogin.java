@@ -390,6 +390,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
                 System.out.println("si es usuario ");
                 Principal.Principal.gestorVentanas.MostrarMenu();
                 minimizar.Reinciar();
+                System.out.println("");
                 //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
             } else {
                 MensajeError men = new MensajeError();

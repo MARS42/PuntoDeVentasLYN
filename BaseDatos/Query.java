@@ -31,6 +31,7 @@ public class Query implements Conectar{
             }
            
         } catch (Exception e) {
+            System.out.println(e.getMessage());
            MensajeError men = new MensajeError();
                     men.Mensaje.setText(mensaje);
                     men.setVisible(true);     

@@ -307,12 +307,22 @@ class javax.swing.JTextField
                 }
 
             }
-            //Madamos los datos
+            if(Conec.Select("select usarName from usuarios ;",1 ).size()==0){
+                System.out.println("No hay usuarios");
+               
+               Conec.insert("insert into usuarios values (?,?,?,?,?,?);",tex.datos , "NO SE PUEDE REGISTAR AL USUARIO");
+               OnlyLogin autorizar=new OnlyLogin();
+            autorizar.setVisible(true);
+            }else{
+                //Madamos los datos
             OnlyLogin autorizar=new OnlyLogin(tex.datos);
             autorizar.setVisible(true);
             //RsAni
             //cajasTexto.clear();
-            //tex.datos.clear();
+            //tex.datos.clear(); 
+            }
+            
+           
             
 
         } else {
