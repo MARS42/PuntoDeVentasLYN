@@ -4,6 +4,7 @@ arreglos o listas con los datos de las tablas
  */
 package BaseDatos;
 
+import Actores.Producto;
 import Principal.Conectar;
 import Ventanas.MensajeError;
 import java.sql.Connection;
@@ -75,6 +76,26 @@ public class Query implements Conectar{
                 for(int i=1; i<=columnas; i++){
                     datos.add(rs.getString(i)); 
                 }
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            MensajeError men = new MensajeError();
+                    men.Mensaje.setText(e.getMessage());
+                    men.setVisible(true);
+                    
+        }
+        return datos;    
+    }
+     public ArrayList SelectProductos(String query,int columnas){
+        ArrayList<Producto> datos= new ArrayList();
+        try{
+            Connection cn=c.getConnection();
+            Statement st=cn.createStatement();
+            ResultSet rs=st.executeQuery(query);
+            while (rs.next()){
+                
+                    datos.add(new Producto(rs.getString("NombreP"),Double.parseDouble(rs.getString("Unidades")))); 
+                
             }
         }catch(Exception e){
             System.out.println(e.getMessage());

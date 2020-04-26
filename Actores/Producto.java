@@ -19,6 +19,12 @@ public class Producto {
         this.NombreP = NombreP;
         this.unidades = unidades;
     }
+
+    public Producto(String NombreP, double unidades) {
+        this.NombreP = NombreP;
+        this.unidades = unidades;
+    }
+    
     public void mostrarDatos(){
         System.out.println("CB "+codigoBarras+ " Nombre "+NombreP+" Unidades "+unidades);
     }

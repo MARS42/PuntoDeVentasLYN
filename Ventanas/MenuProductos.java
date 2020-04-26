@@ -1,6 +1,7 @@
 package Ventanas;
 
 
+import Actores.GenerarGrafica;
 import Actores.Producto;
 import Actores.TextPrompt;
 
@@ -399,6 +400,11 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jMenuItem3.setText("Generar reporte");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jPopupMenu2.add(jMenuItem3);
 
         jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
@@ -1309,6 +1315,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreProductoActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+       
+        
+        ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
+      
+        new GenerarGrafica().generarBarras(p);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
