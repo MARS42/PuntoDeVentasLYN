@@ -106,6 +106,26 @@ public class Query implements Conectar{
         }
         return datos;    
     }
+      public ArrayList SelectProductos(String query){
+        ArrayList<Producto> datos= new ArrayList();
+        try{
+            Connection cn=c.getConnection();
+            Statement st=cn.createStatement();
+            ResultSet rs=st.executeQuery(query);
+            while (rs.next()){
+                //odigoBarras,NombreP,Unidades
+                    datos.add(new Producto(rs.getString("codigoBarras"),rs.getString("NombreP"),Integer.parseInt(rs.getString("Unidades")))); 
+                
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            MensajeError men = new MensajeError();
+                    men.Mensaje.setText(e.getMessage());
+                    men.setVisible(true);
+                    
+        }
+        return datos;    
+    }
        public void create_table(String query,String mensaje){
         try { 
             Connection cn=c.getConnection();

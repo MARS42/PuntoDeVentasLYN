@@ -13,10 +13,13 @@ import static Principal.Conectar.Conec;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.io.IOException;
 import java.time.temporal.Temporal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -1330,12 +1333,16 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_txtNombreProductoActionPerformed
 
     private void GenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarReporteActionPerformed
-        // TODO add your handling code here:
-       
-        new GenerarReportes().ProductosBajos("ReportesT.pdf");
-       /* ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
-      
-        new GenerarGrafica().generarBarras(p);*/
+        try {
+            // TODO add your handling code here:
+            
+            new GenerarReportes().ProductosBajos("Reportes.pdf");
+            /* ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
+            
+            new GenerarGrafica().generarBarras(p);*/
+        } catch (IOException ex) {
+            Logger.getLogger(MenuProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_GenerarReporteActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

@@ -6,6 +6,7 @@ inserta registros etc
 package BaseDatos;
 
 import Principal.Conectar;
+import java.util.ArrayList;
 
 
 /**
@@ -38,6 +39,19 @@ public class tablas implements Conectar {
                 + "  `descripcion` varchar(30) DEFAULT NULL,\n"
                 + "  PRIMARY KEY (`id_rol`)\n"
                 + ");", "");
+        if(Conec.Select("select id_rol from roleas;", 1).size()==0){
+            ArrayList<Object> datos= new ArrayList<>();
+              datos.add("1");
+              datos.add("Administrador");
+              
+            Conec.insert("insert into roleas values(?,?);", datos, "");
+            datos.clear();
+              datos.add("2");
+              datos.add("Empleado");
+              
+            Conec.insert("insert into roleas values(?,?);", datos, "");
+            datos.clear();
+        }
         Conec.create_table("CREATE TABLE IF NOT EXISTS `usuarios` (\n"
                 + "  `usarName` varchar(50) NOT NULL,\n"
                 + "  `nombreU` varchar(30) DEFAULT NULL,\n"

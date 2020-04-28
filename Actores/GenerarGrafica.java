@@ -39,4 +39,20 @@ public class GenerarGrafica {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+    JFreeChart jf;
+    public  JFreeChart  generarBarrasImagen(ArrayList<Producto> pro){
+        try {
+            DefaultCategoryDataset ds= new DefaultCategoryDataset();
+            for(int i=0; i<pro.size(); i++){
+            ds.addValue(pro.get(i).unidades, pro.get(i).NombreP, "");
+            
+            }
+           
+            jf=ChartFactory.createBarChart3D("Prductos", "Nombre del producto", "Unidades", ds, PlotOrientation.VERTICAL, true, true, true);
+           
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return jf;
+    }
 }
