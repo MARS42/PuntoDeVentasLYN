@@ -1,7 +1,9 @@
 package Ventanas;
 
 
+import Actores.CodigoBarras;
 import Actores.GenerarGrafica;
+import Actores.GenerarReportes;
 import Actores.Producto;
 import Actores.TextPrompt;
 
@@ -312,8 +314,9 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        GenerarReporte = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -394,18 +397,28 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         });
         jPopupMenu1.add(jMenuItem2);
 
+        jMenuItem5.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem5.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jMenuItem5.setText("Generar código de barras");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem5);
+
         jPopupMenu2.setBackground(new java.awt.Color(255, 255, 255));
         jPopupMenu2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
 
-        jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuItem3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jMenuItem3.setText("Generar reporte");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        GenerarReporte.setBackground(new java.awt.Color(255, 255, 255));
+        GenerarReporte.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        GenerarReporte.setText("Generar reporte");
+        GenerarReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                GenerarReporteActionPerformed(evt);
             }
         });
-        jPopupMenu2.add(jMenuItem3);
+        jPopupMenu2.add(GenerarReporte);
 
         jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
@@ -1316,19 +1329,28 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreProductoActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void GenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarReporteActionPerformed
         // TODO add your handling code here:
        
-        
-        ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
+        new GenerarReportes().ProductosBajos("ReportesT.pdf");
+       /* ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
       
-        new GenerarGrafica().generarBarras(p);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        new GenerarGrafica().generarBarras(p);*/
+    }//GEN-LAST:event_GenerarReporteActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+             int fila = Tabla.getSelectedRow();
+        if (fila >= 0) {
+         new CodigoBarras().genenar(Tabla.getValueAt(fila, 0)+"","reporte");
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegistro;
     private javax.swing.JPanel Campos;
+    private javax.swing.JMenuItem GenerarReporte;
     private javax.swing.JLabel Inventario;
     private javax.swing.JLabel InventarioLogo;
     private javax.swing.JLabel Label;
@@ -1360,8 +1382,8 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
