@@ -8,7 +8,6 @@ package BaseDatos;
 import Principal.Conectar;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author omara
@@ -39,16 +38,16 @@ public class tablas implements Conectar {
                 + "  `descripcion` varchar(30) DEFAULT NULL,\n"
                 + "  PRIMARY KEY (`id_rol`)\n"
                 + ");", "");
-        if(Conec.Select("select id_rol from roleas;", 1).size()==0){
-            ArrayList<Object> datos= new ArrayList<>();
-              datos.add("1");
-              datos.add("Administrador");
-              
+        if (Conec.Select("select id_rol from roleas;", 1).size() == 0) {
+            ArrayList<Object> datos = new ArrayList<>();
+            datos.add("1");
+            datos.add("Administrador");
+
             Conec.insert("insert into roleas values(?,?);", datos, "");
             datos.clear();
-              datos.add("2");
-              datos.add("Empleado");
-              
+            datos.add("2");
+            datos.add("Empleado");
+
             Conec.insert("insert into roleas values(?,?);", datos, "");
             datos.clear();
         }
@@ -63,6 +62,14 @@ public class tablas implements Conectar {
                 + "  KEY `id_rol` (`id_rol`),\n"
                 + "  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roleas` (`id_rol`)\n"
                 + ");", "");
+        Conec.create_table("create table IF NOT EXISTS ventas (id_venta int primary key auto_increment, "
+                + "usuario varchar(50), importe double,fecha date, id_cliente int, "
+                + "foreign key (usuario) references usuarios(usarName) ,"
+                + " foreign key(id_cliente) references clientes (id_cliente));", "No se puede crear tabla ");
+        Conec.create_table("create table IF NOT EXISTS carrito (id_carrito int PRIMARY key AUTO_INCREMENT,"
+                + "id_producto varchar(50),unidades double, id_venta int , "
+                + "FOREIGN key (id_producto) REFERENCES productos (codigoBarras), FOREIGN key "
+                + "(id_venta) REFERENCES ventas (id_venta))", "No se puede crear la tabla ");
 
     }
 
