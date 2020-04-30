@@ -32,7 +32,7 @@ public class Query implements Conectar{
             }
            
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(mensaje +" "+e.getMessage());
            MensajeError men = new MensajeError();
                     men.Mensaje.setText(mensaje);
                     men.setVisible(true);     
@@ -53,6 +53,7 @@ public class Query implements Conectar{
                     
         }
     }
+   
     public void delete(String query,String mensaje){
         Connection cn=c.getConnection();
         try {
@@ -85,6 +86,27 @@ public class Query implements Conectar{
                     
         }
         return datos;    
+    }
+      public int  ultimo(String query){
+       int id=0;
+        try{
+            Connection cn=c.getConnection();
+            Statement st=cn.createStatement();
+            ResultSet rs=st.executeQuery(query);
+            id=Integer.parseInt(rs.getString(0));
+            /*while (rs.next()){
+                for(int i=1; i<=columnas; i++){
+                    datos.add(rs.getString(i)); 
+                }
+            }*/
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            MensajeError men = new MensajeError();
+                    men.Mensaje.setText(e.getMessage());
+                    men.setVisible(true);
+                    
+        }
+        return id;    
     }
      public ArrayList SelectProductos(String query,int columnas){
         ArrayList<Producto> datos= new ArrayList();

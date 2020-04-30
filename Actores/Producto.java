@@ -12,8 +12,17 @@ public class Producto {
    public String NombreP;
    public double PrecioUnitario,PrecioMayoreo;
    public double unidades;
+   public double importe;
+   
    Producto siguinte;
 
+    public Producto(String codigoBarras, String NombreP, double unidades, double importe) {
+        this.codigoBarras = codigoBarras;
+        this.NombreP = NombreP;
+        this.unidades = unidades;
+        this.importe = importe;
+    }
+    
     public Producto(String  codigoBarras, String NombreP, double unidades) {
         this.codigoBarras = codigoBarras;
         this.NombreP = NombreP;

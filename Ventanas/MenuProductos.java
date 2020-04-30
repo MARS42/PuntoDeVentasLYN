@@ -1,6 +1,5 @@
 package Ventanas;
 
-
 import Actores.CodigoBarras;
 import Actores.GenerarGrafica;
 import Actores.GenerarReportes;
@@ -55,7 +54,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         Formato.start();
         hint.start();
         //Cambiar 
-        
+
     }
 
     //clase para detertar cuando un producto ya no esta disponible 
@@ -296,20 +295,22 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         datos.clear();
 
     }
-   private String  getName(JTable tabla, int i , int j){
-       //Metodo para obtener un string de la tabla
-       return tabla.getValueAt(i,j)+"";
-   }
-   private int getUnidades(JTable tabla , int i ,int j){
-       return Integer.parseInt(tabla.getValueAt(i, j)+"");
-   }
-    void pintarColumnaTabla(JTable tabla){
+
+    private String getName(JTable tabla, int i, int j) {
+        //Metodo para obtener un string de la tabla
+        return tabla.getValueAt(i, j) + "";
+    }
+
+    private int getUnidades(JTable tabla, int i, int j) {
+        return Integer.parseInt(tabla.getValueAt(i, j) + "");
+    }
+
+    void pintarColumnaTabla(JTable tabla) {
         ColorearFilas color = new ColorearFilas(4);
         tabla.getColumnModel().getColumn(4).setCellRenderer(color);
     }
-   //Metodo para pintar de colores  la fila de los productos q tengan menos de 10
-    
-    
+    //Metodo para pintar de colores  la fila de los productos q tengan menos de 10
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -426,6 +427,11 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jMenuItem4.setText("Ver alertas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jPopupMenu2.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1335,7 +1341,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     private void GenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarReporteActionPerformed
         try {
             // TODO add your handling code here:
-            
+
             new GenerarReportes().ProductosBajos("Reportes.pdf");
             /* ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
             
@@ -1347,11 +1353,15 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-             int fila = Tabla.getSelectedRow();
+        int fila = Tabla.getSelectedRow();
         if (fila >= 0) {
-         new CodigoBarras().genenar(Tabla.getValueAt(fila, 0)+"","reporte");
+            new CodigoBarras().genenar(Tabla.getValueAt(fila, 0) + "", "reporte");
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
