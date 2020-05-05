@@ -25,6 +25,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     double importe = 0;
     int fila;
     ArrayList<Double> precios = new ArrayList<>();
+    boolean ticket = false;
 
     public Ventas() {
         initComponents();
@@ -108,21 +109,28 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
 
     public void RegistarCarrito() {
         //Tenemos q crear una lista con solo los campos de vamos a utilzar
+        int id = 0;
         ArrayList<Object> objetos = new ArrayList<>();
-        int id=Conec.ultimo("select  max(id_venta) from ventas;");
-        for(int i=0; i<pro.size(); i++){
+        ArrayList<Object> venta = Conec.Select("select id_venta from ventas where fecha='" + new GenerarFecha().getFecha() + "';", 1);
+        id = Integer.parseInt(venta.get(venta.size() - 1) + "");
+        venta.clear();
+        for (int i = 0; i < pro.size(); i++) {
             objetos.add(pro.get(i).codigoBarras);
             objetos.add(pro.get(i).unidades);
             //consulta para saber cual fue el utlimo registo de la base de datos 
             objetos.add(id);
-            System.out.println(objetos.get(0));
-            System.out.println(objetos.get(1));
-            System.out.println(objetos.get(2));
-             //Conec.insert("insert into carrito (id_producto,unidades,id_venta) values (?,?,?);", objetos, "Nose puede registar");
-             objetos.clear();
+
+            Conec.insert("insert into carrito (id_producto,unidades,id_venta) values (?,?,?);", objetos, "Nose puede registar");
+            objetos.clear();
+            agregarCarrito(new String[]{"Codigo barras", "Nombre producto", "Unidades", "Importe"});
+
         }
     }
-
+     public void ImprimirReporte(){
+         if(ticket){
+             
+         }
+     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -143,6 +151,8 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         TxtUnidades2 = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
         BotonModificar = new javax.swing.JButton();
+        Clientes = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtUnidades = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
@@ -337,6 +347,30 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         DialogoEditarLayout.setVerticalGroup(
             DialogoEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 971, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 598, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout ClientesLayout = new javax.swing.GroupLayout(Clientes.getContentPane());
+        Clientes.getContentPane().setLayout(ClientesLayout);
+        ClientesLayout.setHorizontalGroup(
+            ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ClientesLayout.setVerticalGroup(
+            ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -594,7 +628,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
         );
 
         pack();
@@ -648,7 +682,25 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
         if (JcCliente.isSelected()) {
+            if (txtEfectivo.getText().length() != 0) {
+                //Varificando q el efectivo sea mayor a la cantidad ingresada
+                double efectivo = 0;
+                try {
+                    efectivo = Double.parseDouble(txtEfectivo.getText());
+                    if (importe > efectivo) {
+                        JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
+                    } else {
 
+                        ticket = true;
+                        comprar();
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes de ingresar el efectivo");
+            }
         } else {//Varificnado q el prewcio este puesto
             if (txtEfectivo.getText().length() != 0) {
                 //Varificando q el efectivo sea mayor a la cantidad ingresada
@@ -659,6 +711,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                         JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
                     } else {
                         comprar();
+
                     }
 
                 } catch (Exception e) {
@@ -832,6 +885,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JButton BotonModificar;
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnRegistro;
+    private javax.swing.JDialog Clientes;
     private javax.swing.JDialog Dialogo;
     private javax.swing.JDialog DialogoEditar;
     private javax.swing.JCheckBox JCPrecio;
@@ -861,6 +915,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
