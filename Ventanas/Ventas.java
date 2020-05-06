@@ -2,10 +2,15 @@ package Ventanas;
 
 import Actores.CodigoBarras;
 import Actores.GenerarFecha;
+
 import Actores.Producto;
+import Actores.Ticket;
 import Actores.User;
 import Principal.Conectar;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -26,11 +31,12 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     int fila;
     ArrayList<Double> precios = new ArrayList<>();
     boolean ticket = false;
-
+    double cambio=0;
+    String items="";
     public Ventas() {
         initComponents();
         setLocationRelativeTo(null);
-
+        setExtendedState(this.MAXIMIZED_BOTH);
         /* codigo.add("1707");
         codigo.add("7501035113794");
         codigo.add("7506129400866");
@@ -93,7 +99,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         }
         JLImporte.setText("Importe " + importe);
     }
-
+   
     public void comprar() {
         ArrayList<Object> da = new ArrayList<>();
         da.add(User.usuario);
@@ -105,11 +111,15 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         RegistarCarrito();
         precios.clear();
         pro.clear();
+        agregarCarrito(new String[]{"Codigo barras", "Nombre producto", "Unidades", "Importe"});
+       
+        
+        
     }
-
+     int id;
     public void RegistarCarrito() {
         //Tenemos q crear una lista con solo los campos de vamos a utilzar
-        int id = 0;
+      
         ArrayList<Object> objetos = new ArrayList<>();
         ArrayList<Object> venta = Conec.Select("select id_venta from ventas where fecha='" + new GenerarFecha().getFecha() + "';", 1);
         id = Integer.parseInt(venta.get(venta.size() - 1) + "");
@@ -119,12 +129,18 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             objetos.add(pro.get(i).unidades);
             //consulta para saber cual fue el utlimo registo de la base de datos 
             objetos.add(id);
-
+             items+=pro.get(i).NombreP+"("+pro.get(i).unidades+") "+pro.get(i).importe+"\n";
+             
             Conec.insert("insert into carrito (id_producto,unidades,id_venta) values (?,?,?);", objetos, "Nose puede registar");
             objetos.clear();
-            agregarCarrito(new String[]{"Codigo barras", "Nombre producto", "Unidades", "Importe"});
+           
 
         }
+        
+        Reporte.setSize(569, 460);
+        Reporte.setLocationRelativeTo(null);
+        Cambio.setText(cambio+"");
+        Reporte.setVisible(true);
     }
      public void ImprimirReporte(){
          if(ticket){
@@ -151,8 +167,13 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         TxtUnidades2 = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
         BotonModificar = new javax.swing.JButton();
-        Clientes = new javax.swing.JDialog();
+        Reporte = new javax.swing.JDialog();
         jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        Cambio = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtUnidades = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
@@ -179,7 +200,11 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         JCPrecio = new javax.swing.JCheckBox();
         BtnAgregar = new javax.swing.JButton();
         marco = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        txtDescuento = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -350,27 +375,53 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 971, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
-        );
+        jLabel4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Gracias por su compra");
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 12, 550, -1));
 
-        javax.swing.GroupLayout ClientesLayout = new javax.swing.GroupLayout(Clientes.getContentPane());
-        Clientes.getContentPane().setLayout(ClientesLayout);
-        ClientesLayout.setHorizontalGroup(
-            ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jLabel5.setFont(new java.awt.Font("Corbel", 0, 30)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Su cambio");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 55, 540, -1));
+
+        Cambio.setFont(new java.awt.Font("Arial", 1, 45)); // NOI18N
+        Cambio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel5.add(Cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 98, 550, 70));
+
+        jButton3.setBackground(new java.awt.Color(255, 102, 0));
+        jButton3.setFont(new java.awt.Font("Corbel", 0, 25)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Imprimir  ticket ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 251, 61));
+
+        jButton5.setBackground(new java.awt.Color(51, 153, 0));
+        jButton5.setFont(new java.awt.Font("Corbel", 0, 25)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 251, 61));
+
+        javax.swing.GroupLayout ReporteLayout = new javax.swing.GroupLayout(Reporte.getContentPane());
+        Reporte.getContentPane().setLayout(ReporteLayout);
+        ReporteLayout.setHorizontalGroup(
+            ReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        ClientesLayout.setVerticalGroup(
-            ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        ReporteLayout.setVerticalGroup(
+            ReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -402,7 +453,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jLabel13.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Carrito de compras");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, 1070, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 1070, -1));
 
         txtCodigoB.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCodigoB.setBorder(null);
@@ -447,7 +498,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                 BtnRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 230, 40));
+        jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 230, 40));
 
         jLabel14.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel14.setText("Código de Barras ");
@@ -478,12 +529,12 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 1080, 210));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 460, 1100, 210));
 
         jLabel22.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Buscar");
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 140, -1));
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 140, -1));
 
         txtBuscar.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         txtBuscar.setBorder(null);
@@ -492,16 +543,16 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                 txtBuscarKeyTyped(evt);
             }
         });
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, 440, -1));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, 440, -1));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 30, 130, -1));
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 30, 130, -1));
 
         JcCliente.setBackground(new java.awt.Color(255, 255, 255));
         JcCliente.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         JcCliente.setText("Agregar Cliente");
-        jPanel1.add(JcCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 180, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 440, 20));
+        jPanel1.add(JcCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 180, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, 440, 20));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -523,15 +574,15 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         Tabla1.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(Tabla1);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 1090, 300));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 1090, 300));
 
         jLabel16.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel16.setText("Cantidad");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        JLImporte.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        JLImporte.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         JLImporte.setText("Importe: ");
-        jPanel1.add(JLImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 240, -1));
+        jPanel1.add(JLImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 350, -1));
 
         txtEfectivo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtEfectivo.setBorder(null);
@@ -555,8 +606,8 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 230, 20));
 
         jLabel18.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel18.setText("Efectivo");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+        jLabel18.setText("Descuento");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
 
         JCPrecio.setBackground(new java.awt.Color(255, 255, 255));
         JCPrecio.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
@@ -588,10 +639,31 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jPanel1.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 230, 40));
 
         marco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(marco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 350));
+        jPanel1.add(marco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 350));
+
+        jButton4.setBackground(new java.awt.Color(255, 0, 0));
+        jButton4.setFont(new java.awt.Font("Corbel", 1, 25)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Cancelar compra");
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 770, 240, 40));
+
+        txtDescuento.setBorder(null);
+        txtDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescuentoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 600, 220, 30));
+
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 638, 230, 10));
 
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 280, 340));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 380, 430));
+
+        jLabel19.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel19.setText("Efectivo");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(238, 112, 82));
 
@@ -606,14 +678,14 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1217, Short.MAX_VALUE))
+                .addContainerGap(1386, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -627,8 +699,8 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -686,14 +758,19 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                 //Varificando q el efectivo sea mayor a la cantidad ingresada
                 double efectivo = 0;
                 try {
-                    efectivo = Double.parseDouble(txtEfectivo.getText());
+                    if(txtEfectivo.getText().length()!=0){
+                       
+                      efectivo = Double.parseDouble(txtEfectivo.getText());
                     if (importe > efectivo) {
                         JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
                     } else {
 
                         ticket = true;
+                        cambio=(importe-efectivo);
                         comprar();
+                    }  
                     }
+                    
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, e.getMessage());
@@ -710,6 +787,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                     if (importe > efectivo) {
                         JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
                     } else {
+                        cambio=Math.abs(importe-efectivo);
                         comprar();
 
                     }
@@ -880,23 +958,57 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         DialogoEditar.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void txtDescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyTyped
+        // TODO add your handling code here:
+        char mander = evt.getKeyChar();
+        String ex = mander + "";
+        if (ex.equalsIgnoreCase(".")) {
+            if (!txtDescuento.getText().contains(".")) {
+                txtDescuento.setText(txtDescuento.getText() + ".");
+            }
+
+        }
+        if (!Character.isDigit(mander)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescuentoKeyTyped
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            // TODO add your handling code here:
+            Ticket t= new Ticket("LYN", new GenerarFecha().getFecha(),id+"", User.usuario, new GenerarFecha().gethora(), items, importe+"", txtEfectivo.getText(), cambio+"");
+            t.generarTicket();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Reporte.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonModificar;
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnRegistro;
-    private javax.swing.JDialog Clientes;
+    private javax.swing.JLabel Cambio;
     private javax.swing.JDialog Dialogo;
     private javax.swing.JDialog DialogoEditar;
     private javax.swing.JCheckBox JCPrecio;
     private javax.swing.JLabel JLImporte;
     private javax.swing.JCheckBox JcCliente;
     private javax.swing.JPopupMenu Menu2;
+    private javax.swing.JDialog Reporte;
     private javax.swing.JTable Tabla;
     private javax.swing.JTable Tabla1;
     private javax.swing.JTextField TxtUnidades2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -904,10 +1016,13 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -920,6 +1035,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
@@ -927,6 +1043,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLabel marco;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCodigoB;
+    private javax.swing.JTextField txtDescuento;
     private javax.swing.JTextField txtEfectivo;
     private javax.swing.JTextField txtUnidades;
     // End of variables declaration//GEN-END:variables

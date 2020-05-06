@@ -12,11 +12,21 @@ import java.util.Calendar;
  * @author omara
  */
 public class GenerarFecha {
- public String getFecha(){
-     Calendar fecha = Calendar.getInstance();
+
+    public String getFecha() {
+        Calendar fecha = Calendar.getInstance();
         int año = fecha.get(Calendar.YEAR);
         int mes = fecha.get(Calendar.MONTH) + 1;
         int dia = fecha.get(Calendar.DAY_OF_MONTH);
         return año + "-" + mes + "-" + dia;
- }   
+    }
+
+    public String gethora() {
+        Calendar calendario = Calendar.getInstance();
+        int hora, minutos, segundos;
+        hora = calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND);
+        return hora+":"+minutos+":"+segundos;
+    }
 }
