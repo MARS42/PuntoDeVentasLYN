@@ -386,7 +386,8 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
         //Login();
         try {
             datos = Conec.Select("select usarName,password from usuarios where usarName='" + getUsuario() + "';", 2);
-            if (datos.get(0).equals(getUsuario()) && datos.get(1).equals(getPass())) {
+            if(datos.size()!=0){
+               if (datos.get(0).equals(getUsuario()) && datos.get(1).equals(getPass())) {
                 //Registrar
                 User.usuario=datos.get(0);
                 jButtonEnter.setEnabled(false);
@@ -397,9 +398,15 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
                 //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
             } else {
                 MensajeError men = new MensajeError();
-                men.Mensaje.setText("Revisa el usuario o contraseña");
+                men.Mensaje.setText("Revisa la contraseña");
                 men.setVisible(true);
+            } 
+            }else{
+              MensajeError men = new MensajeError();
+                men.Mensaje.setText("Revisa el usuario");
+                men.setVisible(true);  
             }
+            
         } catch (Exception e) {
 
         }

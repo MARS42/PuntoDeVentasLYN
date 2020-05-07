@@ -1,6 +1,7 @@
 
 package Ventanas;
 
+import Actores.User;
 import Animaciones.Controlador;
 import Animaciones.GaussianBlur;
 import AppPackage.AnimationClass;
@@ -44,6 +45,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         //prueba = txtPassword.getEchoChar();
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         Init();
+        System.out.println(User.usuario);
     }
     
     private void Init()

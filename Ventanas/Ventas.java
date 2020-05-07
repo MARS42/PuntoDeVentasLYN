@@ -218,6 +218,13 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jButton7 = new javax.swing.JButton();
         cliente = new javax.swing.JDialog();
         jPanel7 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        txtBuscar1 = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel25 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Tabla2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtUnidades = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
@@ -534,17 +541,66 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
-        );
+        jLabel9.setFont(new java.awt.Font("Corbel", 1, 25)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Selecciona al cliente");
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 979, 25));
+
+        txtBuscar1.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        txtBuscar1.setBorder(null);
+        txtBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscar1KeyTyped(evt);
+            }
+        });
+        jPanel7.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 530, -1));
+
+        jLabel24.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("Buscar");
+        jPanel7.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
+
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel7.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 530, 30));
+
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        jPanel7.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 70, -1, -1));
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+
+        Tabla2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        Tabla2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Correo", "Telefono"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tabla2.setFocusable(false);
+        Tabla2.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        Tabla2.setRowHeight(35);
+        Tabla2.setSelectionBackground(new java.awt.Color(255, 153, 0));
+        Tabla2.setShowVerticalLines(false);
+        Tabla2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(Tabla2);
+
+        jPanel7.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 153, 980, 330));
 
         javax.swing.GroupLayout clienteLayout = new javax.swing.GroupLayout(cliente.getContentPane());
         cliente.getContentPane().setLayout(clienteLayout);
@@ -1196,6 +1252,13 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         calcularNuevoImporte();
     }//GEN-LAST:event_jLabel7MouseClicked
 
+    private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
+        // TODO add your handling code here:
+        tabla("select * from clientes where  nombre like '%" + txtBuscar.getText() + "%';", Tabla,new String [] {
+                "Nombre", "Correo", "Telefono"
+            });
+    }//GEN-LAST:event_txtBuscar1KeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonModificar;
@@ -1211,6 +1274,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JDialog Reporte;
     private javax.swing.JTable Tabla;
     private javax.swing.JTable Tabla1;
+    private javax.swing.JTable Tabla2;
     private javax.swing.JTextField TxtUnidades2;
     private javax.swing.JDialog cancelar;
     private javax.swing.JDialog cliente;
@@ -1232,12 +1296,15 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1251,14 +1318,17 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel marco;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscar1;
     private javax.swing.JTextField txtCodigoB;
     private javax.swing.JTextField txtDescuento;
     private javax.swing.JTextField txtEfectivo;
