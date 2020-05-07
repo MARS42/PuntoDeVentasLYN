@@ -47,7 +47,8 @@ public class Query implements Conectar{
             
             }   
         } catch (SQLException ex) {
-             MensajeError men = new MensajeError();
+            System.out.println(mensaje+" "+ex.getMessage());
+                     MensajeError men = new MensajeError();
                     men.Mensaje.setText(mensaje+"\n"+ex.getMessage());
                     men.setVisible(true);
                     

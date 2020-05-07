@@ -1,16 +1,16 @@
 package Ventanas;
 
-import Actores.CodigoBarras;
+
 import Actores.GenerarFecha;
 
 import Actores.Producto;
 import Actores.Ticket;
 import Actores.User;
 import Principal.Conectar;
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -45,7 +45,29 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         tabla("select * from productos;", Tabla1, new String[]{"Codigo barras",
             "Nombre producto", "Precio unitario", "Precio Mayoreo", "Unidades"});
     }
-
+    public void reiniciar(){
+         Reporte.setVisible(false);
+         if(pro.size()!=0){
+             pro.clear();
+             
+         }
+         importe=0;
+         fila=0;
+         if(precios.size()!=0){
+             precios.clear();
+         }
+         cambio=0;
+         items="";
+         JLImporte.setText("");
+         txtEfectivo.setText("");
+         txtDescuento.setText("");
+         JCPrecio.setSelected(false);
+         JcCliente.setSelected(false);
+         DefaultTableModel modelo = new DefaultTableModel();
+         Tabla.setModel(modelo);
+         tabla("select * from productos;", Tabla1, new String[]{"Codigo barras",
+            "Nombre producto", "Precio unitario", "Precio Mayoreo", "Unidades"});
+     }
     public void tabla(String sql, JTable Tabla, String[] columnas) {
         DefaultTableModel modelo = new DefaultTableModel();
         for (int i = 0; i < columnas.length; i++) {
@@ -108,10 +130,10 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
 
         Conec.insert("insert into ventas (usuario,importe,fecha) values (?,?,?);", da, "No se puedo registrar la compra");
         da.clear();
+        actualizar();
         RegistarCarrito();
-        precios.clear();
-        pro.clear();
-        agregarCarrito(new String[]{"Codigo barras", "Nombre producto", "Unidades", "Importe"});
+        
+        
        
         
         
@@ -147,6 +169,21 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
              
          }
      }
+     public void actualizar(){
+        for(int i=0; i<pro.size(); i++){
+           //En esta parte necesitamos dos cosas para actulizar el stoke 
+           // el stok actual y el numero de unidades compradas
+           
+           double stokactual=Double.parseDouble(Conec.Select("select "
+                   + " Unidades from productos where  codigoBarras='"+pro.get(i).codigoBarras+"';",1).get(0)+"");
+            System.out.println(stokactual);
+           Conec.update("update productos set Unidades="+
+                   (stokactual-pro.get(i).unidades)+" where codigoBarras='"+
+                   pro.get(i).codigoBarras+"';", "No se pude actulizar");
+        }
+     }
+     
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -174,6 +211,13 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         Cambio = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        cancelar = new javax.swing.JDialog();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        cliente = new javax.swing.JDialog();
+        jPanel7 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtUnidades = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
@@ -203,10 +247,12 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jButton4 = new javax.swing.JButton();
         txtDescuento = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jPopupMenu1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -424,6 +470,93 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
         );
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel6.setText("¿Realmente quieres cancelar la compra?");
+
+        jButton6.setBackground(new java.awt.Color(255, 51, 0));
+        jButton6.setFont(new java.awt.Font("Corbel", 1, 25)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Si");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(204, 204, 0));
+        jButton7.setFont(new java.awt.Font("Corbel", 1, 25)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("No");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64))
+        );
+
+        javax.swing.GroupLayout cancelarLayout = new javax.swing.GroupLayout(cancelar.getContentPane());
+        cancelar.getContentPane().setLayout(cancelarLayout);
+        cancelarLayout.setHorizontalGroup(
+            cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        cancelarLayout.setVerticalGroup(
+            cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 486, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 411, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout clienteLayout = new javax.swing.GroupLayout(cliente.getContentPane());
+        cliente.getContentPane().setLayout(clienteLayout);
+        clienteLayout.setHorizontalGroup(
+            clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        clienteLayout.setVerticalGroup(
+            clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -498,7 +631,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                 BtnRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 230, 40));
+        jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 700, 230, 40));
 
         jLabel14.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel14.setText("Código de Barras ");
@@ -551,7 +684,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         JcCliente.setBackground(new java.awt.Color(255, 255, 255));
         JcCliente.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         JcCliente.setText("Agregar Cliente");
-        jPanel1.add(JcCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 180, -1));
+        jPanel1.add(JcCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 180, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, 440, 20));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
@@ -580,9 +713,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jLabel16.setText("Cantidad");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        JLImporte.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        JLImporte.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         JLImporte.setText("Importe: ");
-        jPanel1.add(JLImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 350, -1));
+        jPanel1.add(JLImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 350, -1));
 
         txtEfectivo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtEfectivo.setBorder(null);
@@ -599,15 +732,15 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                 txtEfectivoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 230, -1));
+        jPanel1.add(txtEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 230, -1));
 
         jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 230, 20));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 230, 20));
 
         jLabel18.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel18.setText("Descuento");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, -1, -1));
 
         JCPrecio.setBackground(new java.awt.Color(255, 255, 255));
         JCPrecio.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
@@ -645,31 +778,54 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jButton4.setFont(new java.awt.Font("Corbel", 1, 25)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Cancelar compra");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 770, 240, 40));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 690, 240, 40));
 
+        txtDescuento.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         txtDescuento.setBorder(null);
         txtDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescuentoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDescuentoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 600, 220, 30));
+        jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 570, 220, 30));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 638, 230, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, 230, 10));
 
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 380, 430));
+        jLabel7.setText("Pulsa aqui para quitar el descuento");
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 640, 200, -1));
 
         jLabel19.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel19.setText("Efectivo");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 380, 390));
 
         jPanel2.setBackground(new java.awt.Color(238, 112, 82));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ventas");
+
+        jLabel8.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Administrar ventas");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -678,7 +834,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1386, Short.MAX_VALUE))
+                .addGap(354, 354, 354)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -686,13 +844,17 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1628, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -753,6 +915,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_BtnRegistroMouseExited
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
+       if(pro.size()!=0){
+           
+      
         if (JcCliente.isSelected()) {
             if (txtEfectivo.getText().length() != 0) {
                 //Varificando q el efectivo sea mayor a la cantidad ingresada
@@ -800,6 +965,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             }
 
         }
+         }else{
+           JOptionPane.showMessageDialog(null, "No se agregado ningun producto aun");
+       }
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -853,7 +1021,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             } else {
                 datos = Conec.Select("select NombreP,PrecioUnitario from productos where codigoBarras='" + getTexto(txtCodigoB) + "';", 2);
             }
-            //Agreando el precio en una lista aparte
+            double unidadesdisponibles=Double.parseDouble(Conec.Select("select Unidades from productos where codigoBarras='" + getTexto(txtCodigoB) + "';", 1).get(0)+"");
+           if(unidadesdisponibles>=Double.parseDouble(txtUnidades.getText())){
+               //Agreando el precio en una lista aparte
             precios.add(Double.parseDouble(datos.get(1)));
             //Agreando el producto en otra lista para operar con el
             pro.add(new Producto(getTexto(txtCodigoB) + "", datos.get(0),//codigo barras
@@ -867,6 +1037,10 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             txtCodigoB.setText("");
             txtUnidades.setText("");
             datos.clear();
+           }
+           else{
+               JOptionPane.showMessageDialog(this, "El numero de unidades de este producto es menor al solicitado");
+           }
 
         } else {
             JOptionPane.showMessageDialog(null, "Debes  escribir todos los datos");
@@ -971,22 +1145,56 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         if (!Character.isDigit(mander)) {
             evt.consume();
         }
+        
     }//GEN-LAST:event_txtDescuentoKeyTyped
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
+      
             // TODO add your handling code here:
             Ticket t= new Ticket("LYN", new GenerarFecha().getFecha(),id+"", User.usuario, new GenerarFecha().gethora(), items, importe+"", txtEfectivo.getText(), cambio+"");
-            t.generarTicket();
-        } catch (IOException ex) {
-            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+              t.generarTicket();
+              reiniciar();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        Reporte.setVisible(false);
+       
+        reiniciar();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtDescuentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyPressed
+        // TODO add your handling code here:
+        //Si precionas enter aplicar el descueto
+         if (evt.getKeyCode() == 10) {
+             double descuento=Double.parseDouble(txtDescuento.getText())/100;
+              importe=importe-(importe*descuento);
+              
+         JLImporte.setText("Importe: "+importe);
+         }
+         
+    }//GEN-LAST:event_txtDescuentoKeyPressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        reiniciar();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        reiniciar();
+        cancelar.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        cancelar.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        calcularNuevoImporte();
+    }//GEN-LAST:event_jLabel7MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1004,11 +1212,15 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JTable Tabla;
     private javax.swing.JTable Tabla1;
     private javax.swing.JTextField TxtUnidades2;
+    private javax.swing.JDialog cancelar;
+    private javax.swing.JDialog cliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1023,6 +1235,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1031,6 +1246,8 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

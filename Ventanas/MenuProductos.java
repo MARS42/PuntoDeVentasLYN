@@ -1,19 +1,18 @@
 package Ventanas;
 
 import Actores.CodigoBarras;
-import Actores.GenerarGrafica;
 import Actores.GenerarReportes;
-import Actores.Producto;
+
 import Actores.TextPrompt;
 
 import Principal.Conectar;
 import static Principal.Conectar.Conec;
 
 import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Font;
 import java.io.IOException;
-import java.time.temporal.Temporal;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,12 +20,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
+
 
 import javax.swing.table.DefaultTableModel;
 
@@ -48,24 +47,34 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
         setExtendedState(this.MAXIMIZED_BOTH);
         setLocationRelativeTo(this);
         PanelBorrar.setVisible(false);
-        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());  
         Thread Formato = new Thread(new FormatoTabla());
         Thread hint = new Thread(new Hint());
+        Thread ta = new Thread(new tabla());
         Formato.start();
         hint.start();
+        ta.start();
         //Cambiar 
 
     }
-
-    //clase para detertar cuando un producto ya no esta disponible 
-    //Hilos para q la carga sea mas rapida
-    //el hilo se encargara de dar diseño a la tabla 
-    class FormatoTabla implements Runnable {
+class FormatoTabla implements Runnable {
 
         @Override
         public void run() {
             diseñoTabla(Tabla);
             diseñoTabla(Tabla2);
+            
+        }
+
+    }
+    //clase para detertar cuando un producto ya no esta disponible 
+    //Hilos para q la carga sea mas rapida
+    //el hilo se encargara de dar diseño a la tabla 
+    class tabla implements Runnable {
+
+        @Override
+        public void run() {
+            
             tabla("select * from productos;", Tabla);
         }
 
@@ -76,7 +85,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
 
         @Override
         public void run() {
-            PlaceHorlder();
+           PlaceHorlder();
             TextPrompt prueba = new TextPrompt("Escribe el código o nombre del producto", txtBuscar);
         }
 

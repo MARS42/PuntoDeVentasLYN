@@ -9,8 +9,9 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.*;
-import java.awt.print.*;
+import java.io.File;
+import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
@@ -22,8 +23,10 @@ import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.print.SimpleDoc;
 import javax.print.Doc;
+import javax.print.PrintException;
 import javax.print.ServiceUI;
 import javax.print.attribute.*;
+import javax.print.attribute.standard.Copies;
 
 public class Ticket {
 
@@ -48,7 +51,7 @@ public class Ticket {
             + "ESPERAMOS SU VISITA NUEVAMENTE {{nameLocal}}\n"
             + "\n"
             + "\n";
-
+    
     //El constructor que setea los valores a la instancia
     public Ticket(String nameLocal, String expedition, String ticket, String caissier, String dateTime, String items, String total, String recibo, String change) {
         this.contentTicket = this.contentTicket.replace("{{nameLocal}}", nameLocal);
@@ -79,8 +82,28 @@ public class Ticket {
             Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+public void imprimir(){
+    PrintService service = PrintServiceLookup.lookupDefaultPrintService();
+ FileInputStream in = null;
+        try {
+            in = new FileInputStream(new File("ticket.pdf"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ PrintRequestAttributeSet  pras = new HashPrintRequestAttributeSet();
+ pras.add(new Copies(1));        
+        DocFlavor.INPUT_STREAM flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
+ Doc doc = new SimpleDoc(in, flavor, null);
+ DocPrintJob job = service.createPrintJob();
 
+        try {
+            job.print(doc, pras);
+        } catch (PrintException ex) {
+            Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
     public void print() {
+        
         //Especificamos el tipo de dato a imprimir
         //Tipo: bytes; Subtipo: autodetectado
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
@@ -105,7 +128,7 @@ public class Ticket {
         
         //Creamos un documento a imprimir, a el se le appendeara
         //el arreglo de bytes
-        Doc doc = new SimpleDoc(bytes, flavor, null);
+        Doc doc = new SimpleDoc(doce, flavor, null);
 
         //Creamos un trabajo de impresión
         DocPrintJob job = service.createPrintJob();
