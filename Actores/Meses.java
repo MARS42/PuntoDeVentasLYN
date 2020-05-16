@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ventanas;
+package Actores;
 
 /**
  *
  * @author omara
  */
-public class NewClass {
+public class Meses {
+    public int numMes;
+    public int dias;
+
+    public Meses(int numMes, int dias) {
+        this.numMes = numMes;
+        this.dias = dias;
+    }
     
 }

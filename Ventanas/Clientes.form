@@ -388,7 +388,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Telefono"/>
+                    <Property name="text" type="java.lang.String" value="Tel&#xe9;fono "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTelefono">
@@ -646,7 +646,7 @@
                   <Table columnCount="3" rowCount="5">
                     <Column editable="true" title="Nombre" type="java.lang.Object"/>
                     <Column editable="false" title="Correo" type="java.lang.Object"/>
-                    <Column editable="false" title="Telefono" type="java.lang.Object"/>
+                    <Column editable="false" title="Tel&#xe9;fono " type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -4,8 +4,7 @@ package Ventanas;
 import Actores.User;
 import Animaciones.Controlador;
 import Animaciones.GaussianBlur;
-import AppPackage.AnimationClass;
-import BaseDatos.Encriptar;
+
 import BaseDatos.Query;
 import Principal.Conectar;
 import java.awt.AWTException;

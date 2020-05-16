@@ -20,7 +20,14 @@ public class GenerarFecha {
         int dia = fecha.get(Calendar.DAY_OF_MONTH);
         return año + "-" + mes + "-" + dia;
     }
-
+    public int getMes(){
+        Calendar fecha = Calendar.getInstance();
+       return fecha.get(Calendar.MONTH) + 1;
+    }
+   public int getYear(){
+       Calendar fecha = Calendar.getInstance();
+       return fecha.get(Calendar.YEAR);
+   }
     public String gethora() {
         Calendar calendario = Calendar.getInstance();
         int hora, minutos, segundos;

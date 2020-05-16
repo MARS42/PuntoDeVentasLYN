@@ -1,15 +1,15 @@
 package Ventanas;
 
-
+import Actores.Calendario;
 import Actores.GenerarFecha;
 
 import Actores.Producto;
+import Actores.TextPrompt;
 import Actores.Ticket;
 import Actores.User;
 import Principal.Conectar;
 
 import java.util.ArrayList;
-
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -31,8 +31,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     int fila;
     ArrayList<Double> precios = new ArrayList<>();
     boolean ticket = false;
-    double cambio=0;
-    String items="";
+    double cambio = 0;
+    String items = "";
+
     public Ventas() {
         initComponents();
         setLocationRelativeTo(null);
@@ -42,32 +43,35 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         codigo.add("7506129400866");
        // Alertas l= new Alertas(codigo);
         //l.enviarMensaje();*/
-        tabla("select * from productos;", Tabla1, new String[]{"Codigo barras",
+      //  TextPrompt prueba = new TextPrompt("Escribe la fecha que deseas buscar ej. 2020-05-16", txtfecha);
+        tabla("select * from productos;", Tabla1, new String[]{"Código barras",
             "Nombre producto", "Precio unitario", "Precio Mayoreo", "Unidades"});
     }
-    public void reiniciar(){
-         Reporte.setVisible(false);
-         if(pro.size()!=0){
-             pro.clear();
-             
-         }
-         importe=0;
-         fila=0;
-         if(precios.size()!=0){
-             precios.clear();
-         }
-         cambio=0;
-         items="";
-         JLImporte.setText("");
-         txtEfectivo.setText("");
-         txtDescuento.setText("");
-         JCPrecio.setSelected(false);
-         JcCliente.setSelected(false);
-         DefaultTableModel modelo = new DefaultTableModel();
-         Tabla.setModel(modelo);
-         tabla("select * from productos;", Tabla1, new String[]{"Codigo barras",
+
+    public void reiniciar() {
+        Reporte.setVisible(false);
+        if (pro.size() != 0) {
+            pro.clear();
+
+        }
+        importe = 0;
+        fila = 0;
+        if (precios.size() != 0) {
+            precios.clear();
+        }
+        cambio = 0;
+        items = "";
+        JLImporte.setText("");
+        txtEfectivo.setText("");
+        txtDescuento.setText("");
+        JCPrecio.setSelected(false);
+        JcCliente.setSelected(false);
+        DefaultTableModel modelo = new DefaultTableModel();
+        Tabla.setModel(modelo);
+        tabla("select * from productos;", Tabla1, new String[]{"Código barras",
             "Nombre producto", "Precio unitario", "Precio Mayoreo", "Unidades"});
-     }
+    }
+
     public void tabla(String sql, JTable Tabla, String[] columnas) {
         DefaultTableModel modelo = new DefaultTableModel();
         for (int i = 0; i < columnas.length; i++) {
@@ -121,7 +125,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         }
         JLImporte.setText("Importe " + importe);
     }
-   
+
     public void comprar() {
         ArrayList<Object> da = new ArrayList<>();
         da.add(User.usuario);
@@ -132,16 +136,26 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         da.clear();
         actualizar();
         RegistarCarrito();
-        
-        
-       
-        
-        
+
     }
-     int id;
+
+    public void comprar2() {
+        ArrayList<Object> da = new ArrayList<>();
+        da.add(User.usuario);
+        da.add(importe);
+        da.add(new GenerarFecha().getFecha());
+        da.add(id_Clinte);
+        Conec.insert("insert into ventas (usuario,importe,fecha,id_cliente) values (?,?,?,?);", da, "No se puedo registrar la compra");
+        da.clear();
+        actualizar();
+        RegistarCarrito();
+
+    }
+    int id;
+
     public void RegistarCarrito() {
         //Tenemos q crear una lista con solo los campos de vamos a utilzar
-      
+
         ArrayList<Object> objetos = new ArrayList<>();
         ArrayList<Object> venta = Conec.Select("select id_venta from ventas where fecha='" + new GenerarFecha().getFecha() + "';", 1);
         id = Integer.parseInt(venta.get(venta.size() - 1) + "");
@@ -151,39 +165,110 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             objetos.add(pro.get(i).unidades);
             //consulta para saber cual fue el utlimo registo de la base de datos 
             objetos.add(id);
-             items+=pro.get(i).NombreP+"("+pro.get(i).unidades+") "+pro.get(i).importe+"\n";
-             
+            items += pro.get(i).NombreP + "(" + pro.get(i).unidades + ") " + pro.get(i).importe + "\n";
+
             Conec.insert("insert into carrito (id_producto,unidades,id_venta) values (?,?,?);", objetos, "Nose puede registar");
             objetos.clear();
-           
 
         }
-        
+
         Reporte.setSize(569, 460);
         Reporte.setLocationRelativeTo(null);
-        Cambio.setText(cambio+"");
+        Cambio.setText(cambio + "");
         Reporte.setVisible(true);
     }
-     public void ImprimirReporte(){
-         if(ticket){
-             
-         }
-     }
-     public void actualizar(){
-        for(int i=0; i<pro.size(); i++){
-           //En esta parte necesitamos dos cosas para actulizar el stoke 
-           // el stok actual y el numero de unidades compradas
-           
-           double stokactual=Double.parseDouble(Conec.Select("select "
-                   + " Unidades from productos where  codigoBarras='"+pro.get(i).codigoBarras+"';",1).get(0)+"");
-            System.out.println(stokactual);
-           Conec.update("update productos set Unidades="+
-                   (stokactual-pro.get(i).unidades)+" where codigoBarras='"+
-                   pro.get(i).codigoBarras+"';", "No se pude actulizar");
+
+    public void ImprimirReporte() {
+        if (ticket) {
+
         }
-     }
-     
-   
+    }
+
+    public void actualizar() {
+        for (int i = 0; i < pro.size(); i++) {
+            //En esta parte necesitamos dos cosas para actulizar el stoke 
+            // el stok actual y el numero de unidades compradas
+
+            double stokactual = Double.parseDouble(Conec.Select("select "
+                    + " Unidades from productos where  codigoBarras='" + pro.get(i).codigoBarras + "';", 1).get(0) + "");
+            System.out.println(stokactual);
+            Conec.update("update productos set Unidades="
+                    + (stokactual - pro.get(i).unidades) + " where codigoBarras='"
+                    + pro.get(i).codigoBarras + "';", "No se pude actulizar");
+        }
+    }
+
+    public void tabla(String sql, JTable Tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("#");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Correo");
+
+        Tabla.setModel(modelo);
+        setVisible(true);
+
+        ArrayList<String> datos = Conec.Select(sql, 4);
+
+        int j = 0;
+        String fila[] = new String[4];
+        for (int i = 0; i < datos.size();) {
+
+            while (j < 4) {
+                fila[j] = datos.get(i);
+
+                i++;
+                j++;
+            }
+            modelo.addRow(fila);
+            j = 0;
+
+        }
+        Tabla.setModel(modelo);
+        datos.clear();
+
+    }
+
+    public void tabla2(String sql, JTable Tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("# venta");
+        modelo.addColumn("Empleado");
+        modelo.addColumn("Importe");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Cliente");
+        Tabla.setModel(modelo);
+        setVisible(true);
+
+        ArrayList<String> datos = Conec.Select(sql, 5);
+        //Antes de imprimir los datos en la tabla hay q modificar el cliente 
+
+        int j = 0;
+        String fila[] = new String[5];
+        for (int i = 0; i < datos.size();) {
+
+            while (j < 5) {
+                if (j == 4) {
+                    if (datos.get(i) == null) {
+                        datos.set(i, "");
+                    } else if (datos.get(i) != null) {
+                        //Aqui cambiamos el id del cliente por su nombre 
+                        datos.set(i, "" + Conec.Select("select nombre from clientes where id_cliente=" + datos.get(i) + ";", 1).get(0));
+                    }
+                }
+                fila[j] = datos.get(i);
+
+                i++;
+                j++;
+            }
+            modelo.addRow(fila);
+            j = 0;
+
+        }
+        Tabla.setModel(modelo);
+        datos.clear();
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,6 +310,9 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jLabel25 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabla2 = new javax.swing.JTable();
+        seleccionar = new javax.swing.JPopupMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         txtUnidades = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
@@ -592,6 +680,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
                 return canEdit [columnIndex];
             }
         });
+        Tabla2.setComponentPopupMenu(seleccionar);
         Tabla2.setFocusable(false);
         Tabla2.setIntercellSpacing(new java.awt.Dimension(0, 0));
         Tabla2.setRowHeight(35);
@@ -612,6 +701,18 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        seleccionar.setBackground(new java.awt.Color(255, 255, 255));
+
+        jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jMenuItem4.setText("Seleccionar ");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        seleccionar.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -856,7 +957,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, 230, 10));
 
-        jLabel7.setText("Pulsa aqui para quitar el descuento");
+        jLabel7.setText("Pulsa aquí para quitar el descuento");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -882,6 +983,11 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Administrar ventas");
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -971,64 +1077,68 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     }//GEN-LAST:event_BtnRegistroMouseExited
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-       if(pro.size()!=0){
-           
-      
-        if (JcCliente.isSelected()) {
-            if (txtEfectivo.getText().length() != 0) {
-                //Varificando q el efectivo sea mayor a la cantidad ingresada
-                double efectivo = 0;
-                try {
-                    if(txtEfectivo.getText().length()!=0){
-                       
-                      efectivo = Double.parseDouble(txtEfectivo.getText());
-                    if (importe > efectivo) {
-                        JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
-                    } else {
+        if (pro.size() != 0) {
 
-                        ticket = true;
-                        cambio=(importe-efectivo);
-                        comprar();
-                    }  
+            if (JcCliente.isSelected()) {
+                if (txtEfectivo.getText().length() != 0) {
+                    //Varificando q el efectivo sea mayor a la cantidad ingresada
+                    double efectivo = 0;
+                    try {
+                        if (txtEfectivo.getText().length() != 0) {
+
+                            efectivo = Double.parseDouble(txtEfectivo.getText());
+                            if (importe > efectivo) {
+                                JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
+                            } else {
+
+                                ticket = true;
+                                //Abriendo la ventana para agregar al cliente
+                                tabla("select * from clientes;", Tabla2);
+                                cliente.setSize(1010, 497);
+                                cliente.setLocationRelativeTo(null);
+
+                                cliente.setVisible(true);
+                                cambio = Math.abs(importe - efectivo);
+
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, e.getMessage());
                     }
-                    
-
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debes de ingresar el efectivo");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Debes de ingresar el efectivo");
-            }
-        } else {//Varificnado q el prewcio este puesto
-            if (txtEfectivo.getText().length() != 0) {
-                //Varificando q el efectivo sea mayor a la cantidad ingresada
-                double efectivo = 0;
-                try {
-                    efectivo = Double.parseDouble(txtEfectivo.getText());
-                    if (importe > efectivo) {
-                        JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
-                    } else {
-                        cambio=Math.abs(importe-efectivo);
-                        comprar();
+            } else {//Varificnado q el prewcio este puesto
+                if (txtEfectivo.getText().length() != 0) {
+                    //Varificando q el efectivo sea mayor a la cantidad ingresada
+                    double efectivo = 0;
+                    try {
+                        efectivo = Double.parseDouble(txtEfectivo.getText());
+                        if (importe > efectivo) {
+                            JOptionPane.showMessageDialog(this, "El monto a pagar es mayor");
+                        } else {
+                            cambio = Math.abs(importe - efectivo);
+                            comprar();
 
+                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, e.getMessage());
                     }
-
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debes de ingresar el efectivo");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Debes de ingresar el efectivo");
-            }
 
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se agregado ningun producto aun");
         }
-         }else{
-           JOptionPane.showMessageDialog(null, "No se agregado ningun producto aun");
-       }
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
-        tabla("select * from productos where codigoBarras='" + txtBuscar.getText() + "'  union select * from productos where NombreP like '%" + txtBuscar.getText() + "%';", Tabla1, new String[]{"Codigo barras",
+        tabla("select * from productos where codigoBarras='" + txtBuscar.getText() + "'  union select * from productos where NombreP like '%" + txtBuscar.getText() + "%';", Tabla1, new String[]{"Código barras",
             "Nombre producto", "Precio unitario", "Precio Mayoreo", "Unidades"});
         // tabla("select * from productos where codigoBarras='" + txtBuscar.getText() + "'  union select * from productos where NombreP like '%" + txtBuscar.getText() + "%';", Tabla);
     }//GEN-LAST:event_txtBuscarKeyTyped
@@ -1077,26 +1187,25 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
             } else {
                 datos = Conec.Select("select NombreP,PrecioUnitario from productos where codigoBarras='" + getTexto(txtCodigoB) + "';", 2);
             }
-            double unidadesdisponibles=Double.parseDouble(Conec.Select("select Unidades from productos where codigoBarras='" + getTexto(txtCodigoB) + "';", 1).get(0)+"");
-           if(unidadesdisponibles>=Double.parseDouble(txtUnidades.getText())){
-               //Agreando el precio en una lista aparte
-            precios.add(Double.parseDouble(datos.get(1)));
-            //Agreando el producto en otra lista para operar con el
-            pro.add(new Producto(getTexto(txtCodigoB) + "", datos.get(0),//codigo barras
-                    Double.parseDouble(txtUnidades.getText()),//Nombre
-                    (Double.parseDouble(datos.get(1)) * Double.parseDouble(getTexto(txtUnidades) + ""))));//precio por unidad
-            agregarCarrito(new String[]{"Codigo barras", "Nombre producto", "Unidades", "Importe"});
-            //Calculando importe
-            importe += Double.parseDouble(datos.get(1)) * Double.parseDouble(getTexto(txtUnidades) + "");
-            JLImporte.setText("Importe: " + importe);
-            //Borrando
-            txtCodigoB.setText("");
-            txtUnidades.setText("");
-            datos.clear();
-           }
-           else{
-               JOptionPane.showMessageDialog(this, "El numero de unidades de este producto es menor al solicitado");
-           }
+            double unidadesdisponibles = Double.parseDouble(Conec.Select("select Unidades from productos where codigoBarras='" + getTexto(txtCodigoB) + "';", 1).get(0) + "");
+            if (unidadesdisponibles >= Double.parseDouble(txtUnidades.getText())) {
+                //Agreando el precio en una lista aparte
+                precios.add(Double.parseDouble(datos.get(1)));
+                //Agreando el producto en otra lista para operar con el
+                pro.add(new Producto(getTexto(txtCodigoB) + "", datos.get(0),//codigo barras
+                        Double.parseDouble(txtUnidades.getText()),//Nombre
+                        (Double.parseDouble(datos.get(1)) * Double.parseDouble(getTexto(txtUnidades) + ""))));//precio por unidad
+                agregarCarrito(new String[]{"Codigo barras", "Nombre producto", "Unidades", "Importe"});
+                //Calculando importe
+                importe += Double.parseDouble(datos.get(1)) * Double.parseDouble(getTexto(txtUnidades) + "");
+                JLImporte.setText("Importe: " + importe);
+                //Borrando
+                txtCodigoB.setText("");
+                txtUnidades.setText("");
+                datos.clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "El numero de unidades de este producto es menor al solicitado");
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Debes  escribir todos los datos");
@@ -1201,34 +1310,34 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         if (!Character.isDigit(mander)) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtDescuentoKeyTyped
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      
-            // TODO add your handling code here:
-            Ticket t= new Ticket("LYN", new GenerarFecha().getFecha(),id+"", User.usuario, new GenerarFecha().gethora(), items, importe+"", txtEfectivo.getText(), cambio+"");
-              t.generarTicket();
-              reiniciar();
-        
+
+        // TODO add your handling code here:
+        Ticket t = new Ticket("LYN", new GenerarFecha().getFecha(), id + "", User.usuario, new GenerarFecha().gethora(), items, importe + "", txtEfectivo.getText(), cambio + "");
+        t.generarTicket();
+        reiniciar();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-       
+
         reiniciar();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void txtDescuentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyPressed
         // TODO add your handling code here:
         //Si precionas enter aplicar el descueto
-         if (evt.getKeyCode() == 10) {
-             double descuento=Double.parseDouble(txtDescuento.getText())/100;
-              importe=importe-(importe*descuento);
-              
-         JLImporte.setText("Importe: "+importe);
-         }
-         
+        if (evt.getKeyCode() == 10) {
+            double descuento = Double.parseDouble(txtDescuento.getText()) / 100;
+            importe = importe - (importe * descuento);
+
+            JLImporte.setText("Importe: " + importe);
+        }
+
     }//GEN-LAST:event_txtDescuentoKeyPressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1254,10 +1363,29 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
 
     private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
         // TODO add your handling code here:
-        tabla("select * from clientes where  nombre like '%" + txtBuscar.getText() + "%';", Tabla,new String [] {
-                "Nombre", "Correo", "Telefono"
-            });
+        tabla("select * from clientes where  nombre like '%" + txtBuscar.getText() + "%';", Tabla, new String[]{
+            "Nombre", "Correo", "Telefono"
+        });
     }//GEN-LAST:event_txtBuscar1KeyTyped
+    String id_Clinte;
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        int fila = Tabla2.getSelectedRow();
+        if (fila > 0) {
+            id_Clinte = Tabla2.getValueAt(fila, 0) + "";
+            cliente.setVisible(false);
+
+            comprar2();
+        } else {
+            JOptionPane.showMessageDialog(null, "No seleccionaste algun cliente");
+        }
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+ new ReporteVentas().setVisible(true);
+    }//GEN-LAST:event_jLabel8MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1276,6 +1404,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JTable Tabla1;
     private javax.swing.JTable Tabla2;
     private javax.swing.JTextField TxtUnidades2;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JDialog cancelar;
     private javax.swing.JDialog cliente;
     private javax.swing.JButton jButton1;
@@ -1308,6 +1437,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1327,6 +1457,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel marco;
+    private javax.swing.JPopupMenu seleccionar;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtBuscar1;
     private javax.swing.JTextField txtCodigoB;

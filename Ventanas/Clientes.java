@@ -81,8 +81,8 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
     public void llenarTextos() {
 
         place.add("Nombre de la persona");
-        place.add("Telefono celular");
-        place.add("Correo electronico");
+        place.add("Teléfono celular");
+        place.add("Correo electrónico");
     }
 
     public void diseñoTabla(JTable Tabla) {
@@ -146,7 +146,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("#");
         modelo.addColumn("Nombre");
-        modelo.addColumn("Telefono");
+        modelo.addColumn("Teléfono");
         modelo.addColumn("Correo");
 
         Tabla.setModel(modelo);
@@ -339,7 +339,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
         pTelefono.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel13.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel13.setText("Telefono");
+        jLabel13.setText("Teléfono ");
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtTelefono.setBorder(null);
@@ -542,7 +542,7 @@ public class Clientes extends javax.swing.JFrame implements Conectar {
                 {null, null, null}
             },
             new String [] {
-                "Nombre", "Correo", "Telefono"
+                "Nombre", "Correo", "Teléfono "
             }
         ) {
             boolean[] canEdit = new boolean [] {
