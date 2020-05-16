@@ -2,6 +2,7 @@ package Ventanas;
 
 import Actores.CodigoBarras;
 import Actores.GenerarReportes;
+import Actores.TablaProductos;
 
 import Actores.TextPrompt;
 
@@ -1352,6 +1353,8 @@ class FormatoTabla implements Runnable {
             // TODO add your handling code here:
 
             new GenerarReportes().ProductosBajos("Reportes.pdf");
+            
+            //new TablaProductos().productos();
             /* ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
             
             new GenerarGrafica().generarBarras(p);*/

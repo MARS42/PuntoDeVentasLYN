@@ -13,6 +13,12 @@ public class Producto {
    public double PrecioUnitario,PrecioMayoreo;
    public double unidades;
    public double importe;
+   public int ventas;
+
+    public Producto(String codigoBarras, int ventas) {
+        this.codigoBarras = codigoBarras;
+        this.ventas = ventas;
+    }
    
    Producto siguinte;
 

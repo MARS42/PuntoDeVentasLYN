@@ -32,7 +32,7 @@ import java.util.Calendar;
  *
  */
 public class GenerarReportes implements Conectar {
-
+TablaProductos tb= new TablaProductos();
     private com.itextpdf.text.Font fuenteBold = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER,
             30, Font.BOLD);
     private com.itextpdf.text.Font fuenteBold1 = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER,
@@ -84,7 +84,45 @@ public class GenerarReportes implements Conectar {
             }
 
             doc.add(mitabla);
+            doc.add(new Paragraph());
+           
+            p.clear();
+            
+            
+            doc.add(new Paragraph(getInfo("Productos mas vendidos del mes ")));
+            doc.add(new Paragraph()); 
+            doc.add(new Paragraph()); 
+            doc.add(new Paragraph()); 
+            //añadiendo la tabla con los productos mas vendidos 
+             tb.productos();
+           PdfPTable  mitabla1 = new PdfPTable(3);
+         Chunk    c3 = new Chunk();
+            c3.setBackground(BaseColor.ORANGE);
+            c3.setFont(Normal);
+            c3.append("Código Barras.");
+           Chunk  c4 = new Chunk();
+            c4.setBackground(BaseColor.ORANGE);
+            c4.setFont(Normal);
+            c4.append("Nombre P.");
+             Chunk c5 = new Chunk();
+            c5.setBackground(BaseColor.ORANGE);
+            c5.setFont(Normal);
+            c5.append("Unidades");
+            mitabla1.addCell(new Paragraph(c3));
+
+            mitabla1.addCell(new Paragraph(c4));
+
+            mitabla1.addCell(new Paragraph(c5));
+              for (int i = 0; i < tb.p.length; i++) {
+                mitabla1.addCell(tb.p[i].codigoBarras);
+                mitabla1.addCell(""+Conec.Select("select NombreP from productos where codigoBarras='"+tb.p[i].codigoBarras+"';", 1).get(0));
+                mitabla1.addCell(tb.p[i].ventas+ "");
+
+            }
+              doc.add(mitabla1);
+            doc.add(new Paragraph());
            doc.add(new Paragraph(getFoter("Papeleria LYN ")));
+           tb.p=null;
             doc.close();
         } catch (DocumentException ex) {
 
