@@ -402,6 +402,7 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
                 men.setVisible(true);
             } 
             }else{
+                
               MensajeError men = new MensajeError();
                 men.Mensaje.setText("Revisa el usuario");
                 men.setVisible(true);  

@@ -327,10 +327,10 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jLabel5.setText("O bien");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 80, 60, 50));
 
-        txtCorreo.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        txtCorreo.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 530, 410, 50));
 
-        txtTelefono.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        txtTelefono.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 600, 410, 50));
 
         jLabel6.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N

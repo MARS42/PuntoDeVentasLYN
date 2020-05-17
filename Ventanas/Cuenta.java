@@ -7,6 +7,7 @@ package Ventanas;
 
 import Actores.TextPrompt;
 import Actores.User;
+import BaseDatos.Encriptar;
 import Principal.Conectar;
 import java.util.ArrayList;
 import javax.swing.JTextField;
@@ -45,7 +46,9 @@ public class Cuenta extends javax.swing.JFrame  implements Conectar{
         }
         datos();
     }
-
+  private String getPass() {
+        return new Encriptar(txtPass.getText().toString()).Encrip();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,17 +74,17 @@ public class Cuenta extends javax.swing.JFrame  implements Conectar{
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtTelefono.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        txtTelefono.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ui.png"))); // NOI18N
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
 
-        txtCorreo.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        txtCorreo.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(238, 112, 82));
         jButton1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
@@ -224,7 +227,26 @@ public class Cuenta extends javax.swing.JFrame  implements Conectar{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Primero preguntamos si todos los requisistos indispensables se cumplen
-//
+//acvtualizando las cajas 
+String codigos[]= new String[4];
+codigos[0]="update usuarios set nombreU='";
+codigos[1]="update usuarios set password='";
+codigos[2]="update usuarios set Correo='";
+codigos[3]="update usuarios set telefono='";
+for(int i=0; i<4; i++){
+   if(i==1){
+       if(txtPass.getText().length()!=0){
+           Conec.update(codigos[1]+getPass()+"' where usarName='"+User.usuario+"';", "No se puede actualizar los datos");
+       }
+   }else if(i<3){
+       if(cajas.get(i).getText().length()!=0){
+           Conec.update(codigos[i]+cajas.get(i).getText()
+            +"' where usarName='"+User.usuario+"';", "No se pudo actualizar");
+       }
+   } 
+}
+txtPass.setText("");
+datos();
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
