@@ -328,10 +328,8 @@ class FormatoTabla implements Runnable {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         GenerarReporte = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -411,16 +409,6 @@ class FormatoTabla implements Runnable {
         });
         jPopupMenu1.add(jMenuItem2);
 
-        jMenuItem5.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuItem5.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jMenuItem5.setText("Generar código de barras");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem5);
-
         jPopupMenu2.setBackground(new java.awt.Color(255, 255, 255));
         jPopupMenu2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
 
@@ -433,16 +421,6 @@ class FormatoTabla implements Runnable {
             }
         });
         jPopupMenu2.add(GenerarReporte);
-
-        jMenuItem4.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuItem4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jMenuItem4.setText("Ver alertas");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -1128,7 +1106,7 @@ class FormatoTabla implements Runnable {
     private void LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelMouseClicked
 
         pocionActual = 0;
-
+ jPanel2.setBackground(new Color(238,112,82));
         PanelBorrar.setVisible(false);
         PanelRegistro.setVisible(true);
         MostrarVentanaC();
@@ -1185,6 +1163,7 @@ class FormatoTabla implements Runnable {
         // TODO add your handling code here:
 
         pocionActual = 1;
+        jPanel2.setBackground(new Color(238,120,5));
         PanelBorrar.setVisible(false);
         PanelRegistro.setVisible(true);
         MostrarVentanaC();
@@ -1199,6 +1178,7 @@ class FormatoTabla implements Runnable {
 
     private void InventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InventarioMouseClicked
         // TODO add your handling code here:
+         jPanel2.setBackground(new Color(238,76,0));
         PanelBorrar.setVisible(true);
         tabla("select * from productos;", Tabla2);
         PanelRegistro.setVisible(false);
@@ -1363,18 +1343,6 @@ class FormatoTabla implements Runnable {
         }
     }//GEN-LAST:event_GenerarReporteActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        int fila = Tabla.getSelectedRow();
-        if (fila >= 0) {
-            new CodigoBarras().genenar(Tabla.getValueAt(fila, 0) + "", "reporte");
-        }
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegistro;
@@ -1411,8 +1379,6 @@ class FormatoTabla implements Runnable {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;

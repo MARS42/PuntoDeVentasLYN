@@ -70,9 +70,7 @@ public class ReporteVentas extends javax.swing.JFrame {
                 i++;
                 j++;
             }
-            for(int k=0; k<fila.length; k++){
-                System.out.println(fila[k]);
-            }
+          
             modelo.addRow(fila);
             j = 0;
 

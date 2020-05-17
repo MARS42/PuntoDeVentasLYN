@@ -603,6 +603,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         if(desbloquear){
             //abrir una nueva ventana
+             new Cuenta().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
         }
@@ -645,7 +646,13 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         if(desbloquear){
             //abrir una nueva ventana
-           new MenuProductos().setVisible(true);
+            if(Conec.Select("select id_rol from  usuarios where usarName='"+User.usuario+"';", 1).get(0).equals("1")){
+            new MenuProductos().setVisible(true);
+             
+        }else{
+           JOptionPane.showMessageDialog(null, "Lo sentimos no eres administrador no puedes ingresar a esta opción");
+        }
+           
         }else{
             JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
         }

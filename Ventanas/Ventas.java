@@ -1384,7 +1384,13 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
- new ReporteVentas().setVisible(true);
+        if(Conec.Select("select id_rol from  usuarios where usarName='"+User.usuario+"';", 1).get(0).equals("1")){
+             new ReporteVentas().setVisible(true);
+             
+        }else{
+           JOptionPane.showMessageDialog(null, "Lo sentimos no eres administrador no puedes ingresar a esta opción");
+        }
+
     }//GEN-LAST:event_jLabel8MouseClicked
 
 

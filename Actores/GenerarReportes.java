@@ -84,15 +84,14 @@ TablaProductos tb= new TablaProductos();
             }
 
             doc.add(mitabla);
-            doc.add(new Paragraph());
+            
            
             p.clear();
             
             
             doc.add(new Paragraph(getInfo("Productos mas vendidos del mes ")));
-            doc.add(new Paragraph()); 
-            doc.add(new Paragraph()); 
-            doc.add(new Paragraph()); 
+            doc.add(new Paragraph("--------------------------------------------------------------------------------------------------------------------------------")); 
+            
             //añadiendo la tabla con los productos mas vendidos 
              tb.productos();
            PdfPTable  mitabla1 = new PdfPTable(3);
@@ -113,7 +112,7 @@ TablaProductos tb= new TablaProductos();
             mitabla1.addCell(new Paragraph(c4));
 
             mitabla1.addCell(new Paragraph(c5));
-              for (int i = 0; i < tb.p.length; i++) {
+              for (int i = tb.p.length-1; i>=0 ; i--) {
                 mitabla1.addCell(tb.p[i].codigoBarras);
                 mitabla1.addCell(""+Conec.Select("select NombreP from productos where codigoBarras='"+tb.p[i].codigoBarras+"';", 1).get(0));
                 mitabla1.addCell(tb.p[i].ventas+ "");
