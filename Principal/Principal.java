@@ -1,5 +1,6 @@
 package Principal;
 
+import Actores.Alertas;
 import Animaciones.Controlador;
 import BaseDatos.tablas;
 import Ventanas.GestorVentanas;
@@ -16,6 +17,7 @@ public class Principal {
     public static void main(String[] args) 
     {   
        new Principal().iniciar();
+      
         //salida = new Salida();
         //salida.setVisible(true);
     }

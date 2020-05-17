@@ -44,7 +44,8 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         //prueba = txtPassword.getEchoChar();
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/papeleria.png")).getImage());
         Init();
-        System.out.println(User.usuario);
+        //System.out.println(User.usuario);
+         //new Actores.Alertas().GenerarAlertas();
     }
     
     private void Init()
