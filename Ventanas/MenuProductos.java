@@ -1,10 +1,12 @@
 package Ventanas;
 
 import Actores.CodigoBarras;
+import Actores.EnviarCorreos;
 import Actores.GenerarReportes;
 import Actores.TablaProductos;
 
 import Actores.TextPrompt;
+import Actores.User;
 
 import Principal.Conectar;
 import static Principal.Conectar.Conec;
@@ -12,6 +14,8 @@ import static Principal.Conectar.Conec;
 import java.awt.Color;
 
 import java.awt.Font;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -21,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 import javax.swing.JOptionPane;
 
@@ -330,6 +335,7 @@ class FormatoTabla implements Runnable {
         jMenuItem2 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         GenerarReporte = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -421,6 +427,16 @@ class FormatoTabla implements Runnable {
             }
         });
         jPopupMenu2.add(GenerarReporte);
+
+        jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItem3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jMenuItem3.setText("Enviar reporte por correo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(jMenuItem3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -1331,9 +1347,9 @@ class FormatoTabla implements Runnable {
     private void GenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarReporteActionPerformed
         try {
             // TODO add your handling code here:
-
-            new GenerarReportes().ProductosBajos("Reportes.pdf");
-            
+            guardarArchivo();
+            new GenerarReportes().ProductosBajos(ruta);
+           
             //new TablaProductos().productos();
             /* ArrayList<Producto> p =Conec.SelectProductos("select NombreP,Unidades from productos where Unidades<=10; ", 2);
             
@@ -1343,7 +1359,51 @@ class FormatoTabla implements Runnable {
         }
     }//GEN-LAST:event_GenerarReporteActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            // TODO add your handling code here:
+            new GenerarReportes().ProductosBajos("reportes.pdf");
+            Thread t= new Thread(new hiloCorreo());
+            t.start();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+String ruta;
+private class hiloCorreo implements Runnable{
 
+        @Override
+        public void run() {
+            new EnviarCorreos().EnviarCorreo("Reporte de los productos. ",
+                ""+Conec.Select("select Correo from usuarios where  usarName='"+User.usuario+"';", 1).get(0), "papelerialyn2020@gmail.com", ":::Lapiz:1001:::", "Reporte productos", "reportes.pdf");
+        }
+    
+}
+private void guardarArchivo() {
+        try {
+            
+            JFileChooser file = new JFileChooser();
+            file.showSaveDialog(this);
+            File guarda = file.getSelectedFile();
+   
+            if (guarda != null) {
+                /*guardamos el archivo y le damos el formato directamente,
+    * si queremos que se guarde en formato doc lo definimos como .doc*/
+                FileWriter save = new FileWriter(guarda + ".pdf");
+                ruta=guarda+".pdf";
+                save.write("");
+                save.close();
+                JOptionPane.showMessageDialog(null,
+                        "El archivo se a guardado Exitosamente",
+                        "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Su archivo no se ha guardado",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegistro;
     private javax.swing.JPanel Campos;
@@ -1379,6 +1439,7 @@ class FormatoTabla implements Runnable {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;

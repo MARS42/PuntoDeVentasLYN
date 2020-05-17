@@ -38,9 +38,9 @@ public class Cuenta extends javax.swing.JFrame  implements Conectar{
         cajas.add(txtCorreo);
         cajas.add(txtTelefono);
         palabras[0]="Nombre";
-        palabras[1]="Contraseña";
-         palabras[2]="Correo";
-          palabras[3]="Telefono";
+      
+         palabras[1]="Correo";
+          palabras[2]="Telefono";
         for(int i=0; i<cajas.size(); i++){
             TextPrompt prueba = new TextPrompt(palabras[i], cajas.get(i));
         }
@@ -230,21 +230,23 @@ public class Cuenta extends javax.swing.JFrame  implements Conectar{
 //acvtualizando las cajas 
 String codigos[]= new String[4];
 codigos[0]="update usuarios set nombreU='";
-codigos[1]="update usuarios set password='";
-codigos[2]="update usuarios set Correo='";
-codigos[3]="update usuarios set telefono='";
-for(int i=0; i<4; i++){
-   if(i==1){
-       if(txtPass.getText().length()!=0){
-           Conec.update(codigos[1]+getPass()+"' where usarName='"+User.usuario+"';", "No se puede actualizar los datos");
-       }
-   }else if(i<3){
+codigos[1]="update usuarios set Correo='";
+codigos[2]="update usuarios set telefono='";
+codigos[3]="update usuarios set password='";
+for(int i=0; i<3; i++){
+    
        if(cajas.get(i).getText().length()!=0){
            Conec.update(codigos[i]+cajas.get(i).getText()
             +"' where usarName='"+User.usuario+"';", "No se pudo actualizar");
        }
-   } 
+   
 }
+if(txtPass.getText().length()!=0){
+           Conec.update(codigos[3]+getPass()+"' where usarName='"+User.usuario+"';", "No se puede actualizar los datos");
+       }
+/* if(i==1){
+       
+   } */
 txtPass.setText("");
 datos();
       

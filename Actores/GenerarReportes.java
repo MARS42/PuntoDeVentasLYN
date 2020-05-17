@@ -18,11 +18,14 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Font;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 
 /**
  *
@@ -32,7 +35,10 @@ import java.util.Calendar;
  *
  */
 public class GenerarReportes implements Conectar {
-TablaProductos tb= new TablaProductos();
+
+
+
+    TablaProductos tb = new TablaProductos();
     private com.itextpdf.text.Font fuenteBold = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER,
             30, Font.BOLD);
     private com.itextpdf.text.Font fuenteBold1 = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.COURIER,
@@ -84,26 +90,24 @@ TablaProductos tb= new TablaProductos();
             }
 
             doc.add(mitabla);
-            
-           
+
             p.clear();
-            
-            
+
             doc.add(new Paragraph(getInfo("Productos mas vendidos del mes ")));
-            doc.add(new Paragraph("--------------------------------------------------------------------------------------------------------------------------------")); 
-            
+            doc.add(new Paragraph("--------------------------------------------------------------------------------------------------------------------------------"));
+
             //añadiendo la tabla con los productos mas vendidos 
-             tb.productos();
-           PdfPTable  mitabla1 = new PdfPTable(3);
-         Chunk    c3 = new Chunk();
+            tb.productos();
+            PdfPTable mitabla1 = new PdfPTable(3);
+            Chunk c3 = new Chunk();
             c3.setBackground(BaseColor.ORANGE);
             c3.setFont(Normal);
             c3.append("Código Barras.");
-           Chunk  c4 = new Chunk();
+            Chunk c4 = new Chunk();
             c4.setBackground(BaseColor.ORANGE);
             c4.setFont(Normal);
             c4.append("Nombre P.");
-             Chunk c5 = new Chunk();
+            Chunk c5 = new Chunk();
             c5.setBackground(BaseColor.ORANGE);
             c5.setFont(Normal);
             c5.append("Unidades");
@@ -112,16 +116,16 @@ TablaProductos tb= new TablaProductos();
             mitabla1.addCell(new Paragraph(c4));
 
             mitabla1.addCell(new Paragraph(c5));
-              for (int i = tb.p.length-1; i>=0 ; i--) {
+            for (int i = tb.p.length - 1; i >= 0; i--) {
                 mitabla1.addCell(tb.p[i].codigoBarras);
-                mitabla1.addCell(""+Conec.Select("select NombreP from productos where codigoBarras='"+tb.p[i].codigoBarras+"';", 1).get(0));
-                mitabla1.addCell(tb.p[i].ventas+ "");
+                mitabla1.addCell("" + Conec.Select("select NombreP from productos where codigoBarras='" + tb.p[i].codigoBarras + "';", 1).get(0));
+                mitabla1.addCell(tb.p[i].ventas + "");
 
             }
-              doc.add(mitabla1);
+            doc.add(mitabla1);
             doc.add(new Paragraph());
-           doc.add(new Paragraph(getFoter("Papeleria LYN ")));
-           tb.p=null;
+            doc.add(new Paragraph(getFoter("Papeleria LYN ")));
+            tb.p = null;
             doc.close();
         } catch (DocumentException ex) {
 
@@ -171,15 +175,17 @@ TablaProductos tb= new TablaProductos();
         p.add(c);
         return p;
     }
-     public Paragraph getDateFormat(String texto) {
+
+    public Paragraph getDateFormat(String texto) {
         Paragraph p = new Paragraph();
         Chunk c = new Chunk();
-        
+
         c.append(texto);
         c.setFont(fuenteBold1);
         p.add(c);
         return p;
     }
+
     public String getDate() {
         Calendar fecha = Calendar.getInstance();
         int año = fecha.get(Calendar.YEAR);
