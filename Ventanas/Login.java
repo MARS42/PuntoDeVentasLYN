@@ -7,6 +7,7 @@ import Animaciones.GaussianBlur;
 
 import BaseDatos.Query;
 import Principal.Conectar;
+import Principal.Principal;
 import java.awt.AWTException;
 
 import java.awt.Dimension;
@@ -528,15 +529,16 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
         {
             lastPos = getLocation();
             d.setSize(maxx, maxy);
-            //setPreferredSize(d);
-            //setLocation(0, 0);
-            Controlador.main.GranPe(this, true, maxx, maxy, lastPos);
+            setSize(d);
+            setLocation(0, 0);
+            //setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH );
+            //Controlador.main.GranPe(this, true, maxx, maxy, lastPos);
         }
         else
         {
-            //setPreferredSize(defaultSize);
-            //setLocation(lastPos);
-            Controlador.main.GranPe(this, false, (int)defaultSize.getWidth(), (int)defaultSize.getHeight(), lastPos);
+            setSize(defaultSize);
+            setLocation(lastPos);
+            //Controlador.main.GranPe(this, false, (int)defaultSize.getWidth(), (int)defaultSize.getHeight(), lastPos);
         }
         //pack();
     }//GEN-LAST:event_jLabel18MouseClicked
@@ -627,6 +629,7 @@ public class Login extends javax.swing.JFrame implements Conectar, WindowListene
 
         if(desbloquear){
             //abrir una nueva ventana
+            Principal.gestorVentanas.MostrarCiber(true);
         }else{
             JOptionPane.showMessageDialog(this, "Primero debe de entrar con usuario valido");
         }

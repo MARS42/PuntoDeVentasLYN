@@ -1,5 +1,6 @@
 package Ventanas;
 
+import BaseDatos.CiberDB;
 import com.sun.awt.AWTUtilities;
 import java.awt.Component;
 
@@ -13,6 +14,8 @@ public class GestorVentanas
     private OnlyLogin login;
     private Login menu;
     //public Salida salida;
+    private Ciber ciber;
+    private CiberDB ciberdb;
     
     public GestorVentanas()
     {
@@ -32,6 +35,16 @@ public class GestorVentanas
     {
         menu = new Login();
         menu.setVisible(true);
+    }
+    
+    public void MostrarCiber(boolean mostrar)
+    {
+        if(ciber == null)
+        {
+            ciberdb = new CiberDB();
+            ciber = new Ciber(ciberdb);
+        }
+        ciber.setVisible(mostrar);
     }
     
     private void CerrarVentanas()
