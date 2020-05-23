@@ -53,7 +53,6 @@ public class MensajeError extends javax.swing.JFrame {
             setOpacity(1 - lerp);
         else
             setOpacity(lerp);
-        System.out.println("dsads");
         return null;
     }
     
