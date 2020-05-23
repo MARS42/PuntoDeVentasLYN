@@ -397,14 +397,14 @@ public class OnlyLogin extends javax.swing.JFrame implements Conectar {
                 System.out.println("");
                 //Conec.insert("insert into usuarios values (?,?,?,?,?,?);", datosUsuario, "No se pudo agregar el Usuario");
             } else {
-                   if(MensajeError.sin == null)
+                   //if(MensajeError.sin == null)
                         new MensajeError("Revisa la contraseña");
                 //men.Mensaje.setText("Revisa la contraseña");
                 //men.setVisible(true);
                    System.out.println("asdsa");
             } 
             }else{
-                if(MensajeError.sin == null)
+                //if(MensajeError.sin == null)
                     new MensajeError("Revisa el usuario");
               //  men.Mensaje.setText("Revisa el usuario");
                 //men.setVisible(true);
