@@ -43,7 +43,7 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         
         t2.start();
         setResizable(false);
-        Panel2.setMinimumSize(new Dimension(Panel2.getWidth(), this.MAXIMIZED_VERT));
+        Logo.setMinimumSize(new Dimension(Logo.getWidth(), this.MAXIMIZED_VERT));
         setVisible(true);
         
     }
@@ -107,33 +107,38 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jButtonEnter = new javax.swing.JButton();
         JLInternet = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        txtUsuario = new javax.swing.JTextField();
-        txtPass = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Campos = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCorreo = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        Panel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        VerPasword = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        JLDisponibilidadUsuario = new javax.swing.JLabel();
-        JLDisponibilidadUsuario1 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        JLDisponibilidadUsuario1 = new javax.swing.JLabel();
+        JLDisponibilidadUsuario = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        VerPasword = new javax.swing.JLabel();
+        txtPass = new javax.swing.JPasswordField();
         jLabel17 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        Logo = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         JPIngreso.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -270,32 +275,25 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel2.setText("Contraseña");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 310, 200, 50));
+        Campos.setBackground(new java.awt.Color(255, 255, 255));
+        Campos.setPreferredSize(new java.awt.Dimension(610, 600));
 
-        txtNombre.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 150, 410, 50));
+        jLabel24.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setPreferredSize(new java.awt.Dimension(450, 25));
+        Campos.add(jLabel24);
 
-        txtUsuario.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtUsuarioKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUsuarioKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 220, 410, 50));
+        jLabel4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel4.setText("Crea una cuenta");
+        jLabel4.setPreferredSize(new java.awt.Dimension(235, 25));
+        Campos.add(jLabel4);
 
-        txtPass.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 360, 410, 50));
-
-        jComboBox1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Administrador" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 460, 410, 50));
+        jLabel5.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel5.setText("O bien");
+        jLabel5.setPreferredSize(new java.awt.Dimension(196, 25));
+        Campos.add(jLabel5);
 
         jLabel3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 255));
@@ -306,7 +304,130 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 80, 120, 50));
+        Campos.add(jLabel3);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(480, 450));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Name.png"))); // NOI18N
+        jPanel2.add(jLabel9);
+
+        txtNombre.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        txtNombre.setPreferredSize(new java.awt.Dimension(350, 31));
+        jPanel2.add(txtNombre);
+
+        jLabel15.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("*");
+        jLabel15.setPreferredSize(new java.awt.Dimension(50, 25));
+        jPanel2.add(jLabel15);
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/UserName.png"))); // NOI18N
+        jPanel2.add(jLabel10);
+
+        txtUsuario.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        txtUsuario.setPreferredSize(new java.awt.Dimension(350, 31));
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtUsuario);
+
+        jLabel16.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("*");
+        jPanel2.add(jLabel16);
+
+        JLDisponibilidadUsuario1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        JLDisponibilidadUsuario1.setForeground(new java.awt.Color(51, 153, 0));
+        JLDisponibilidadUsuario1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(JLDisponibilidadUsuario1);
+
+        JLDisponibilidadUsuario.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        JLDisponibilidadUsuario.setForeground(new java.awt.Color(255, 0, 0));
+        JLDisponibilidadUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(JLDisponibilidadUsuario);
+
+        jLabel2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel2.setText("Contraseña");
+        jLabel2.setPreferredSize(new java.awt.Dimension(450, 25));
+        jPanel2.add(jLabel2);
+
+        VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png"))); // NOI18N
+        VerPasword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        VerPasword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VerPaswordMouseClicked(evt);
+            }
+        });
+        jPanel2.add(VerPasword);
+
+        txtPass.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtPass.setPreferredSize(new java.awt.Dimension(350, 31));
+        jPanel2.add(txtPass);
+
+        jLabel17.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("*");
+        jPanel2.add(jLabel17);
+
+        jLabel6.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel6.setText("Cargo");
+        jLabel6.setPreferredSize(new java.awt.Dimension(450, 25));
+        jPanel2.add(jLabel6);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/equipo.png"))); // NOI18N
+        jPanel2.add(jLabel11);
+
+        jComboBox1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Administrador" }));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(350, 31));
+        jPanel2.add(jComboBox1);
+
+        jLabel22.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setPreferredSize(new java.awt.Dimension(41, 25));
+        jPanel2.add(jLabel22);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
+        jPanel2.add(jLabel12);
+
+        txtCorreo.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtCorreo.setPreferredSize(new java.awt.Dimension(350, 30));
+        jPanel2.add(txtCorreo);
+
+        jLabel23.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setPreferredSize(new java.awt.Dimension(41, 25));
+        jPanel2.add(jLabel23);
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ui.png"))); // NOI18N
+        jPanel2.add(jLabel13);
+
+        txtTelefono.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtTelefono.setPreferredSize(new java.awt.Dimension(350, 30));
+        jPanel2.add(txtTelefono);
+
+        jLabel14.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("* Datos obligatorios");
+        jLabel14.setPreferredSize(new java.awt.Dimension(450, 25));
+        jPanel2.add(jLabel14);
+
+        Campos.add(jPanel2);
 
         jButton1.setBackground(new java.awt.Color(238, 112, 82));
         jButton1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
@@ -317,103 +438,42 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 750, 400, 50));
+        Campos.add(jButton1);
 
-        jLabel4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel4.setText("Crea una cuenta");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 80, 210, 50));
+        Logo.setBackground(new java.awt.Color(238, 112, 82));
+        Logo.setMinimumSize(new java.awt.Dimension(512, 310));
+        Logo.setPreferredSize(new java.awt.Dimension(512, 600));
 
-        jLabel5.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel5.setText("O bien");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 80, 60, 50));
-
-        txtCorreo.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 530, 410, 50));
-
-        txtTelefono.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 600, 410, 50));
-
-        jLabel6.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel6.setText("Cargo");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 410, 200, 50));
-
-        Panel2.setBackground(new java.awt.Color(238, 112, 82));
-        Panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boligrafo.png"))); // NOI18N
+        jLabel7.setPreferredSize(new java.awt.Dimension(300, 400));
+        Logo.add(jLabel7);
 
         jLabel1.setFont(new java.awt.Font("Corbel", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Papeleria L Y N");
-        Panel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 830, 50));
+        Logo.add(jLabel1);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boligrafo.png"))); // NOI18N
-        Panel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 330, 390));
-
-        jPanel1.add(Panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 840));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Name.png"))); // NOI18N
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, -1, 50));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/UserName.png"))); // NOI18N
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 220, -1, 50));
-
-        VerPasword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bloquear.png"))); // NOI18N
-        VerPasword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        VerPasword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                VerPaswordMouseClicked(evt);
-            }
-        });
-        jPanel1.add(VerPasword, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 360, 50, 50));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/equipo.png"))); // NOI18N
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 460, -1, 60));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gmail.png"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 530, -1, 50));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ui.png"))); // NOI18N
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 600, -1, 50));
-
-        JLDisponibilidadUsuario.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        JLDisponibilidadUsuario.setForeground(new java.awt.Color(255, 0, 0));
-        JLDisponibilidadUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(JLDisponibilidadUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 280, 400, 40));
-
-        JLDisponibilidadUsuario1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        JLDisponibilidadUsuario1.setForeground(new java.awt.Color(51, 153, 0));
-        JLDisponibilidadUsuario1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(JLDisponibilidadUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 280, 400, 40));
-
-        jLabel14.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("* Datos obligatorios");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 690, 390, 50));
-
-        jLabel15.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("*");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 150, 40, 50));
-
-        jLabel16.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("*");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 220, 40, 50));
-
-        jLabel17.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("*");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 360, 40, 50));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 440, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(Campos, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Campos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1589, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,11 +686,12 @@ public void entar(){
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Campos;
     private javax.swing.JLabel JLDisponibilidadUsuario;
     private javax.swing.JLabel JLDisponibilidadUsuario1;
     private javax.swing.JLabel JLInternet;
     private javax.swing.JPanel JPIngreso;
-    private javax.swing.JPanel Panel2;
+    private javax.swing.JPanel Logo;
     private javax.swing.JLabel VerPasword;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEnter;
@@ -649,6 +710,9 @@ public void entar(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -657,6 +721,7 @@ public void entar(){
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JDialog login;
