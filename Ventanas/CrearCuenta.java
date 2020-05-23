@@ -140,6 +140,9 @@ public class CrearCuenta extends javax.swing.JFrame implements Conectar {
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        login.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        login.setUndecorated(true);
+
         JPIngreso.setBackground(new java.awt.Color(255, 255, 255));
         JPIngreso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         JPIngreso.setForeground(new java.awt.Color(255, 255, 255));
@@ -570,7 +573,7 @@ public void entar(){
 }
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        new Login().setVisible(true);
+       new OnlyLogin().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
 
