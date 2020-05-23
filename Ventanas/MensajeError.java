@@ -20,26 +20,29 @@ public class MensajeError extends javax.swing.JFrame {
     /**
      * Creates new form Mensaje
      */
+    static MensajeError sin;
     Dimension screenSize;
     int xCenter, yCenter;
     
     Animacion show, hide;
 
-    public MensajeError() {
+    public MensajeError(String err) {
         initComponents();
-        
+        sin = this;
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         xCenter = (screenSize.width - this.getWidth())/2;
         yCenter = 0;
         this.setLocation(xCenter, yCenter);
         
-        show = new Animaciones.Animacion(this, getX(), getY() + getHeight() / 2, getWidth(), getHeight(), 
-                () -> { setOpacity(1); return null; }, 3);
-        show.setUpdateAction(() -> Opacidad(show.getLerp(), false));
-        hide = new Animaciones.Animacion(this, getX(), getY(), getWidth(), getHeight(), () -> { setOpacity(0); return null; }, 3);
-        hide.setUpdateAction(() -> Opacidad(hide.getLerp(), true));
+        //show = new Animaciones.Animacion(this, getX(), getY() + getHeight() / 2, getWidth(), getHeight(), 
+        //        () -> { setOpacity(1); return null; }, 3);
+        //show.setUpdateAction(() -> Opacidad(show.getLerp(), false));
+        //hide = new Animaciones.Animacion(this, getX(), getY(), getWidth(), getHeight(), () -> { setOpacity(0); return null; }, 3);
+        //hide.setUpdateAction(() -> Opacidad(hide.getLerp(), true));
         //animacion();
-        setOpacity(0);
+        Mensaje.setText(err);
+        //setOpacity(0);
+        //show.Reinciar();
         setVisible(true);
     }
 
@@ -53,15 +56,17 @@ public class MensajeError extends javax.swing.JFrame {
         return null;
     }
     
-    public void Mostrar(String err)
+    public void MostrarNO(String err)
     {
         Mensaje.setText(err);
         requestFocus();
+
         //Login.ins.Darken();
         //preguntaa.setText(pregunta);
         //Controlador.main.AccionesVentana(this, () -> { setOpacity(1);setVisible(true); return null;}, 6);
         //setVisible(true);
-        show.Reinciar();
+        
+//show.Reinciar();
     }
     
 //    public void animacion() {
@@ -175,7 +180,9 @@ public class MensajeError extends javax.swing.JFrame {
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
         // TODO add your handling code here:
         //Fade.JFrameFadeOut(1f, 0f, 0.1f, 30, this,Fade.DISPOSE);
-        hide.Reinciar();
+        //hide.Reinciar();
+        //setVisible(false);
+        dispose();
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     private void BtnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistroMouseExited
