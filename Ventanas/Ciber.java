@@ -78,7 +78,7 @@ public class Ciber extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Nombre = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Manejo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -110,18 +110,22 @@ public class Ciber extends javax.swing.JFrame {
         registrar = new javax.swing.JButton();
         ScrollTabla = new javax.swing.JScrollPane();
         tablaRegistros = new javax.swing.JTable();
+        Nombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Nombre.setFont(new java.awt.Font("Segoe Script", 0, 36)); // NOI18N
-        Nombre.setForeground(new java.awt.Color(51, 51, 51));
-        Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Nombre.setText("CIBER LYN");
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        Manejo.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("ADMINISTRAR TIEMPOS");
 
+        CamposBoton1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(750, 44));
 
         jLabel5.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
@@ -132,6 +136,7 @@ public class Ciber extends javax.swing.JFrame {
         comboMaquinas.setPreferredSize(new java.awt.Dimension(140, 20));
         jPanel4.add(comboMaquinas);
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setPreferredSize(new java.awt.Dimension(750, 44));
 
         libre.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
@@ -177,6 +182,10 @@ public class Ciber extends javax.swing.JFrame {
         });
         jPanel5.add(minutosText);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        iniciarTiempo.setBackground(new java.awt.Color(255, 153, 0));
+        iniciarTiempo.setForeground(new java.awt.Color(255, 255, 255));
         iniciarTiempo.setText("Empezar tiempo");
         iniciarTiempo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +219,8 @@ public class Ciber extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        ScrollTabla1.setBackground(new java.awt.Color(255, 255, 255));
 
         tablaTiempos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,16 +258,21 @@ public class Ciber extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CamposBoton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollTabla1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addComponent(ScrollTabla1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Administrar tiempos", Manejo);
 
+        Registro.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("REGISTRAR COMPUTADORA");
 
+        CamposBoton.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(750, 44));
 
         jLabel2.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
@@ -269,6 +285,7 @@ public class Ciber extends javax.swing.JFrame {
         nombreText.setPreferredSize(new java.awt.Dimension(140, 22));
         jPanel2.add(nombreText);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(750, 44));
 
         jLabel3.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
@@ -282,13 +299,16 @@ public class Ciber extends javax.swing.JFrame {
         marcaText.setPreferredSize(new java.awt.Dimension(140, 22));
         jPanel3.add(marcaText);
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        registrar.setBackground(new java.awt.Color(255, 153, 0));
+        registrar.setForeground(new java.awt.Color(255, 255, 255));
         registrar.setText("Registrar");
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarActionPerformed(evt);
             }
         });
-        jPanel6.add(registrar);
 
         javax.swing.GroupLayout CamposBotonLayout = new javax.swing.GroupLayout(CamposBoton);
         CamposBoton.setLayout(CamposBotonLayout);
@@ -296,7 +316,7 @@ public class Ciber extends javax.swing.JFrame {
             CamposBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CamposBotonLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
             .addGroup(CamposBotonLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
@@ -306,6 +326,10 @@ public class Ciber extends javax.swing.JFrame {
                 .addGap(332, 332, 332)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(332, 332, 332))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CamposBotonLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(registrar)
+                .addGap(298, 298, 298))
         );
         CamposBotonLayout.setVerticalGroup(
             CamposBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,9 +338,13 @@ public class Ciber extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(registrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        ScrollTabla.setBackground(new java.awt.Color(255, 255, 255));
 
         tablaRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -352,32 +380,44 @@ public class Ciber extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CamposBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addComponent(ScrollTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Registrar Máquina", Registro);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
-                    .addComponent(Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+        Nombre.setFont(new java.awt.Font("Segoe Script", 0, 36)); // NOI18N
+        Nombre.setForeground(new java.awt.Color(51, 51, 51));
+        Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Nombre.setText("CIBER LYN");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(313, 313, 313)
                 .addComponent(Nombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addContainerGap(360, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 42, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 42, Short.MAX_VALUE)))
         );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(Nombre)
+                .addGap(0, 612, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 49, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 48, Short.MAX_VALUE)))
+        );
+
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -385,7 +425,7 @@ public class Ciber extends javax.swing.JFrame {
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
         if(nombreText.getText().isEmpty() || marcaText.getText().isEmpty())
-            return;
+        return;
         data.registrarMaquina(nombreText.getText(), marcaText.getText());
         actualizarTablaRegistros(data.ultimoRegistro());
         limpiarCamposRegistro();
@@ -400,15 +440,9 @@ public class Ciber extends javax.swing.JFrame {
         String fin = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":"+ c.get(Calendar.SECOND);
         modeloTiempo.addRow(new Object[]{ modeloCombo.getSelectedItem(), inicio, "", libre.isSelected() ? "Libre" : fin });
         data.IniciarConteo(modeloCombo.getSelectedItem().toString(), modeloTiempo.getRowCount() - 1,
-                Calendar.getInstance(), c, libre.isSelected());
+            Calendar.getInstance(), c, libre.isSelected());
         limpiarCamposTiempo();
     }//GEN-LAST:event_iniciarTiempoActionPerformed
-
-    private void libreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libreActionPerformed
-        // TODO add your handling code here:
-        horasText.setEnabled(!libre.isSelected());
-        minutosText.setEnabled(!libre.isSelected());
-    }//GEN-LAST:event_libreActionPerformed
 
     private void minutosTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minutosTextActionPerformed
         // TODO add your handling code here:
@@ -417,6 +451,12 @@ public class Ciber extends javax.swing.JFrame {
     private void horasTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horasTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_horasTextActionPerformed
+
+    private void libreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libreActionPerformed
+        // TODO add your handling code here:
+        horasText.setEnabled(!libre.isSelected());
+        minutosText.setEnabled(!libre.isSelected());
+    }//GEN-LAST:event_libreActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -478,6 +518,7 @@ public class Ciber extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JCheckBox libre;
@@ -486,6 +527,6 @@ public class Ciber extends javax.swing.JFrame {
     private javax.swing.JTextField nombreText;
     private javax.swing.JButton registrar;
     private javax.swing.JTable tablaRegistros;
-    public javax.swing.JTable tablaTiempos;
+    private javax.swing.JTable tablaTiempos;
     // End of variables declaration//GEN-END:variables
 }
