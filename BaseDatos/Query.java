@@ -33,9 +33,10 @@ public class Query implements Conectar{
            
         } catch (Exception e) {
             System.out.println(mensaje +" "+e.getMessage());
-           MensajeError men = new MensajeError();
-                    men.Mensaje.setText(mensaje);
-                    men.setVisible(true);     
+//           MensajeError men = new MensajeError();
+//                    men.Mensaje.setText(mensaje);
+//                    men.setVisible(true);
+                    new MensajeError(mensaje);
         }
     }  
 
@@ -48,9 +49,9 @@ public class Query implements Conectar{
             }   
         } catch (SQLException ex) {
             System.out.println(mensaje+" "+ex.getMessage());
-                     MensajeError men = new MensajeError();
-                    men.Mensaje.setText(mensaje+"\n"+ex.getMessage());
-                    men.setVisible(true);
+                    new MensajeError(mensaje+"\n"+ex.getMessage());
+                    //men.Mensaje.setText(mensaje+"\n"+ex.getMessage());
+                    //men.setVisible(true);
                     
         }
     }
@@ -63,9 +64,9 @@ public class Query implements Conectar{
                 
             }
         } catch (Exception e) {
-            MensajeError men = new MensajeError();
-                    men.Mensaje.setText(mensaje);
-                    men.setVisible(true);  
+            new MensajeError(mensaje);
+                    //men.Mensaje.setText(mensaje);
+                    //men.setVisible(true);  
         }
     }
     public ArrayList Select(String query,int columnas){
@@ -81,9 +82,9 @@ public class Query implements Conectar{
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
-            MensajeError men = new MensajeError();
-                    men.Mensaje.setText(e.getMessage());
-                    men.setVisible(true);
+            new MensajeError(e.getMessage());
+                    //men.Mensaje.setText(e.getMessage());
+                    //men.setVisible(true);
                     
         }
         return datos;    
@@ -102,9 +103,9 @@ public class Query implements Conectar{
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
-            MensajeError men = new MensajeError();
-                    men.Mensaje.setText(e.getMessage());
-                    men.setVisible(true);
+            new MensajeError(e.getMessage());
+                    //men.Mensaje.setText(e.getMessage());
+                   // men.setVisible(true);
                     
         }
         return datos;    
@@ -122,9 +123,9 @@ public class Query implements Conectar{
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
-            MensajeError men = new MensajeError();
-                    men.Mensaje.setText(e.getMessage());
-                    men.setVisible(true);
+             new MensajeError(e.getMessage());
+                    //men.Mensaje.setText(e.getMessage());
+                   // men.setVisible(true);
                     
         }
         return datos;    
@@ -138,9 +139,9 @@ public class Query implements Conectar{
             }   
         } catch (SQLException ex) {
             System.out.println("Error "+ex.getSQLState());
-             MensajeError men = new MensajeError();
-                    men.Mensaje.setText(mensaje+"\n"+ex.getMessage());
-                    men.setVisible(true);
+              new MensajeError(mensaje+"\n"+ex.getMessage());
+                    //men.Mensaje.setText(mensaje+"\n"+ex.getMessage());
+                    //men.setVisible(true);
                     
         }
     }
@@ -157,9 +158,9 @@ public class Query implements Conectar{
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
-            MensajeError men = new MensajeError();
-                    men.Mensaje.setText(e.getMessage());
-                    men.setVisible(true);
+            new MensajeError(e.getMessage());
+                    //men.Mensaje.setText(e.getMessage());
+                    //men.setVisible(true);
                     
         }
         return datos;    

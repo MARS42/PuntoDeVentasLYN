@@ -46,7 +46,7 @@ public class MenuProductos extends javax.swing.JFrame implements Conectar {
     int pocionActual = 0;
 
     Confirmacion confirmacion = new Confirmacion(this);
-    MensajeError msjerror = new MensajeError();
+    //MensajeError msjerror = new MensajeError();
 
     public MenuProductos() {
         initComponents();
@@ -1216,7 +1216,9 @@ class FormatoTabla implements Runnable {
                  */
                 if (txtNombreProducto.getText().length() == 0 || txtPrecioUnitarii.getText().length() == 0) {
                     //MensajeError men = new MensajeError();
-                    msjerror.Mostrar("Debes ingresar el nombre del\n producto o el precio unitario");
+                    
+                    //msjerror.Mostrar("Debes ingresar el nombre del\n producto o el precio unitario");
+                    new MensajeError("Debes ingresar el nombre del\n producto o el precio unitario");
                     //men.Mensaje.setText("Debes ingresar el nombre del\n producto o el precio unitario");
                     //men.setVisible(true);
 

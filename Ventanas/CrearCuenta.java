@@ -562,9 +562,9 @@ public void entar(){
                     this.setVisible(false);
                     login.setVisible(false);
                 } else {
-                    MensajeError men = new MensajeError();
-                    men.Mensaje.setText("Revisa el usuario o contraseña");
-                    men.setVisible(true);
+                    /*MensajeError men = */new MensajeError("Revisa el usuario o contraseña");
+                    //men.Mensaje.setText();
+                    //men.setVisible(true);
                 }
             } catch (Exception e) {
                 
