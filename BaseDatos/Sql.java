@@ -15,10 +15,10 @@ public class Sql
     private static Connection conect = null;
     private static final String driver="com.mysql.jdbc.Driver"; 
     //Variables para la conexion a mysql 
-    String servidor="bzhxn1jvfwzfcmdmvsna-mysql.services.clever-cloud.com";
-    String baseDatos="bzhxn1jvfwzfcmdmvsna";
-    String usuario="uqrpgkbs9nbay4jd";
-    String password="67xGHnnVYGKSuO3f6zO7";
+    String servidor="localhost";
+    String baseDatos="papeleria";
+    String usuario="root";
+    String password="";
    
     public  void apagar ()
     {
