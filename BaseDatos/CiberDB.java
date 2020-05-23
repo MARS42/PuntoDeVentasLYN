@@ -53,7 +53,7 @@ public class CiberDB
             {
                 addSeg();
                 transcurso.add(Calendar.SECOND, 1);
-                if(transcurso.compareTo(fin) == 1)
+                if(!libre && transcurso.compareTo(fin) == 1)
                 {
                     cont.stop();
                     return;
