@@ -6,6 +6,7 @@ inserta registros etc
 package BaseDatos;
 
 import Principal.Conectar;
+
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class tablas implements Conectar {
 
     public void verificar() {
-
+        
         Conec.create_table("CREATE TABLE IF NOT EXISTS `clientes` (\n"
                 + " `id_cliente` int(11) NOT NULL AUTO_INCREMENT,\n"
                 + " `nombre` varchar(100) DEFAULT NULL,\n"
