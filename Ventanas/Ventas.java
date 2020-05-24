@@ -692,7 +692,7 @@ public class Ventas extends javax.swing.JFrame implements Conectar {
         Tabla2.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(Tabla2);
 
-        jPanel7.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 153, 980, 330));
+        jPanel7.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 133, 980, 330));
 
         javax.swing.GroupLayout clienteLayout = new javax.swing.GroupLayout(cliente.getContentPane());
         cliente.getContentPane().setLayout(clienteLayout);
