@@ -15,10 +15,7 @@ public class Sql
     private static Connection conect = null;
     private static final String driver="com.mysql.jdbc.Driver"; 
     //Variables para la conexion a mysql 
-    String servidor="mydatabase.ca2varb4mkus.us-west-1.rds.amazonaws.com";
-    String baseDatos="papeleria";
-    String usuario="admin";
-    String password="password";
+ 
    
     public  void apagar ()
     {
