@@ -15,7 +15,10 @@ public class Sql
     private static Connection conect = null;
     private static final String driver="com.mysql.jdbc.Driver"; 
     //Variables para la conexion a mysql 
- 
+ String servidor="localhost";
+ String baseDatos="papeleria";
+ String usuario="root";
+ String password="";
    
     public  void apagar ()
     {
